@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="../static/css/1.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li class="menu-item"><a href="/">Главная</a></li>
+                <li class="menu-item"><a href="/about">Обо мне</a></li>
+                <li class="menu-item"><a href="/links">Ссылочки</a></li>
+                <li class="menu-item"><a href="/pictures">Картиночки</a></li>
+                <li class="menu-item"><a href="/contacts">Контактики</a></li>
+                <li class="menu-item"><a href="/login">Войти</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main_content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
