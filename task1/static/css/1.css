@@ -12,21 +12,14 @@ header
     padding-top: 0.25%;
     padding-bottom: 0.25%;
     background: rgba(69, 104, 142, 1);
-    color: white;
 }
 
 .menu-item
 {
     text-align: center;
     display: inline-block;
-    width: 10%;
+    width: 128px;
     margin: -2px; /* чтобы не было отступа от других элементов */
-}
-
-.greetings
-{
-    text-align: center;
-    display: inline-block;
 }
 
 .menu-item:hover
