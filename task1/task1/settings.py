@@ -41,7 +41,9 @@ DJANGO_APPS = [
 ]
 
 MY_APPS = [
-    'mysite'
+    'mysite',
+    'myauth',
+    'extuser',
 ]
 
 INSTALLED_APPS = MY_APPS + DJANGO_APPS
@@ -129,3 +131,5 @@ USE_TZ = True
 STATIC_ROOT = "static"
 
 STATIC_URL = '/static/'
+
+AUTH_USER_MODEL = 'extuser.ExtUser'
