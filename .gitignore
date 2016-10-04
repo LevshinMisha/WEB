@@ -13,3 +13,9 @@
 /task1/mysite/__pycache__/__init__.cpython-35.pyc
 /task1/mysite/__pycache__/urls.cpython-35.pyc
 /task1/mysite/__pycache__/views.cpython-35.pyc
+/task1/extuser/__pycache__/__init__.cpython-35.pyc
+/task1/extuser/__pycache__/admin.cpython-35.pyc
+/task1/extuser/__pycache__/forms.cpython-35.pyc
+/task1/extuser/__pycache__/models.cpython-35.pyc
+/task1/extuser/migrations/__pycache__/0001_initial.cpython-35.pyc
+/task1/extuser/migrations/__pycache__/__init__.cpython-35.pyc
