@@ -1,22 +1,28 @@
 <!DOCTYPE html>
-{% load staticfiles %}
 <html>
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="{% static 'css/1.css' %}">
+    <link rel="stylesheet" href="/static/css/1.css">
+    <link rel="shortcut icon" href="/static/favicon.ico">
 </head>
 <body>
     <header>
         <nav>
             <ul class="menu">
-                <li class="greetings">Приветствую тебя, {{ user }}</li>
+                {% if user.is_authenticated %}
+                    <li class="greetings">Приветствую тебя, {{ user }}</li>
+                    <li class="menu-item"><a href="/auth/logout">Выйти</a></li>
+                {% else %}
+                    <li class="menu-item"><a href="/auth">Войти</a></li>
+                    <li class="menu-item"><a href="/auth/registration">Регистрация</a></li>
+                {% endif %}
                 <li class="menu-item"><a href="/">Главная</a></li>
                 <li class="menu-item"><a href="/about">Обо мне</a></li>
                 <li class="menu-item"><a href="/links">Ссылочки</a></li>
-                <li class="menu-item"><a href="/pictures">Картиночки</a></li>
+                <li class="menu-item"><a href="/gallery">Картиночки</a></li>
                 <li class="menu-item"><a href="/contacts">Контактики</a></li>
-                <li class="menu-item"><a href="/login">Войти</a></li>
+
             </ul>
         </nav>
     </header>
@@ -25,5 +31,9 @@
         {% block content %}
         {% endblock %}
     </div>
+
+    <footer>
+        Powered by Django 1.10 by Misha Levshin
+    </footer>
 </body>
 </html>
