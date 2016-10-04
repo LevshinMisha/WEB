@@ -2,12 +2,11 @@
 
 {% block content %}
 
-    <h1 class="login_title">Register</h1>
-
+    <h1 class="login_title">Кто здесь?</h1>
     <form method="post" class="post-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Register</button>
+        <button type="submit" class="save btn btn-default">Заявить о себе</button>
     </form>
 
 {% endblock %}

@@ -1,1 +1,1 @@
-PAGE_TO_REDIRECT = '/auth'
+PAGE_TO_REDIRECT = '/'

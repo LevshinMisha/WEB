@@ -15,7 +15,7 @@ def need_authentication(func):
 
 def log_out(request):
     logout(request)
-    return redirect("/auth")
+    return redirect(PAGE_TO_REDIRECT)
 
 
 def auth(request):
@@ -23,11 +23,12 @@ def auth(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             user = form.authenticate()
+            print(user)
             if user is not None and user.is_active:
                 login(request, user)
                 return redirect(PAGE_TO_REDIRECT)
     form = LoginForm()
-    return render(request, 'auth/auth.html', {'form': form})
+    return render(request, 'auth/auth.html', {'form': form, 'title': 'Авторизация'})
 
 
 def register(request):
@@ -38,4 +39,4 @@ def register(request):
             login(request, user)
             return redirect(PAGE_TO_REDIRECT)
     form = RegistrationForm()
-    return render(request, "auth/registration.html", {'form': form})
+    return render(request, "auth/registration.html", {'form': form, 'title': 'Регистрация'})

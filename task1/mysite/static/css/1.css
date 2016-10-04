@@ -6,7 +6,7 @@ body
 
 header
 {
-    width: 110%;
+    width: 101%;
     margin-left: -10px; /* для того чтобы не было отступа от границы экрана */
     margin-top: -10px; /* для того чтобы не было отступа от границы экрана */
     padding-top: 0.25%;
@@ -19,7 +19,7 @@ header
 {
     text-align: center;
     display: inline-block;
-    width: 10%;
+    width: 5%;
     margin: -2px; /* чтобы не было отступа от других элементов */
 }
 
@@ -44,13 +44,27 @@ header
 .main_content
 {
     margin-left: 3%;
+    margin-top: 1%;
 }
 
 .main_content p
 {
-    padding-top: 10px;
     padding-left: 5px;
+    padding-top: 10px;
     padding-bottom: 10px;
     width: 94%;
     background: white;
+}
+
+footer
+{
+    float: right;
+}
+
+.gallery_img
+{
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+    margin: 10px;
 }
