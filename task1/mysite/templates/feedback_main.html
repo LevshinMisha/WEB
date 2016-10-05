@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for feedback in feedbacks %}
+
+        <h1 class="feedback_title">
+            <span>{{ feedback.author }}</span>
+        </h1>
+            <span class="published">published: {{ feedback.published_date }}</span>
+            <a href="{% url 'feedback_edit' pk=feedback.pk %}">Редактировать</a>
+            <a href="{% url 'feedback_delete' pk=feedback.pk %}">Удалить</a>
+
+        <p class="text">
+            {{ feedback.text }}
+        </p>
+    {% endfor %}
+{% endblock content %}

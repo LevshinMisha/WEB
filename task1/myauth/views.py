@@ -2,20 +2,28 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login, logout
 from .form import LoginForm, RegistrationForm
-from .settings import PAGE_TO_REDIRECT
+from .settings import PAGE_TO_REDIRECT_AFTER_AUTH, AUTH_PAGE
+
+
+def is_user(request):
+    return not isinstance(request.user, get_user_model())
+
+
+def is_admin(request):
+    return is_user(request) and request.user.is_superuser
 
 
 def need_authentication(func):
     def f(request, *args, **kwargs):
-        if not isinstance(request.user, get_user_model()):
-            return redirect('auth/auth.html')
+        if is_user(request):
+            return redirect(AUTH_PAGE)
         return func(request, *args, **kwargs)
     return f
 
 
 def log_out(request):
     logout(request)
-    return redirect(PAGE_TO_REDIRECT)
+    return redirect(PAGE_TO_REDIRECT_AFTER_AUTH)
 
 
 def auth(request):
@@ -23,12 +31,11 @@ def auth(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             user = form.authenticate()
-            print(user)
             if user is not None and user.is_active:
                 login(request, user)
-                return redirect(PAGE_TO_REDIRECT)
+                return redirect(PAGE_TO_REDIRECT_AFTER_AUTH)
     form = LoginForm()
-    return render(request, 'auth/auth.html', {'form': form, 'title': 'Авторизация'})
+    return render(request, 'auth.html', {'form': form, 'title': 'Авторизация'})
 
 
 def register(request):
@@ -37,6 +44,6 @@ def register(request):
         if form.is_valid():
             user = form.registrate()
             login(request, user)
-            return redirect(PAGE_TO_REDIRECT)
+            return redirect(PAGE_TO_REDIRECT_AFTER_AUTH)
     form = RegistrationForm()
-    return render(request, "auth/registration.html", {'form': form, 'title': 'Регистрация'})
+    return render(request, "registration.html", {'form': form, 'title': 'Регистрация'})
