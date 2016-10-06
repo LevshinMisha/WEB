@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import login, logout
 from .form import LoginForm, RegistrationForm
 from .settings import PAGE_TO_REDIRECT_AFTER_AUTH, AUTH_PAGE
-
+from ipware.ip import get_real_ip, get_ip, get_trusted_ip
 
 def is_user(request):
     return not isinstance(request.user, get_user_model())
@@ -39,6 +39,8 @@ def auth(request):
 
 
 def register(request):
+    print(get_ip(request))
+    print(get_real_ip(request))
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():

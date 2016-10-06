@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <script>
+
+    </script>
+
 
     <h1 class="login_title">Кто здесь?</h1>
-    <form method="post" class="post-form">
+    <form method="post" class="form">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Заявить о себе</button>

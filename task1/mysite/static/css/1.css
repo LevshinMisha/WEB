@@ -58,6 +58,7 @@ footer
 {
     text-align: center;
     display: inline-block;
+    width: 10%;
 }
 
 .menu-item:hover

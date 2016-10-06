@@ -25,10 +25,16 @@ class LoginForm(forms.Form):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
 
     def is_valid(self):
-        return all(self.data) and user_exists(get_email(self.data['username']))
+        return self.check_data() and user_exists(get_email(self.data['username']))
 
     def authenticate(self):
         return authenticate(email=get_email(self.data['username']), password=self.data['password'])
+
+    def check_data(self):
+        for i in ['username', 'password']:
+            if i not in self.data:
+                return False
+        return all(self.data)
 
 
 class RegistrationForm(forms.Form):
@@ -38,7 +44,13 @@ class RegistrationForm(forms.Form):
     password2 = forms.CharField(label='Password2', widget=forms.PasswordInput)
 
     def is_valid(self):
-        return all(self.data) and self.data['password1'] == self.data['password2'] and not user_exists(self.data['email'])
+        return self.check_data() and self.data['password1'] == self.data['password2'] and not user_exists(self.data['email'])
 
     def registrate(self):
         return get_user_model().objects.create_user(email=self.data['email'], username=self.data['username'], password=self.data['password1'])
+
+    def check_data(self):
+        for i in ['email', 'username', 'password1', 'password2']:
+            if i not in self.data:
+                return False
+        return all(self.data)

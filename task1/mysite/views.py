@@ -21,3 +21,6 @@ def links(request):
 def gallery(request):
     urls = ['/static/img/' + filename for filename in os.listdir(os.path.dirname(__file__) + '/static/img')]
     return render(request, 'gallery.html', {'title': 'Картиночки', 'urls': urls})
+
+def popup(request):
+    return render(request, 'popup.html', {'title': 'popup'})
