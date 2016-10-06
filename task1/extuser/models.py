@@ -25,11 +25,11 @@ class UserManager(BaseUserManager):
 
 
 class ExtUser(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField('Электронная почта', max_length=255, unique=True, db_index=True)
+    email = models.EmailField('Электронная почта', max_length=30, unique=True, db_index=True)
     avatar = models.ImageField('Аватар', blank=True, null=True, upload_to="user/avatar")
     register_date = models.DateField('Дата регистрации', auto_now_add=True)
     is_active = models.BooleanField('Активен', default=True)
-    username = models.TextField('Имя Пользователя', unique=True)
+    username = models.TextField('Имя Пользователя', unique=True, max_length=20)
 
     # Этот метод обязательно должен быть определён
     def get_full_name(self):

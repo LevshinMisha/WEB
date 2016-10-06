@@ -31,3 +31,6 @@
 /task1/task1/__pycache__/settings.cpython-35.pyc
 /task1/task1/__pycache__/urls.cpython-35.pyc
 /task1/task1/__pycache__/wsgi.cpython-35.pyc
+/task1/extuser/migrations/__pycache__/0002_auto_20161005_2155.cpython-35.pyc
+/task1/extuser/migrations/__pycache__/0003_auto_20161005_2157.cpython-35.pyc
+/task1/feedbacks/migrations/__pycache__/0002_auto_20161005_2155.cpython-35.pyc
