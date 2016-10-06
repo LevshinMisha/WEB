@@ -1,4 +1,4 @@
-@media(max-width: 1200)
+@media(max-width: 1300px)
 {
     html
     {
@@ -6,7 +6,7 @@
     }
 }
 
-@media(max-width: 800)
+@media(max-width: 800px)
 {
     html
     {
@@ -14,7 +14,7 @@
     }
 }
 
-@media(max-width: 400)
+@media(max-width: 400px)
 {
     html
     {
