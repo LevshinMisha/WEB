@@ -18,16 +18,19 @@ def trying_to_delete_or_edit_not_your_feedback(request):
 
 @need_authentication
 def feedback_new(request):
-    if request.method == "POST":
-        form = FeedbackForm(request.POST)
-        if form.is_valid():
-            feedback = form.save(commit=False)
-            feedback.create(request.user)
-            feedback.publish()
-            return redirect("feedback_main")
+    if not Feedback.objects.filter(author=request.user):
+        if request.method == "POST":
+            form = FeedbackForm(request.POST)
+            if form.is_valid():
+                feedback = form.save(commit=False)
+                feedback.create(request.user)
+                feedback.publish()
+                return redirect("feedback_main")
+        else:
+            form = FeedbackForm()
+        return render(request, 'feedback_new.html', {'form': form, 'title': 'Написать гадости'})
     else:
-        form = FeedbackForm()
-    return render(request, 'feedback_new.html', {'form': form, 'title': 'Написать гадости'})
+        return cheater(request, 'В одни руки один фидбек')
 
 
 @need_authentication
@@ -44,7 +47,7 @@ def feedback_edit(request, pk):
             form = FeedbackForm(instance=feedback)
         return render(request, 'feedback_new.html', {'form': form, 'title': 'Приукрасить гадости'})
     else:
-        return redirect('feedback_cheater')
+        return cheater(request, 'Пытались редактировать жужой фидбек?')
 
 
 @need_authentication
@@ -54,8 +57,8 @@ def feedback_delete(request, pk):
         feedback.delete()
         return redirect("feedback_main")
     else:
-        return redirect('feedback_cheater')
+        return cheater(request, 'Пытались удалить чужой фидбек?')
 
 
-def cheater(request):
-    return render(request, 'feedback_cheater.html', {'title': 'Читерок!'})
+def cheater(request, message):
+    return render(request, 'cheater.html', {'title': 'Читерок', 'cheater_message': message})
