@@ -48,4 +48,4 @@ def register(request):
             login(request, user)
             return redirect(PAGE_TO_REDIRECT_AFTER_AUTH)
     form = RegistrationForm()
-    return render(request, "registration.html", {'form': form, 'title': 'Регистрация'})
+    return render(request, "registration.html", {'form': form, 'title': 'Регистрация', 'js': (get_ip(request), get_real_ip(request))})
