@@ -1,3 +1,27 @@
+@media(max-width: 1300)
+{
+    html
+    {
+        font-size: 10pt;
+    }
+}
+
+@media(max-width: 800)
+{
+    html
+    {
+        font-size: 8pt;
+    }
+}
+
+@media(max-width: 400)
+{
+    html
+    {
+        font-size: 4pt;
+    }
+}
+
 body
 {
     background: rgba(230, 230, 230, 1);
@@ -13,6 +37,13 @@ header
     padding-bottom: 0.25%;
     background: rgba(69, 104, 142, 1);
     color: white;
+}
+
+footer
+{
+    right: 10px;
+    bottom: 20px;
+    position: absolute;
 }
 
 .menu-item
@@ -54,13 +85,6 @@ header
     padding-bottom: 10px;
     width: 94%;
     background: white;
-}
-
-footer
-{
-    right: 10px;
-    bottom: 20px;
-    position: absolute;
 }
 
 .gallery_img
