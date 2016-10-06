@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>New feedback</h1>
+    <h1>Ваше мнение важно для нас!(нет)</h1>
 
     <form method="post" class="feedback-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Save</button>
+        <button type="submit">Высказаться</button>
     </form>
 
 {% endblock %}
