@@ -58,7 +58,9 @@ header
 
 footer
 {
-    float: right;
+    right: 10px;
+    bottom: 20px;
+    position: absolute;
 }
 
 .gallery_img

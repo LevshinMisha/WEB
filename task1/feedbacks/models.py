@@ -4,7 +4,7 @@ from task1.settings import AUTH_USER_MODEL
 
 
 class Feedback(models.Model):
-    text = models.TextField()
+    text = models.TextField(max_length=300)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     author = models.ForeignKey(AUTH_USER_MODEL)
@@ -19,4 +19,4 @@ class Feedback(models.Model):
         self.save()
 
     def __str__(self):
-        return self.title
+        return self.text
