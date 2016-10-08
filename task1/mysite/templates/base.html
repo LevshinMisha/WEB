@@ -50,7 +50,8 @@
         }
 
         var d = document.createElement('div');
-        d.innerHTML = 'Уникальных посещений: ' + ajaxGet('/visits');
+        responseDict = JSON.parse(ajaxGet('/visits'));
+        d.innerHTML = 'Уникальных посещений: ' + responseDict['unic_visits'] + '<br>Всего посещений: ' + responseDict['visits_count'];
         d.className = 'visits';
         document.body.appendChild(d);
     </script>

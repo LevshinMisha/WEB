@@ -1,9 +1,11 @@
 from django.shortcuts import render, HttpResponse
 import os
 from ipware.ip import get_ip
+import json
+
 
 ips = []
-
+visits_count = 0
 
 def main_page(request):
     return render(request, 'main.html', {'title': 'Кто здесь?'})
@@ -31,8 +33,11 @@ def popup(request):
 
 
 def visits(request):
-    for i in ips:
-        if str(get_ip(request)) == i:
-            return HttpResponse(len(ips))
-    ips.append(str(get_ip(request)))
-    return HttpResponse(len(ips))
+    global visits_count
+    visits_count += 1
+    if str(get_ip(request)) not in ips:
+        ips.append(str(get_ip(request)))
+    d = dict()
+    d['unic_visits'] = len(ips)
+    d['visits_count'] = visits_count
+    return HttpResponse(json.dumps(d))
