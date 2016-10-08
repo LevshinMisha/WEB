@@ -42,7 +42,7 @@ header
 footer
 {
     right: 10px;
-    bottom: 20px;
+    bottom: 10px;
     position: absolute;
 }
 
@@ -94,4 +94,11 @@ footer
     height: 150px;
     display: inline-block;
     margin: 10px;
+}
+
+.visits
+{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
 }

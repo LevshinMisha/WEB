@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import login, logout
 from .form import LoginForm, RegistrationForm
 from .settings import PAGE_TO_REDIRECT_AFTER_AUTH, AUTH_PAGE
-from ipware.ip import get_real_ip, get_ip, get_trusted_ip
+from ipware.ip import get_ip
 
 ips = []
 
@@ -14,15 +14,6 @@ def is_user(request):
 
 def is_admin(request):
     return is_user(request) and request.user.is_superuser
-
-
-def admin_can_do_it(f):
-    def func(request, *args, **kwargs):
-        if is_admin(request):
-            return lambda: True
-        else:
-            return f
-    return func
 
 
 def need_authentication(func):
