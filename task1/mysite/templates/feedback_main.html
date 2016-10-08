@@ -7,6 +7,7 @@
             <span>{{ feedback.author }}</span>
         </h1>
             <span class="published">published: {{ feedback.published_date }}</span>
+            <br>
             <a href="{% url 'feedback_edit' pk=feedback.pk %}">Редактировать</a>
             <a href="{% url 'feedback_delete' pk=feedback.pk %}">Удалить</a>
 
