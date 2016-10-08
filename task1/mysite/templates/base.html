@@ -10,9 +10,9 @@
 <body>
     <header>
         <nav>
-            <ul class="menu">
+            <ul class="menu" style="">
                 {% if user.is_authenticated %}
-                    <li class="greetings">Приветствую тебя, {{ user }}</li>
+                    <li class="greetings">Привет, {{ user }}</li>
                     <li class="menu-item"><a href="/auth/logout">Выйти</a></li>
                 {% else %}
                     <li class="menu-item"><a href="/auth">Войти</a></li>
@@ -57,7 +57,7 @@
     </script>
 
     <footer>
-        Powered by Django 1.10 by Misha Levshin
+        Powered by Django 1.10
     </footer>
 </body>
 </html>

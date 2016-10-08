@@ -43,15 +43,13 @@ def auth(request):
 
 def register(request):
     if request.method == "POST":
-        for i in ips:
-            if str(get_ip(request)) == i:
-                return render(request, "cheater.html",
-                              {'title': 'Читерок', 'cheater_message': 'Пытались зарегистрироваться дважды?'})
+        if str(get_ip(request)) in ips:
+            return render(request, "cheater.html", {'title': 'Читерок', 'cheater_message': 'Пытались зарегистрироваться дважды?'})
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            ips.append(str(get_ip(request)))
             user = form.registrate()
             login(request, user)
+            ips.append(str(get_ip(request)))
             return redirect(PAGE_TO_REDIRECT_AFTER_AUTH)
     form = RegistrationForm()
     return render(request, "registration.html", {'form': form, 'title': 'Регистрация'})

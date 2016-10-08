@@ -1,27 +1,3 @@
-@media(max-width: 1300px)
-{
-    html
-    {
-        font-size: 10pt;
-    }
-}
-
-@media(max-width: 1000px)
-{
-    html
-    {
-        font-size: 8pt;
-    }
-}
-
-@media(max-width: 650px)
-{
-    html
-    {
-        font-size: 4pt;
-    }
-}
-
 body
 {
     background: rgba(230, 230, 230, 1);
@@ -30,13 +6,11 @@ body
 
 header
 {
-    width: 101%;
-    margin-left: -10px; /* для того чтобы не было отступа от границы экрана */
-    margin-top: -10px; /* для того чтобы не было отступа от границы экрана */
-    padding-top: 0.25%;
-    padding-bottom: 0.25%;
+    margin-left: -8px; /* для того чтобы не было отступа от границы экрана */
+    margin-top: -16px; /* для того чтобы не было отступа от границы экрана */
     background: rgba(69, 104, 142, 1);
     color: white;
+    display: block;
 }
 
 footer
@@ -50,15 +24,20 @@ footer
 {
     text-align: center;
     display: inline-block;
-    width: 10%;
-    margin: -2px; /* чтобы не было отступа от других элементов */
+    width: 110px;
+}
+
+nav
+{
+    text-align: left;
+    margin-left: -30px;
 }
 
 .greetings
 {
     text-align: center;
     display: inline-block;
-    width: 10%;
+    width: 110px;
 }
 
 .menu-item:hover
@@ -68,9 +47,11 @@ footer
 
 .menu-item a
 {
-    color: white;
     display: block;
+    color: white;
     text-decoration: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .main_content
@@ -90,8 +71,8 @@ footer
 
 .gallery_img
 {
-    width: 150px;
-    height: 150px;
+    width: 128px;
+    height: 128px;
     display: inline-block;
     margin: 10px;
 }
