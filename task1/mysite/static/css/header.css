@@ -1,0 +1,46 @@
+header
+{
+    width: auto;
+    margin-left: -8px; /* для того чтобы не было отступа от границы экрана */
+    margin-top: -16px; /* для того чтобы не было отступа от границы экрана */
+    margin-right: -8px; /* для того чтобы не было отступа от границы экрана */
+    background: rgba(69, 104, 142, 1);
+    color: white;
+    display: block;
+}
+
+.menu-item
+{
+    text-align: center;
+    display: inline-block;
+    width: 110px;
+
+}
+
+nav
+{
+    text-align: left;
+    margin-left: -30px;
+}
+
+.greetings
+{
+    text-align: center;
+    display: inline-block;
+    width: 110px;
+}
+
+.menu-item:hover
+{
+    background: rgba(79, 124, 172, 1);
+}
+
+.menu-item a
+{
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 12;
+}
