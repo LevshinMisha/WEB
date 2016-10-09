@@ -30,6 +30,7 @@ class ExtUser(AbstractBaseUser, PermissionsMixin):
     register_date = models.DateField('Дата регистрации', auto_now_add=True)
     is_active = models.BooleanField('Активен', default=True)
     username = models.TextField('Имя Пользователя', unique=True, max_length=20)
+    visits_count = models.IntegerField('Кол-во посещений сайта', default=0)
 
     # Этот метод обязательно должен быть определён
     def get_full_name(self):

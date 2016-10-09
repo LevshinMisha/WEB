@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="/static/css/1.css">
+    <link rel="stylesheet" href="/static/css/header.css">
     <link rel="shortcut icon" href="/static/favicon.ico">
     <link rel="script" href="/static/js/visits.js">
 </head>
@@ -12,28 +13,22 @@
         <nav>
             <ul class="menu" style="">
                 {% if user.is_authenticated %}
-                    <li class="greetings">Привет, {{ user }}</li>
-                    <li class="menu-item"><a href="/auth/logout">Выйти</a></li>
-                {% else %}
-                    <li class="menu-item"><a href="/auth">Войти</a></li>
-                    <li class="menu-item"><a href="/auth/registration">Регистрация</a></li>
-                {% endif %}
-                <li class="menu-item"><a href="/">Главная</a></li>
-                <li class="menu-item"><a href="/about">Обо мне</a></li>
-                <li class="menu-item"><a href="/links">Ссылочки</a></li>
-                <li class="menu-item"><a href="/gallery">Картиночки</a></li>
-                <li class="menu-item"><a href="/contacts">Контактики</a></li>
-                <li class="menu-item"><a href="/feedbacks">Фидбеки</a></li>
-                <li class="menu-item"><a href="/feedbacks/new/">Ваш фидбек</a></li>
+                    <li class="greetings">Привет, {{ user }}</li><!--
+                    --><li class="menu-item"><a href="/auth/logout">Выйти</a></li><!--
+                -->{% else %}
+                    <li class="menu-item"><a href="/auth">Войти</a></li><!--
+                    --><li class="menu-item"><a href="/auth/registration">Регистрация</a></li><!--
+                -->{% endif %}<!--
+                --><li class="menu-item"><a href="/">Главная</a></li><!--
+                --><li class="menu-item"><a href="/about">Обо мне</a></li><!--
+                --><li class="menu-item"><a href="/links">Ссылочки</a></li><!--
+                --><li class="menu-item"><a href="/gallery">Картиночки</a></li><!--
+                --><li class="menu-item"><a href="/contacts">Контактики</a></li><!--
+                --><li class="menu-item"><a href="/feedbacks">Фидбеки</a></li><!--
+                --><li class="menu-item"><a href="/feedbacks/new/">Ваш фидбек</a></li>
             </ul>
         </nav>
     </header>
-
-    {% if js %}
-        <script>
-            alert('{{ js }}');
-        </script>
-    {% endif %}
 
     <div class="main_content">
         {% block content %}
@@ -51,7 +46,10 @@
 
         var d = document.createElement('div');
         responseDict = JSON.parse(ajaxGet('/visits'));
-        d.innerHTML = 'Уникальных посещений: ' + responseDict['unic_visits'] + '<br>Всего посещений: ' + responseDict['visits_count'];
+        d.innerHTML = 'Уникальных пользователей за сегодня: ' + responseDict['unic_user_visits_today'] +
+        '<br>Анонимных посещений за сегодня: ' + responseDict['anonimous_visits_today'] +
+        '<br>Пользовательских посещений за сегодня: ' + responseDict['user_visits_today'] +
+        '<br>Посещений за все время: ' + responseDict['visits_count'];
         d.className = 'visits';
         document.body.appendChild(d);
     </script>
