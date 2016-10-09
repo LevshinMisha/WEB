@@ -33,7 +33,6 @@ def visits(request):
         day.save()
     for day in Day.objects.all():
         visits_count += day.visits_count + day.anonimous_visits_count
-    visits_count += 1
     d = dict()
     d['anonimous_visits_today'] = day.anonimous_visits_count
     d['user_visits_today'] = sum(visit.visits_count for visit in UserDayVisits.objects.filter(day=day))
