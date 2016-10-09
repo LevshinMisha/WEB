@@ -46,3 +46,8 @@
 /task1/visits/__pycache__/urls.cpython-35.pyc
 /task1/visits/__pycache__/views.cpython-35.pyc
 /task1/extuser/migrations/__pycache__/0004_extuser_visits_count.cpython-35.pyc
+/task1/extuser/migrations/__pycache__/0005_remove_extuser_visits_count.cpython-35.pyc
+/task1/visits/migrations/__pycache__/0006_auto_20161009_1103.cpython-35.pyc
+/task1/visits/migrations/__pycache__/0007_auto_20161009_1243.cpython-35.pyc
+/task1/visits/migrations/__pycache__/0008_visit_os.cpython-35.pyc
+/task1/visits/migrations/__pycache__/0009_remove_visit_os.cpython-35.pyc

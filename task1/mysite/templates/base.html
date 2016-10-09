@@ -46,10 +46,11 @@
 
         var d = document.createElement('div');
         responseDict = JSON.parse(ajaxGet('/visits'));
-        d.innerHTML = 'Уникальных пользователей за сегодня: ' + responseDict['unic_user_visits_today'] +
-        '<br>Анонимных посещений за сегодня: ' + responseDict['anonimous_visits_today'] +
-        '<br>Пользовательских посещений за сегодня: ' + responseDict['user_visits_today'] +
-        '<br>Посещений за все время: ' + responseDict['visits_count'];
+        d.innerHTML = 'Визитов за сегодня: ' + responseDict['user_visits_today'] +
+        '<br>Просмотров за сегодня: ' + responseDict['hits_today'] +
+        '<br>Визитов за все время: ' + responseDict['user_visits'] +
+        '<br>Просмотров за все время: ' + responseDict['hits'] +
+        '<br>Время между визитами: ' + responseDict['time_out'] + 'секунд';
         d.className = 'visits';
         document.body.appendChild(d);
     </script>

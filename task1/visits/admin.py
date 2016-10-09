@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import Day, UserDayVisits
+from .models import Visit
 
-admin.site.register(Day)
-admin.site.register(UserDayVisits)
+admin.site.register(Visit)
