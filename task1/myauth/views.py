@@ -3,9 +3,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import login, logout
 from .form import LoginForm, RegistrationForm
 from .settings import PAGE_TO_REDIRECT_AFTER_AUTH, AUTH_PAGE
-from ipware.ip import get_ip
-
-ips = []
 
 
 def is_user(request):
@@ -43,13 +40,10 @@ def auth(request):
 
 def register(request):
     if request.method == "POST":
-        if str(get_ip(request)) in ips:
-            return render(request, "cheater.html", {'title': 'Читерок', 'cheater_message': 'Пытались зарегистрироваться дважды?'})
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.registrate()
             login(request, user)
-            ips.append(str(get_ip(request)))
             return redirect(PAGE_TO_REDIRECT_AFTER_AUTH)
     form = RegistrationForm()
     return render(request, "registration.html", {'form': form, 'title': 'Регистрация'})
