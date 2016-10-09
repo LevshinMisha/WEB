@@ -5,7 +5,6 @@ from django.utils import timezone
 class Visit(models.Model):
     ip = models.TextField()
     browser = models.TextField()
-    cookies = models.TextField()
     last_hit = models.DateTimeField(default=timezone.now)
     hit_count = models.IntegerField(default=1)
 
@@ -15,4 +14,4 @@ class Visit(models.Model):
         self.save()
 
     def __str__(self):
-        return str(self.ip) + ', ' + str(self.browser) + ', ' + str(self.cookies) + ', ' + str(self.last_hit)
+        return str(self.ip) + ', ' + str(self.browser) + ', ' + str(self.last_hit)

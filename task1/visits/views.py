@@ -19,11 +19,10 @@ def seconds_to_time(seconds):
 def visits(request):
     ip = get_ip(request)
     browser = request.META['HTTP_USER_AGENT']
-    cookies = request.COOKIES
-    if len(Visit.objects.filter(ip=ip, browser=browser, cookies=cookies, last_hit__gt=seconds_to_time(time_to_seconds(timezone.now()) - TIME_OUT))):
-        Visit.objects.get(ip=ip, browser=browser, cookies=cookies, last_hit__gt=seconds_to_time(time_to_seconds(timezone.now()) - TIME_OUT)).update()
+    if len(Visit.objects.filter(ip=ip, browser=browser, last_hit__gt=seconds_to_time(time_to_seconds(timezone.now()) - TIME_OUT))):
+        Visit.objects.get(ip=ip, browser=browser, last_hit__gt=seconds_to_time(time_to_seconds(timezone.now()) - TIME_OUT)).update()
     else:
-        Visit.objects.create(ip=ip, browser=browser, cookies=cookies)
+        Visit.objects.create(ip=ip, browser=browser)
     d = dict()
     d['user_visits_today'] = len(Visit.objects.filter(last_hit__day=timezone.now().day))
     d['hits_today'] = sum(visit.hit_count for visit in Visit.objects.filter(last_hit__day=timezone.now().day))
