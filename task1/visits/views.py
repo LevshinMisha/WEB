@@ -7,6 +7,7 @@ from django.utils import timezone
 
 TIME_OUT = 30 * 60
 
+
 def time_to_seconds(time):
     return time.hour * 60 * 60 + time.minute * 60 + time.second
 
@@ -20,6 +21,10 @@ def today_visits():
     return [visit for visit in Visit.objects.all() if visit.last_hit.day == timezone.now().day]
 
 
+def todays_hits():
+    return [visit.hit_count for visit in Visit.objects.all() if visit.last_hit.day == timezone.now().day]
+
+
 def visits(request):
     ip = get_ip(request)
     browser = request.META['HTTP_USER_AGENT']
@@ -29,7 +34,7 @@ def visits(request):
         Visit.objects.create(ip=ip, browser=browser)
     d = dict()
     d['user_visits_today'] = len(today_visits())
-    d['hits_today'] = sum(visit.hit_count for visit in Visit.objects.filter(last_hit__day=timezone.now().day))
+    d['hits_today'] = sum(todays_hits())
     d['user_visits'] = len(Visit.objects.all())
     d['hits'] = sum(visit.hit_count for visit in Visit.objects.all())
     d['time_out'] = TIME_OUT
