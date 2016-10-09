@@ -2,40 +2,32 @@ from django.shortcuts import render, HttpResponse
 import os
 from ipware.ip import get_ip
 import json
-from django.contrib.auth import get_user_model
-from .models import UserDayVisits, Day
+from .models import Visit
 from django.utils import timezone
 
+TIME_OUT = 30 * 60
 
-def today_already_exists():
-    return len(Day.objects.filter(date=timezone.now()))
+def time_to_seconds(time):
+    return time.hour * 60 * 60 + time.minute * 60 + time.second
 
 
-def user_already_visit_in_this_day(user, day):
-    if isinstance(user, get_user_model()):
-        return len(UserDayVisits.objects.filter(user=user, day=day))
-    return True
+def seconds_to_time(seconds):
+    a = timezone.now()
+    return a.replace(year=a.year, month=a.month, day=a.day, hour=seconds // (60 * 60), minute=(seconds % (60 * 60)) // 60, second=seconds % 60)
 
 
 def visits(request):
-    visits_count = 0
-    user = request.user
-    if today_already_exists():
-        day = Day.objects.get(date=timezone.now())
+    ip = get_ip(request)
+    browser = request.META['HTTP_USER_AGENT']
+    cookies = request.COOKIES
+    if len(Visit.objects.filter(ip=ip, browser=browser, cookies=cookies, last_hit__gt=seconds_to_time(time_to_seconds(timezone.now()) - TIME_OUT))):
+        Visit.objects.get(ip=ip, browser=browser, cookies=cookies, last_hit__gt=seconds_to_time(time_to_seconds(timezone.now()) - TIME_OUT)).update()
     else:
-        day = Day.objects.create()
-    if not user_already_visit_in_this_day(user, day):
-        UserDayVisits.objects.create(user=user, day=day)
-    if isinstance(user, get_user_model()):
-        UserDayVisits.objects.get(user=user, day=day).visit_one_more_page()
-    else:
-        day.anonimous_visits_count += 1
-        day.save()
-    for day in Day.objects.all():
-        visits_count += day.visits_count + day.anonimous_visits_count
+        Visit.objects.create(ip=ip, browser=browser, cookies=cookies)
     d = dict()
-    d['anonimous_visits_today'] = day.anonimous_visits_count
-    d['user_visits_today'] = sum(visit.visits_count for visit in UserDayVisits.objects.filter(day=day))
-    d['unic_user_visits_today'] = len(UserDayVisits.objects.filter(day=day))
-    d['visits_count'] = visits_count
+    d['user_visits_today'] = len(Visit.objects.filter(last_hit__day=timezone.now().day))
+    d['hits_today'] = sum(visit.hit_count for visit in Visit.objects.filter(last_hit__day=timezone.now().day))
+    d['user_visits'] = len(Visit.objects.all())
+    d['hits'] = sum(visit.hit_count for visit in Visit.objects.all())
+    d['time_out'] = TIME_OUT
     return HttpResponse(json.dumps(d))
