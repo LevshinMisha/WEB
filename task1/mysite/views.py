@@ -19,6 +19,7 @@ def links(request):
 
 def gallery(request):
     urls = ['/static/img/' + filename for filename in os.listdir(os.path.dirname(__file__) + '/static/img')]
+    urls = [(urls[i], i) for i in range(len(urls))]
     return render(request, 'gallery.html', {'title': 'Картиночки', 'urls': urls})
 
 

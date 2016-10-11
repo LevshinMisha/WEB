@@ -9,21 +9,27 @@ header
     display: block;
 }
 
-.menu-item
-{
-    text-align: center;
-    display: inline-block;
-    width: 110px;
 
+
+.menu
+{
+    margin-left: -16px;
+    margin-right: 20px;
 }
 
 nav
 {
     text-align: left;
-    margin-left: -30px;
 }
 
 .greetings
+{
+    text-align: center;
+    display: inline-block;
+    width: 110px;
+}
+
+.menu-item
 {
     text-align: center;
     display: inline-block;
@@ -43,4 +49,18 @@ nav
     padding-top: 15px;
     padding-bottom: 15px;
     font-size: 12;
+}
+
+@media(max-width: 500px)
+{
+    .menu-item
+    {
+        width: 100px;
+
+    }
+
+    .greetings
+    {
+        width: 100px;
+    }
 }

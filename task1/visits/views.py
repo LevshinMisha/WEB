@@ -25,11 +25,19 @@ def todays_hits():
     return [visit.hit_count for visit in Visit.objects.all() if visit.last_hit.day == timezone.now().day]
 
 
+def last_visit_was_less_then(ip, browser, time):
+    return len(Visit.objects.filter(ip=ip, browser=browser, last_hit__gt=seconds_to_time(time_to_seconds(timezone.now()) - time)))
+
+
 def visits(request):
     ip = get_ip(request)
     browser = request.META['HTTP_USER_AGENT']
-    if len(Visit.objects.filter(ip=ip, browser=browser, last_hit__gt=seconds_to_time(time_to_seconds(timezone.now()) - TIME_OUT))):
-        Visit.objects.get(ip=ip, browser=browser, last_hit__gt=seconds_to_time(time_to_seconds(timezone.now()) - TIME_OUT)).update()
+    if last_visit_was_less_then(ip, browser, TIME_OUT):
+        visit = Visit.objects.get(ip=ip, browser=browser, last_hit__gt=seconds_to_time(time_to_seconds(timezone.now()) - TIME_OUT))
+        if not last_visit_was_less_then(ip, browser, 5):
+            visit.update()
+        else:
+            visit.update_only_time()
     else:
         Visit.objects.create(ip=ip, browser=browser)
     d = dict()
