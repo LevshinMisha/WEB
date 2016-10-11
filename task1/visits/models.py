@@ -13,5 +13,9 @@ class Visit(models.Model):
         self.hit_count += 1
         self.save()
 
+    def update_only_time(self):
+        self.last_hit = timezone.now()
+        self.save()
+
     def __str__(self):
         return str(self.ip) + ', ' + str(self.browser) + ', ' + str(self.last_hit)

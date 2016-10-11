@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for url in urls %}
-        <img class="gallery_img" src="{{ url }}" alt="loading...">
-    {% endfor %}
+    <script>
+        function expandImage(url)
+        {
+            alert(url);
+        }
+    </script>
+
+    <div class="gallery">
+        {% for url in urls %}
+            <img class="gallery_img" src="{{ url.0 }}" alt="loading..." id="{{ url.1 }}" onclick="expandImage('{{ url.1 }}')">
+        {% endfor %}
+    </div>
 {% endblock %}

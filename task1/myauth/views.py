@@ -39,6 +39,7 @@ def auth(request):
 
 
 def register(request):
+    return render(request, 'cheater.html', {'title': 'Читерок', 'cheater_message': 'Регистрация закрыта, но вы держитесь'})
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
