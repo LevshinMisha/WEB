@@ -1,13 +1,12 @@
 body
 {
     background: rgba(230, 230, 230, 1);
+
 }
 
-footer
+.content
 {
-    bottom: 10px;
-    left: 10px;
-    position: absolute;
+    min-height: calc(100vh - 95px);
 }
 
 .main_content
@@ -16,6 +15,7 @@ footer
     margin-top: 1%;
     margin-right: 16px;
     padding-bottom: 10%;
+
 }
 
 .main_content p
