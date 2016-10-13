@@ -9,46 +9,47 @@
     <link rel="script" href="/static/js/visits.js">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul class="menu" id="menu">
-                {% if user.is_authenticated %}
-                    <script>
-                        var m = document.getElementById('menu');
-                        var l = document.createElement('li');
-                        l.className = 'greetings';
-                        var text = '{{ user }}'
-                        if (text.length < 10)
-                            l.innerHTML = text;
-                        else
-                            l.innerHTML = text.slice(0, 10) + '...';
-                        m.appendChild(l);
-                    </script><!--
-                    --><li class="menu-item"><a href="/auth/logout">Выйти</a></li><!--
-                -->{% else %}
-                    <li class="menu-item"><a href="/auth">Войти</a></li><!--
-                    --><li class="menu-item"><a href="/auth/registration">Регистрация</a></li><!--
-                -->{% endif %}<!--
-                --><li class="menu-item"><a href="/">Главная</a></li><!--
-                --><li class="menu-item"><a href="/about">Обо мне</a></li><!--
-                --><li class="menu-item"><a href="/links">Ссылочки</a></li><!--
-                --><li class="menu-item"><a href="/gallery">Картиночки</a></li><!--
-                --><li class="menu-item"><a href="/contacts">Контактики</a></li><!--
-                --><li class="menu-item"><a href="/feedbacks">Фидбеки</a></li><!--
-                --><li class="menu-item"><a href="/feedbacks/new/">Ваш фидбек</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="content">
+        <header>
+            <nav>
+                <ul class="menu" id="menu">
+                    {% if user.is_authenticated %}
+                        <script>
+                            var m = document.getElementById('menu');
+                            var l = document.createElement('li');
+                            l.className = 'greetings';
+                            var text = '{{ user }}'
+                            if (text.length < 10)
+                                l.innerHTML = text;
+                            else
+                                l.innerHTML = text.slice(0, 10) + '...';
+                            m.appendChild(l);
+                        </script><!--
+                        --><li class="menu-item"><a href="/auth/logout">Выйти</a></li><!--
+                    -->{% else %}
+                        <li class="menu-item"><a href="/auth">Войти</a></li><!--
+                        --><li class="menu-item"><a href="/auth/registration">Регистрация</a></li><!--
+                    -->{% endif %}<!--
+                    --><li class="menu-item"><a href="/">Главная</a></li><!--
+                    --><li class="menu-item"><a href="/about">Обо мне</a></li><!--
+                    --><li class="menu-item"><a href="/links">Ссылочки</a></li><!--
+                    --><li class="menu-item"><a href="/gallery">Картиночки</a></li><!--
+                    --><li class="menu-item"><a href="/contacts">Контактики</a></li><!--
+                    --><li class="menu-item"><a href="/feedbacks">Фидбеки</a></li><!--
+                    --><li class="menu-item"><a href="/feedbacks/new/">Ваш фидбек</a></li>
+                </ul>
+            </nav>
+        </header>
 
-    <script>
-        var g = document.getElements
-    </script>
+        <script>
+            var g = document.getElements
+        </script>
 
-    <div class="main_content">
-        {% block content %}
-        {% endblock %}
+        <div class="main_content">
+            {% block content %}
+            {% endblock %}
+        </div>
     </div>
-
     <script>
         function ajaxGet(path)
         {
@@ -59,14 +60,8 @@
         }
 
         var footer = document.createElement('footer');
-        responseDict = JSON.parse(ajaxGet('/visits'));
-        footer.innerHTML = 'Визитов за сегодня: ' + responseDict['user_visits_today'] +
-        '<br>Просмотров за сегодня: ' + responseDict['hits_today'] +
-        '<br>Визитов за все время: ' + responseDict['user_visits'] +
-        '<br>Просмотров за все время: ' + responseDict['hits'] +
-        '<br>Время между визитами: ' + responseDict['time_out'] + 'секунд' +
-        '<br>Powered by Django 1.10';
-        footer.className = 'visits';
+        ajaxGet('/visits/img');
+        footer.innerHTML = '<img src="/static/files/visits.jpg">';
         document.body.appendChild(footer);
     </script>
 </body>

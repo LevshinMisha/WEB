@@ -4,6 +4,7 @@ from ipware.ip import get_ip
 import json
 from .models import Visit
 from django.utils import timezone
+from .models import VisitsImage
 
 TIME_OUT = 30 * 60
 
@@ -21,7 +22,7 @@ def today_visits():
     return [visit for visit in Visit.objects.all() if visit.last_hit.day == timezone.now().day]
 
 
-def todays_hits():
+def today_hits():
     return [visit.hit_count for visit in Visit.objects.all() if visit.last_hit.day == timezone.now().day]
 
 
@@ -41,9 +42,15 @@ def visits(request):
     else:
         Visit.objects.create(ip=ip, browser=browser)
     d = dict()
-    d['user_visits_today'] = len(today_visits())
-    d['hits_today'] = sum(todays_hits())
-    d['user_visits'] = len(Visit.objects.all())
+    d['visits_today'] = len(today_visits())
+    d['hits_today'] = sum(today_hits())
+    d['visits'] = len(Visit.objects.all())
     d['hits'] = sum(visit.hit_count for visit in Visit.objects.all())
     d['time_out'] = TIME_OUT
     return HttpResponse(json.dumps(d))
+
+
+def visits_img(request):
+    a = json.loads(bytes.decode(visits(request).content))
+    VisitsImage().draw_visits(a['visits_today'], a['visits'], a['hits_today'], a['hits'])
+    return HttpResponse('<img src="/static/files/visits.jpg">')
