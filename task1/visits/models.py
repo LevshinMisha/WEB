@@ -25,10 +25,9 @@ class Visit(models.Model):
 class VisitsImage:
     def __init__(self):
         self.img = Img.new("RGBA", (300, 90), (69, 104, 142, 1))
-        self.img.save('1.jpg')
         self.draw = ImageDraw.Draw(self.img)
 
     def draw_visits(self, today_visits, visits, today_hits, hits):
         self.draw.text((10, 10), "Visits Count: {}\nToday Visits Count: {}".format(visits, today_visits), (255, 255, 255))
         self.draw.text((10, 45), "Hit Count: {}\nToday Hit Count: {}".format(hits, today_hits), (255, 255, 255))
-        self.img.save('mysite/static/files/visits.jpg')
+        self.img.save('visits.jpg')
