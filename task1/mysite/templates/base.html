@@ -58,11 +58,11 @@
             xhr.send();
             return xhr.responseText;
         }
-
-        var footer = document.createElement('footer');
         ajaxGet('/visits/img');
-        footer.innerHTML = '<img src="/static/files/visits.jpg">';
-        document.body.appendChild(footer);
     </script>
+
+    <footer>
+        <img src="/static/files/visits.jpg">
+    </footer>
 </body>
 </html>
