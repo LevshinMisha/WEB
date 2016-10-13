@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from PIL import Image as Img, ImageDraw, ImageFont
 
+
 class Visit(models.Model):
     ip = models.TextField()
     browser = models.TextField()
@@ -28,6 +29,6 @@ class VisitsImage:
         self.font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeSansBold.ttf", encoding='utf-8', size=14)
 
     def draw_visits(self, today_visits, visits, today_hits, hits):
-        self.draw.text((10, 10), "Визитов за сегодня: {}\nВсего: {}".format(today_visits, visits), (255, 255, 255), font=self.font)
-        self.draw.text((10, 45), "Просмотров за сегодня: {}\nВсего: {}".format(today_hits, hits), (255, 255, 255), font=self.font)
+        self.draw.text((10, 10), "Visits Count: {}\nToday Visits Count: {}".format(visits, today_visits), (255, 255, 255), font=self.font)
+        self.draw.text((10, 45), "Hit Count: {}\nToday Hit Count: {}".format(hits, today_hits), (255, 255, 255), font=self.font)
         self.img.save('mysite/static/files/visits.jpg')
