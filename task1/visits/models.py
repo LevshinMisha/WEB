@@ -25,6 +25,7 @@ class Visit(models.Model):
 class VisitsImage:
     def __init__(self):
         self.img = Img.new("RGBA", (300, 90), (69, 104, 142, 1))
+        self.img.save('1.jpg')
         self.draw = ImageDraw.Draw(self.img)
 
     def draw_visits(self, today_visits, visits, today_hits, hits):
