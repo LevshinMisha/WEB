@@ -23,11 +23,11 @@ class Visit(models.Model):
 
 class VisitsImage:
     def __init__(self):
-        self.img = Img.new("RGBA", (200, 80), (69, 104, 142, 1))
+        self.img = Img.new("RGBA", (300, 90), (69, 104, 142, 1))
         self.draw = ImageDraw.Draw(self.img)
         self.font = ImageFont.truetype(font='/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-BI.ttf', encoding='cp-1251', size=14)
 
     def draw_visits(self, today_visits, visits, today_hits, hits):
         self.draw.text((10, 10), "Визитов за сегодня: {}\nВсего: {}".format(today_visits, visits), (255, 255, 255), font=self.font)
-        self.draw.text((10, 40), "Просмотров за сегодня: {}\nВсего: {}".format(today_hits, hits), (255, 255, 255), font=self.font)
+        self.draw.text((10, 45), "Просмотров за сегодня: {}\nВсего: {}".format(today_hits, hits), (255, 255, 255), font=self.font)
         self.img.save('mysite/static/files/visits.jpg')
