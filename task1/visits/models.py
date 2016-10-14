@@ -24,6 +24,8 @@ class Visit(models.Model):
 
 class VisitsImage:
     def __init__(self):
+        import os
+        raise Exception(os.curdir)
         self.img = Img.open('mysite/static/files/visits.jpg')
         self.draw = ImageDraw.Draw(self.img)
 
