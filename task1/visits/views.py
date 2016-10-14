@@ -46,7 +46,6 @@ def visits(request):
     d['hits_today'] = sum(today_hits())
     d['visits'] = len(Visit.objects.all())
     d['hits'] = sum(visit.hit_count for visit in Visit.objects.all())
-    d['time_out'] = TIME_OUT
     return HttpResponse(json.dumps(d))
 
 
