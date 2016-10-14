@@ -51,5 +51,7 @@ def visits(request):
 
 def visits_img(request):
     a = json.loads(bytes.decode(visits(request).content))
-    VisitsImage().draw_visits(a['visits_today'], a['visits'], a['hits_today'], a['hits'])
-    return HttpResponse('<img src="/static/files/visits.jpg">')
+    img = VisitsImage().draw_visits(a['visits_today'], a['visits'], a['hits_today'], a['hits'])
+    response = HttpResponse(content_type="image/png")
+    img.save(response, "PNG")
+    return response
