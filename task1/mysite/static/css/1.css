@@ -1,13 +1,11 @@
 body
 {
     background: rgba(230, 230, 230, 1);
-
 }
-
 
 .content
 {
-    min-height: calc(100vh - 85px);
+    min-height: calc(100vh - 100px);
     min-width: 350px;
 }
 
@@ -38,7 +36,6 @@ body
 {
     margin-right: 16px;
 }
-
 
 @media(max-width: 525px)
 {
