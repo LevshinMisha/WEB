@@ -4,28 +4,16 @@ body
 
 }
 
-footer
-{
-    margin-left: 16px;
-}
-
-footer img
-{
-    width:300px;
-}
 
 .content
 {
-    min-height: calc(100vh - 105px);
+    min-height: calc(100vh - 85px);
+    min-width: 350px;
 }
 
 .main_content
 {
-    margin-left: 16px;
     margin-top: 1%;
-    margin-right: 16px;
-    padding-bottom: 10%;
-
 }
 
 .main_content p
@@ -45,6 +33,12 @@ footer img
     margin-bottom: -4px;
     cursor: pointer;
 }
+
+.gallery
+{
+    margin-right: 16px;
+}
+
 
 @media(max-width: 525px)
 {
