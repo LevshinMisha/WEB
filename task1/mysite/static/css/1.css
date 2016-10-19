@@ -5,14 +5,13 @@ body
 
 .content
 {
-    min-height: calc(101vh - 120px);
+    min-height: calc(101vh - 135px);
     min-width: 315px;
 }
 
 .main_content
 {
     margin-top: -10px;
-    margin-bottom: 20px;
 }
 
 .main_content p
@@ -35,10 +34,9 @@ body
 
 .gallery
 {
-    margin-right: -16px;
 }
 
-@media(max-width: 525px)
+@media(max-width: 500px)
 {
     .gallery_img
     {
