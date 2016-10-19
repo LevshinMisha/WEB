@@ -25,3 +25,7 @@ def gallery(request):
 
 def popup(request):
     return render(request, 'popup.html', {'title': 'popup'})
+
+
+def homework(request):
+    return render(request, 'homework.html', {'title': 'Домашка'})
