@@ -5,13 +5,14 @@ body
 
 .content
 {
-    min-height: calc(100vh - 100px);
-    min-width: 350px;
+    min-height: calc(101vh - 120px);
+    min-width: 315px;
 }
 
 .main_content
 {
-    margin-top: 1%;
+    margin-top: -10px;
+    margin-bottom: 20px;
 }
 
 .main_content p
@@ -34,7 +35,7 @@ body
 
 .gallery
 {
-    margin-right: 16px;
+    margin-right: -16px;
 }
 
 @media(max-width: 525px)
@@ -44,4 +45,10 @@ body
         width: 100px;
         height: 100px;
     }
+}
+
+.cheater img
+{
+    width: 300px;
+    height: 300px;
 }
