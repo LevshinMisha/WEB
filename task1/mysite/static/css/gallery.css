@@ -1,0 +1,61 @@
+.gallery_img
+{
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.gallery
+{
+    font-size: 0;
+}
+
+@media(max-width: 500px)
+{
+    .gallery_img
+    {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+
+.gallery_big_img
+{
+    width: 900px;
+    background: #555 url('http://katushka.in.ua/templates/katushka2/images/ajax-loader.gif') center center no-repeat;
+}
+
+@media(max-width: 915px)
+{
+
+    .gallery_big_img
+    {
+        width: 600px;
+    }
+}
+
+
+@media(max-width: 615px)
+{
+
+    .gallery_big_img
+    {
+        width: 450px;
+    }
+}
+
+@media(max-width: 500px)
+{
+
+    .gallery_big_img
+    {
+        width: 300px;
+    }
+}
+
+.help
+{
+    display: block;
+}
