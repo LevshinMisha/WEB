@@ -22,29 +22,6 @@ body
     background: white;
 }
 
-.gallery_img
-{
-    width: 150px;
-    height: 150px;
-    display: inline-block;
-    margin-right: -4px;
-    margin-bottom: -4px;
-    cursor: pointer;
-}
-
-.gallery
-{
-}
-
-@media(max-width: 500px)
-{
-    .gallery_img
-    {
-        width: 100px;
-        height: 100px;
-    }
-}
-
 .cheater img
 {
     width: 300px;
