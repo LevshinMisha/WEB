@@ -56,6 +56,15 @@
     }
 }
 
+@media(max-height: 700px)
+{
+
+    .gallery_big_img
+    {
+        width: 450px;
+    }
+}
+
 @media(max-height: 500px)
 {
 
