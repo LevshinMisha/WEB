@@ -2,6 +2,16 @@
 
 {% block content %}
     <script src="/static/js/gallery.js"></script>
+
+    <div class="gallery_big_img_container" id="gallery_big_img_container">
+        <div class="gallery_big_img_content">
+            <img class='gallery_big_img' id="gallery_big_img">
+            <br>
+            <button onclick="makeImage">Сделать Фоновым Изображением</button>
+            <button onclick="closeBigImage()">Закрыть</button>
+        </div>
+    </div>
+
     <p id="help">Здесь должен быть хелп. Если его тут нет, значит у вас не работает javascript</p>
 
     <div class="gallery" id="gallery">
@@ -10,10 +20,5 @@
         {% endfor %}
     </div>
 
-    <div class="gallery_big_img_container" id="gallery_big_img_container">
-        <img class='gallery_big_img' id="gallery_big_img">
-        <br>
-        <button>Сделать Фоновым Изображением</button>
-        <button onclick="closeBigImage()">Закрыть</button>
-    </div>
+
 {% endblock %}

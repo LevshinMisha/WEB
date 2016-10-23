@@ -1,36 +1,5 @@
 IMAGE_COUNT = 19;
 
-function getCookie(name)
-{
-  var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
-  return matches ? decodeURIComponent(matches[1]) : undefined;
-}
-
-
-function getHelpElement()
-{
-    return document.getElementById('help')
-}
-
-
-function showHelp()
-{
-    getHelpElement().style.display = 'block';
-}
-
-function hideHelp()
-{
-    getHelpElement().style.display = 'none';
-}
-
-window.onload = function (event)
-{
-    getHelpElement().style.display = 'none';
-    getHelpElement().style.whiteSpace = 'pre-wrap';
-    getHelpElement().innerHTML = 'Нажмите F1, чтобы открыть\\закрыть хелп\nНажимайте на миниатюру чтобы увидеть полную картинку\nПеремещение по галерее с помощью стрелок\nESC - закрывает картинку';
-    cookieChange();
-}
-
 function closeBigImage()
 {
     document.cookie = 'img=-1';
@@ -39,7 +8,6 @@ function closeBigImage()
 
 document.body.onkeydown = function (e)
 {
-    console.log(e.keyCode);
     if (e.keyCode === 112)
         if (getHelpElement().style.display === 'none')
             showHelp();
@@ -88,18 +56,17 @@ function expandImage(id)
 
 function cookieChange()
 {
-    console.log(getCookie('img'));
-    console.log(document.cookie);
-    if (getCookie('img') === '-1' || getCookie('img') === undefined)
+    if (document.getElementById('gallery') !== undefined)
     {
-        document.getElementById('gallery').style.display = 'block';
-        document.getElementById('gallery_big_img_container').style.display = 'none';
-    }
-    else
-    {
-        document.getElementById('gallery').style.display = 'none';
-        expandImage(getCookie('img'));
-        document.getElementById('gallery_big_img_container').style.display = 'block';
+        if (getCookie('img') === '-1' || getCookie('img') === undefined)
+        {
+            document.getElementById('gallery_big_img_container').style.display = 'none';
+        }
+        else
+        {
+            expandImage(getCookie('img'));
+            document.getElementById('gallery_big_img_container').style.display = 'block';
+        }
     }
 }
 
