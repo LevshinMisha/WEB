@@ -76,28 +76,10 @@
 }
 .gallery_big_img_content
 {
-    margin-top: 54px;
+    margin-top: 3%;
     margin-left: 8px;
     width: auto;
     height: auto;
-}
-
-@media(max-width: 1358px)
-{
-
-    .gallery_big_img_content
-    {
-        margin-top: 100px;
-    }
-}
-
-@media(max-width: 758px)
-{
-
-    .gallery_big_img_content
-    {
-        margin-top: 150px;
-    }
 }
 
 @media(max-width: 500px)
@@ -106,10 +88,5 @@
     .gallery_big_img
     {
         width: 300px;
-    }
-
-    .gallery_big_img_content
-    {
-        margin-top: 146px;
     }
 }
