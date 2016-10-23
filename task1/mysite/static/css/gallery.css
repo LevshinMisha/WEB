@@ -25,7 +25,7 @@
 .gallery_big_img
 {
     width: 900px;
-    background: #555 url('http://katushka.in.ua/templates/katushka2/images/ajax-loader.gif') center center no-repeat;
+    background: #555 url('/static/files/loading.gif') center center no-repeat;
 }
 
 .gallery_big_img_container
