@@ -23,12 +23,18 @@ function hideHelp()
 
 window.onload = function (event)
 {
+    console.log(document.cookie);
+    if (getCookie('big_img') !== undefined)
+    {
+        document.body.style.backgroundImage = 'url(' + getCookie('big_img') + ')';
+    }
     try
     {
         getHelpElement().style.display = 'none';
         getHelpElement().style.whiteSpace = 'pre-wrap';
         getHelpElement().innerHTML = 'Нажмите F1, чтобы открыть\\закрыть хелп\nНажимайте на миниатюру чтобы увидеть полную картинку\nПеремещение по галерее с помощью стрелок\nESC - закрывает картинку';
         cookieChange();
+
     }
     catch (Exception)
     {
