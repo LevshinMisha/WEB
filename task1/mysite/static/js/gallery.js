@@ -52,6 +52,9 @@ function expandImage(id)
 
     }
     document.getElementById('gallery_big_img').src = src;
+    console.log(document.getElementById('button_make_img_background').onclick);
+    document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
+    document.getElementById('gallery_big_img_container').style.display = 'block';
 }
 
 function cookieChange()
@@ -65,8 +68,12 @@ function cookieChange()
         else
         {
             expandImage(getCookie('img'));
-            document.getElementById('gallery_big_img_container').style.display = 'block';
         }
+    }
+    console.log(document.cookie);
+    if (getCookie('big_img') !== undefined)
+    {
+        document.body.style.backgroundImage = 'url(' + getCookie('big_img') + ')';
     }
 }
 
@@ -76,3 +83,11 @@ function imgOnClick(id)
     cookieChange();
 }
 
+function makeBackgroundImage(url)
+{
+    return function (event)
+    {
+        document.cookie = 'big_img=' + url;
+        cookieChange();
+    }
+}
