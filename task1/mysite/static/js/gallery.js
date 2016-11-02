@@ -2,8 +2,7 @@ IMAGE_COUNT = 19;
 
 function closeBigImage()
 {
-    document.cookie = 'img=-1';
-    cookieChange();
+    setCookie('img', '-1');
 }
 
 document.body.onkeydown = function (e)
@@ -22,22 +21,20 @@ document.body.onkeydown = function (e)
         var c = parseInt(getCookie('img')) - 1
         if (c === -1)
             c = IMAGE_COUNT;
-        document.cookie = 'img=' + c.toString();
-        cookieChange();
+        setCookie('img', c.toString());
     }
     if (e.keyCode === 39)
     {
         var c = parseInt(getCookie('img')) + 1
         if (c === IMAGE_COUNT + 1)
             c = 0;
-        document.cookie = 'img=' + c.toString();
-        cookieChange();
+        setCookie('img', c.toString());
     }
 }
 
 function expandImage(id)
 {
-    document.cookie = 'img=' + id;
+    document.cookie = 'img=' + id + '; path=/;';
     var src_parts = document.getElementById(id).src.split('/');
     var src = '';
     for (var i = 0; i < src_parts.length; i++)
@@ -51,43 +48,22 @@ function expandImage(id)
             }
 
     }
-    document.getElementById('gallery_big_img').src = src;
-    console.log(document.getElementById('button_make_img_background').onclick);
-    document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
     document.getElementById('gallery_big_img_container').style.display = 'block';
+    document.getElementById('gallery_big_img').src = src;
+    document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
 }
 
-function cookieChange()
-{
-    if (document.getElementById('gallery') !== undefined)
-    {
-        if (getCookie('img') === '-1' || getCookie('img') === undefined)
-        {
-            document.getElementById('gallery_big_img_container').style.display = 'none';
-        }
-        else
-        {
-            expandImage(getCookie('img'));
-        }
-    }
-    console.log(document.cookie);
-    if (getCookie('big_img') !== undefined)
-    {
-        document.body.style.backgroundImage = 'url(' + getCookie('big_img') + ')';
-    }
-}
+
 
 function imgOnClick(id)
 {
-    document.cookie = 'img=' + id;
-    cookieChange();
+    setCookie('img', id.toString());
 }
 
 function makeBackgroundImage(url)
 {
     return function (event)
     {
-        document.cookie = 'big_img=' + url;
-        cookieChange();
+        setCookie('big_img', url);
     }
 }
