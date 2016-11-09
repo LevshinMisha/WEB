@@ -6,7 +6,9 @@ function getCookie(name)
 
 function galleryCheck()
 {
-    if (document.getElementById('gallery') !== undefined)
+    console.log(document.cookie);
+    console.log(document.getElementById('gallery'));
+    if (document.getElementById('gallery') !== null)
     {
         if (getCookie('img') === '-1' || getCookie('img') === undefined)
         {
@@ -60,8 +62,11 @@ window.onload = function (event)
 {
     console.log(document.cookie);
     checks();
-    console.log(screen.width);
-    getHelpElement().style.display = 'none';
-    getHelpElement().style.whiteSpace = 'pre-wrap';
-    getHelpElement().innerHTML = 'Нажмите F1, чтобы открыть\\закрыть хелп\nНажимайте на миниатюру чтобы увидеть полную картинку\nПеремещение по галерее с помощью стрелок\nESC - закрывает картинку';
+    var help = document.getElementById('help');
+    if (help !== null)
+    {
+        help.style.display = 'none';
+        help.style.whiteSpace = 'pre-wrap';
+        help.innerHTML = 'Нажмите F1, чтобы открыть\\закрыть хелп\nНажимайте на миниатюру чтобы увидеть полную картинку\nПеремещение по галерее с помощью стрелок\nESC - закрывает картинку';
+    }
 }
