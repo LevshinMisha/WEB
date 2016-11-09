@@ -10,6 +10,7 @@
 {
     font-size: 0;
     margin-right: -4px;
+    text-align: left;
 }
 
 @media(max-width: 500px)

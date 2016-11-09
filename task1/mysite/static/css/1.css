@@ -6,7 +6,7 @@ body
 
 .content
 {
-    min-height: calc(101vh - 135px);
+    min-height: calc(100vh - 90px);
     min-width: 315px;
 }
 
