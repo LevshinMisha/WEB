@@ -8,18 +8,19 @@ header
     color: white;
     display: block;
     font-size: 12pt;
+    text-align: left;
+
 }
 
 .menu
 {
-    margin-left: -16px;
-    margin-right: 4px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 nav
 {
-    text-align: left;
-    margin-left: -16px;
+    margin-left: -46px;
 }
 
 .greetings
@@ -55,7 +56,7 @@ nav
     padding-bottom: 15px;
 }
 
-@media(max-width: 500px)
+@media(max-width: 530px)
 {
 
     .menu-item

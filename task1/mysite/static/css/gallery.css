@@ -2,18 +2,17 @@
 {
     width: 150px;
     height: 150px;
-    display: inline-block;
     cursor: pointer;
+    margin: -2px;
 }
 
 .gallery
 {
-    font-size: 0;
-    margin-right: -4px;
-    text-align: left;
+    margin-right: auto;
+    margin-left: auto;
 }
 
-@media(max-width: 500px)
+@media(max-width: 530px)
 {
     .gallery_img
     {
