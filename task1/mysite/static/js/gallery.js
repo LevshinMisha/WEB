@@ -57,6 +57,7 @@ function expandImage(id)
 
 function imgOnClick(id)
 {
+    console.log(screen.availWidth);
     setCookie('img', id.toString());
 }
 
