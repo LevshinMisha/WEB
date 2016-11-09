@@ -7,7 +7,6 @@ function getCookie(name)
 function galleryCheck()
 {
     console.log(document.cookie);
-    console.log(document.getElementById('gallery'));
     if (document.getElementById('gallery') !== null)
     {
         if (getCookie('img') === '-1' || getCookie('img') === undefined)
@@ -60,7 +59,6 @@ function hideHelp()
 
 window.onload = function (event)
 {
-    console.log(document.cookie);
     checks();
     var help = document.getElementById('help');
     if (help !== null)
@@ -69,4 +67,30 @@ window.onload = function (event)
         help.style.whiteSpace = 'pre-wrap';
         help.innerHTML = 'Нажмите F1, чтобы открыть\\закрыть хелп\nНажимайте на миниатюру чтобы увидеть полную картинку\nПеремещение по галерее с помощью стрелок\nESC - закрывает картинку';
     }
+    onResize();
+}
+
+window.onresize = function(event)
+{
+    onResize();
+};
+
+function onResize()
+{
+    console.log('first');
+
+    var clientWidth = window.innerWidth - 12;
+    console.log(clientWidth);
+    if (clientWidth < 518)
+    {
+        clientWidth -= clientWidth % 100;
+        if (clientWidth < 300)
+            clientWidth = 300;
+    }
+    else
+        clientWidth -= clientWidth % 150;
+    console.log(clientWidth);
+    if (document.getElementById('gallery'))
+        document.getElementById('gallery').style.width = clientWidth.toString() + 'px';
+    document.getElementById('menu').style.width = clientWidth.toString() + 'px';
 }
