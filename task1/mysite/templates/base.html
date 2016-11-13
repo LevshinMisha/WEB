@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="/static/css/1.css">
-    <link rel="stylesheet" href="/static/css/gallery.css">
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="shortcut icon" href="/static/favicon.ico">
     <script src="/static/js/common.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <div class="content">
-        <header>
+    <div class="content" id="content">
+        <header id="header">
             <nav>
                 <ul class="menu" id="menu">
                     {% if user.is_authenticated %}
@@ -33,7 +32,7 @@
             </nav>
         </header>
 
-        <div class="main_content">
+        <div class="main_content" id="main_content">
             {% block content %}
             {% endblock %}
         </div>
