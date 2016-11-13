@@ -91,7 +91,9 @@ function onResize()
         document.getElementById('gallery').style.width = clientWidth.toString() + 'px';
         document.getElementById('main_content').style.width = clientWidth.toString() + 'px';
         document.getElementById('gallery_big_img_content').style.width = clientWidth.toString() + 'px';
-        if (clientWidth > 600)
+        if (clientWidth > 1200)
+            document.getElementById('gallery_big_img').style.width = (clientWidth - 600).toString() + 'px';
+        else if (clientWidth > 600)
             document.getElementById('gallery_big_img').style.width = (clientWidth - 300).toString() + 'px';
         else
             document.getElementById('gallery_big_img').style.width = (clientWidth).toString() + 'px';

@@ -24,7 +24,7 @@
 .gallery_big_img
 {
     background: #555 url('/static/files/loading.gif') center center no-repeat;
-    max-height: 85vh;
+    max-height: 75vh;
 }
 
 .loading_img
@@ -49,4 +49,17 @@
     margin-right: auto;
     margin-left: auto;
     text-align: center;
+}
+
+.tmp1
+{
+    margin-right: -10px;
+}
+
+@media(max-width: 774px)
+{
+    .tmp1
+    {
+        margin-right: -6px;
+    }
 }
