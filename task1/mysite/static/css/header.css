@@ -1,6 +1,5 @@
 header
 {
-    width: auto;
     margin-left: -8px; /* для того чтобы не было отступа от границы экрана */
     margin-top: -16px; /* для того чтобы не было отступа от границы экрана */
     margin-right: -8px; /* для того чтобы не было отступа от границы экрана */
@@ -9,7 +8,6 @@ header
     display: block;
     font-size: 12pt;
     text-align: left;
-
 }
 
 .menu
@@ -20,7 +18,7 @@ header
 
 nav
 {
-    margin-left: -46px;
+    margin-left: -35px;
 }
 
 .greetings
@@ -56,7 +54,7 @@ nav
     padding-bottom: 15px;
 }
 
-@media(max-width: 530px)
+@media(max-width: 500px)
 {
 
     .menu-item
