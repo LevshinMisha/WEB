@@ -88,27 +88,16 @@ function onResize()
     if (document.getElementById('gallery'))
     {
         document.getElementById('gallery').style.width = clientWidth.toString() + 'px';
-        document.getElementById('main_content').style.width = (clientWidth - 2).toString() + 'px';
-        document.getElementById('gallery_big_img_content').style.width = clientWidth.toString() + 'px';
         if (clientWidth > 1200)
-        {
             document.getElementById('gallery_big_img').style.width = (clientWidth - 600).toString() + 'px';
-            document.getElementById('gallery_big_img_content').style.marginTop = '50px';
-        }
+        else if (clientWidth > 600)
+            document.getElementById('gallery_big_img').style.width = (clientWidth - 300).toString() + 'px';
         else
-            if (clientWidth > 600)
-            {
-                document.getElementById('gallery_big_img').style.width = (clientWidth - 300).toString() + 'px';
-                document.getElementById('gallery_big_img_content').style.marginTop = '100px';
-            }
-            else
-            {
-                document.getElementById('gallery_big_img').style.width = (clientWidth).toString() + 'px';
-                document.getElementById('gallery_big_img_content').style.marginTop = '150px';
-            }
+            document.getElementById('gallery_big_img').style.width = (clientWidth).toString() + 'px';
     }
     document.getElementById('header').style.marginLeft = '-'+ ((window.innerWidth - clientWidth) / 2).toString() + 'px';
     document.getElementById('header').style.marginRight = '-'+ ((window.innerWidth - clientWidth) / 2).toString() + 'px';
     document.getElementById('menu').style.width = clientWidth.toString() + 'px';
+    document.getElementById('main_content').style.width = (clientWidth).toString() + 'px';
     document.body.style.width = (clientWidth).toString() + 'px';
 }
