@@ -9,14 +9,14 @@ body
 
 .content
 {
-    min-height: calc(100vh - 90px);
+    min-height: calc(100vh - 100px);
     min-width: 315px;
 }
 
 .main_content
 {
     margin-top: -10px;
-    padding: 5px;
+    padding: 0px;
     background: rgba(255, 255, 255, 0.8);
 }
 
