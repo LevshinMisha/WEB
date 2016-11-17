@@ -15,6 +15,7 @@ body
 
 .main_content
 {
+
     margin-top: -10px;
     padding: 5px;
     background: rgba(255, 255, 255, 0.8);
@@ -32,3 +33,12 @@ body
 }
 
 
+.parent {
+  display: flex;
+  background: red;
+}
+
+.child {
+    background: blue;
+  margin: auto;  /* Магия! */
+}

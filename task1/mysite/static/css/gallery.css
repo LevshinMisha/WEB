@@ -4,6 +4,7 @@
     height: 150px;
     cursor: pointer;
     margin: -2px;
+    align-self: baseline;
 }
 
 @media(max-width: 500px)
@@ -17,15 +18,48 @@
 
 .gallery
 {
-    margin-top: -15px;
-    margin-right: 0;
-    margin-left: -4px;
+    text-align: center;
+    margin-bottom: -20px;
+}
+
+.gallery:after
+{
+                 /* выравнивание по центру */
+                content: ' i i i i i i i i ';
+                word-spacing: 141px;
+                padding-left: 143px;
+                visibility: hidden;
+}
+
+
+
+@media(max-width: 910px)
+{
+
+    .gallery:after
+    {
+                     /* выравнивание по центру */
+                    content: ' i i i i i ';
+    }
+}
+
+@media(max-width: 500px)
+{
+
+    .gallery:after
+    {
+                     /* выравнивание по центру */
+                    content: ' i i i i ';
+                    word-spacing: 100px;
+                    padding-left: 98px;
+    }
 }
 
 .gallery_big_img
 {
     background: #555 url('/static/files/loading.gif') center center no-repeat;
     max-height: 75vh;
+    max-width: 90%;
 }
 
 .loading_img
@@ -50,10 +84,4 @@
 {
     margin-left: 2px;
     text-align: center;
-}
-
-.main_content
-{
-    margin: 0;
-    background: rgba(0, 0, 0, 0);
 }
