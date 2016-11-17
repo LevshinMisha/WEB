@@ -66,38 +66,4 @@ window.onload = function (event)
         help.style.whiteSpace = 'pre-wrap';
         help.innerHTML = 'Нажмите F1, чтобы открыть\\закрыть хелп\nНажимайте на миниатюру чтобы увидеть полную картинку\nПеремещение по галерее с помощью стрелок\nESC - закрывает картинку';
     }
-    onResize();
-}
-
-window.onresize = function(event)
-{
-    onResize();
-};
-
-function onResize()
-{
-    var clientWidth = window.innerWidth - 25;
-    if (clientWidth < 476)
-    {
-        clientWidth -= clientWidth % 100;
-        if (clientWidth < 300)
-            clientWidth = 300;
-    }
-    else
-        clientWidth -= clientWidth % 150;
-    if (document.getElementById('gallery'))
-    {
-        document.getElementById('gallery').style.width = clientWidth.toString() + 'px';
-        if (clientWidth > 1200)
-            document.getElementById('gallery_big_img').style.width = (clientWidth - 600).toString() + 'px';
-        else if (clientWidth > 600)
-            document.getElementById('gallery_big_img').style.width = (clientWidth - 300).toString() + 'px';
-        else
-            document.getElementById('gallery_big_img').style.width = (clientWidth).toString() + 'px';
-    }
-    document.getElementById('header').style.marginLeft = '-'+ ((window.innerWidth - clientWidth) / 2).toString() + 'px';
-    document.getElementById('header').style.marginRight = '-'+ ((window.innerWidth - clientWidth) / 2).toString() + 'px';
-    document.getElementById('menu').style.width = clientWidth.toString() + 'px';
-    document.getElementById('main_content').style.width = (clientWidth).toString() + 'px';
-    document.body.style.width = (clientWidth).toString() + 'px';
 }

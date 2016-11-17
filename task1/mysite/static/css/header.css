@@ -1,25 +1,54 @@
 header
 {
-    margin-left: -8px; /* для того чтобы не было отступа от границы экрана */
+    //margin-left: -8px; /* для того чтобы не было отступа от границы экрана */
     margin-top: -16px; /* для того чтобы не было отступа от границы экрана */
-    margin-right: -8px; /* для того чтобы не было отступа от границы экрана */
+    //margin-right: -8px; /* для того чтобы не было отступа от границы экрана */
     background: rgba(69, 104, 142, 1);
     color: white;
-    display: block;
     font-size: 12pt;
-    text-align: left;
+    text-align: center;
+    margin-bottom: -30px;
+}
+
+.menu:after
+    {
+                     /* выравнивание по центру */
+                    content: ' i i i i i i i i ';
+                    word-spacing: 141px;
+                    padding-left: 143px;
+                    visibility: hidden;
+    }
+
+@media(max-width: 910px)
+{
+
+   .menu:after
+    {
+                     /* выравнивание по центру */
+                    content: ' i i i i i i i ';
+                    word-spacing: 141px;
+                    padding-left: 142px;
+                    visibility: hidden;
+    }
+}
+
+@media(max-width: 619px)
+{
+
+   .menu:after
+    {
+                     /* выравнивание по центру */
+                    content: ' i i i ';
+                    word-spacing: 120px;
+                    padding-left: 160px;
+                    visibility: hidden;
+    }
 }
 
 .menu
 {
-    margin-right: auto;
-    margin-left: auto;
-    padding: 0;
-}
-
-nav
-{
-    //margin-left: 6px;
+    margin-left: -5px;
+    padding: 5px;
 }
 
 .greetings
@@ -74,8 +103,4 @@ nav
 @media(max-width: 424px)
 {
 
-    nav
-    {
-        margin-left: -18px;
-    }
 }
