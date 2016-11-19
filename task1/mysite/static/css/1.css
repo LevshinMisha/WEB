@@ -1,10 +1,8 @@
 body
 {
     background: rgba(230, 230, 230, 1);
-
     margin-right: auto;
     margin-left: auto;
-    overflow-x: hidden;
 }
 
 .content
@@ -18,6 +16,8 @@ body
 
     margin-top: -10px;
     padding: 5px;
+    margin-left: 6px;
+    margin-right: 6px;
     background: rgba(255, 255, 255, 0.8);
 }
 
@@ -32,13 +32,7 @@ body
     height: 300px;
 }
 
-
-.parent {
-  display: flex;
-  background: red;
-}
-
-.child {
-    background: blue;
-  margin: auto;  /* Магия! */
+footer
+{
+    margin-left: 5px;
 }

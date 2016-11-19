@@ -48,7 +48,7 @@ function expandImage(id)
             }
 
     }
-    document.getElementById('gallery_big_img_container').style.display = 'block';
+    document.getElementById('gallery_big_img_container').style.display = 'flex';
     document.getElementById('gallery_big_img').src = src;
     document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
 }
