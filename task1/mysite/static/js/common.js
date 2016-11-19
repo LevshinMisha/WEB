@@ -59,7 +59,7 @@ function hideHelp()
 window.onload = function (event)
 {
     checks();
-    var help = document.getElementById('help');
+    var help = getHelpElement();
     if (help !== null)
     {
         help.style.display = 'none';
