@@ -61,7 +61,7 @@ nav
 
 }
 
-.menu-item a:hover
+.menu-item a[href]:hover
 {
     background: rgba(79, 124, 172, 1);
 }
