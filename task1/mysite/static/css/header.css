@@ -73,6 +73,9 @@ nav
     text-decoration: none;
     padding-top: 15px;
     padding-bottom: 15px;
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Чикаем всё, что не помещается в область */
+    text-overflow: ellipsis; /* Добавляем многоточие */
 }
 
 @media(max-width: 780px)
