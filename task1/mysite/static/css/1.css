@@ -2,6 +2,7 @@ body
 {
     background: rgba(230, 230, 230, 1);
     margin: auto;
+    font-family: Times New Roman;
 }
 
 @media(max-width: 615px)
