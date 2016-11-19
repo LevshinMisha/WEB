@@ -10,12 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+    <div class="header_background"></div>
     <div class="content" id="content">
         <header id="header">
             <nav>
                 <ul class="menu" id="menu">
                     {% if user.is_authenticated %}
-                    <li class="menu-item"><a>Привет, {{ user }}</a></li><!--
+                    <li class="menu-item">Привет, {{ user }}</li><!--
                     --><li class="menu-item"><a href="/auth/logout">Выйти</a></li><!--
                     -->{% else %}
                     <li class="menu-item"><a href="/auth">Войти</a></li><!--
