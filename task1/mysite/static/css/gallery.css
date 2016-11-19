@@ -3,7 +3,6 @@
     width: 150px;
     height: 150px;
     cursor: pointer;
-    margin: -2px;
     align-self: baseline;
     display: inline-block;
 }
@@ -19,8 +18,9 @@
 
 .gallery
 {
-    margin-left: -3px;
+    margin-left: -5px;
     margin-top: -3px;
+    font-size: 0;
 }
 
 .gallery_big_img
