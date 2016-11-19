@@ -5,6 +5,8 @@ header
     color: white;
     font-size: 12pt;
     margin-left: 0px;
+    line-height: 0;
+
 }
 
 .header_background
@@ -32,11 +34,6 @@ header
     {
         height: calc(50px * 3);
     }
-}
-
-nav
-{
-
 }
 
 .menu
@@ -71,8 +68,8 @@ nav
     display: block;
     color: white;
     text-decoration: none;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 24px;
+    padding-bottom: 24px;
     white-space: nowrap; /* Запрещаем перенос строк */
     overflow: hidden; /* Чикаем всё, что не помещается в область */
     text-overflow: ellipsis; /* Добавляем многоточие */
