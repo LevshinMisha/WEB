@@ -18,7 +18,7 @@ header
     z-index: -100;
 }
 
-@media(max-width: 1400px)
+@media(max-width: 1359px)
 {
     .header_background
     {
@@ -36,13 +36,11 @@ header
 
 nav
 {
-    margin-left: -4px;
-    margin-right: 9px;
+
 }
 
 .menu
 {
-    margin-left: 10px;
     padding: 0px;
 }
 
