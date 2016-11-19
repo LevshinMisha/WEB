@@ -22,7 +22,7 @@ header
 {
     .header_background
     {
-        height: calc(48px * 2);
+        height: calc(50px * 2);
     }
 }
 
@@ -30,7 +30,7 @@ header
 {
     .header_background
     {
-        height: calc(48px * 3);
+        height: calc(50px * 3);
     }
 }
 
