@@ -18,12 +18,6 @@
         width: calc(75vw + 10px);
     }
 
-    .main_content
-    {
-
-        //min-width: 315px;
-    }
-
     .menu-item
     {
         width: 25vw;
@@ -41,12 +35,18 @@
 
     .help
     {
-        width: 90%;
+        width: calc(75vw - 10px);
+        min-width: 290px;
     }
 
     footer img
     {
         width: 50vw;
         min-width: 200px;
+    }
+
+    .gallery
+    {
+        width: 75vw;
     }
 }

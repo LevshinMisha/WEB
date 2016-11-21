@@ -3,14 +3,14 @@ body
     background: rgba(230, 230, 230, 1);
     margin: auto;
     font-family: Times New Roman;
-    min-width: 300px;
+    min-width: 320px;
 }
 
 .content
 {
     min-height: calc(100vh - 100px);
     margin: 0 5px;
-    min-width: 300px;
+    min-width: 310px;
 }
 
 .main_content
