@@ -49,4 +49,9 @@
     {
         width: 75vw;
     }
+
+    .main_content
+    {
+        width: calc(75vw - 10px);
+    }
 }
