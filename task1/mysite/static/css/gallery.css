@@ -39,7 +39,6 @@
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
-
 }
 
 .gallery_big_img_content
@@ -68,24 +67,3 @@
     padding: 5px;
 }
 
-@media(max-width: 780px)
-{
-    .gallery_img
-    {
-        width: 100px;
-        height: 100px;
-    }
-
-    .help
-    {
-        width: 490px;
-    }
-}
-
-@media(max-width: 525px)
-{
-    .help
-    {
-        width: 290px;
-    }
-}

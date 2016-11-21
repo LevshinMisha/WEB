@@ -3,37 +3,22 @@ body
     background: rgba(230, 230, 230, 1);
     margin: auto;
     font-family: Times New Roman;
-}
-
-@media(max-width: 615px)
-{
-    body
-    {
-        width: 525px;
-    }
-}
-
-@media(max-width: 525px)
-{
-    body
-    {
-        width: 325px;
-    }
+    min-width: 300px;
 }
 
 .content
 {
     min-height: calc(100vh - 100px);
-    min-width: 315px;
     margin: 0 5px;
+    min-width: 300px;
 }
 
 .main_content
 {
-
     margin-top: -10px;
     padding: 5px;
     background: rgba(255, 255, 255, 0.8);
+    min-width: 300px;
 }
 
 .main_content p
