@@ -8,10 +8,14 @@ function closeBigImage()
 document.body.onkeydown = function (e)
 {
     if (e.keyCode === 112)
+    {
+        e.preventDefault();
+        e.stopImmediatePropagation();
         if (getHelpElement().style.display === 'none')
             showHelp();
         else
             hideHelp();
+    }
     if (e.keyCode === 27)
     {
         closeBigImage();
