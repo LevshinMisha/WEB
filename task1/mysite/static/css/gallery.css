@@ -11,6 +11,7 @@
 {
     margin: 0 -5px;
     font-size: 0;
+    min-width: 300px;
 }
 
 .gallery_big_img
@@ -63,6 +64,7 @@
     width: 590px;
     background: rgba(255, 255, 255, 0.8);
     margin-left: -5px;
+    margin-right: -5px;
     margin-bottom: 10px;
     padding: 5px;
 }
