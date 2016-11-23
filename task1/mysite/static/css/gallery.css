@@ -37,7 +37,6 @@
     top: 0px;
     left: 0px;
     min-width: 315px;
-    display: flex;
     flex-flow: column wrap;
     justify-content: center;
 }
