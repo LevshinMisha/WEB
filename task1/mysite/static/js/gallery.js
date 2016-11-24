@@ -7,11 +7,14 @@ PREV_IMAGE = new Image();
 function pre_download_next_and_prev_image(id)
 {
     var int_id = parseInt(id);
-    console.log(id);
-    PREV_IMAGE.src = getImageSrc((int_id - 1).toString());
-    PREV_IMAGE.background = 'url(' + LOADING_IMAGE.src + ')';
-    NEXT_IMAGE.src = getImageSrc((int_id + 1).toString());
-    NEXT_IMAGE.background = 'url(' + LOADING_IMAGE.src + ')';
+    if (int_id !== 0)
+        PREV_IMAGE.src = getImageSrc((int_id - 1).toString());
+    else
+        NEXT_IMAGE.src = getImageSrc((IMAGE_COUNT - 1).toString());
+    if (int_id !== IMAGE_COUNT)
+        NEXT_IMAGE.src = getImageSrc((int_id + 1).toString());
+    else
+        NEXT_IMAGE.src = getImageSrc('0');
 }
 
 function closeBigImage()
@@ -52,7 +55,6 @@ document.body.onkeydown = function (e)
 
 function getImageSrc(id)
 {
-    console.log(id);
     var src_parts = document.getElementById(id).src.split('/');
     var src = '';
     for (var i = 0; i < src_parts.length; i++)
