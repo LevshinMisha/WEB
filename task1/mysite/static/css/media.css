@@ -46,9 +46,9 @@
 
     footer img
     {
-
-        width: 50vw;
-        min-width: 200px;
+        max-width: 450px;
+        width: 75vw;
+        min-width: 300px;
     }
 
     .gallery
@@ -59,7 +59,7 @@
 
     .main_content
     {
-        max-width: 450px;
+        max-width: 440px;
         width: calc(75vw - 10px);
     }
 
@@ -67,6 +67,7 @@
     {
         width: 75vw;
         max-width: 450px;
+        min-height: calc(100vh - 120px);
     }
 
 }
