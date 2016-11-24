@@ -9,7 +9,6 @@
 
 .gallery
 {
-    margin: 0 -5px;
     font-size: 0;
     min-width: 300px;
 }
@@ -19,6 +18,7 @@
     background: #555 url('/static/files/loading.gif') center center no-repeat;
     max-height: 75vh;
     max-width: 90%;
+    opacity: 0.8;
 }
 
 .loading_img
@@ -56,15 +56,16 @@
 .main_content
 {
     background: rgba(255, 255, 255, 0);
+    padding: 0;
+    min-width: 300px;
 }
 
 .help
 {
     width: 590px;
     background: rgba(255, 255, 255, 0.8);
-    margin-left: -5px;
     margin-right: -5px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     padding: 5px;
 }
 

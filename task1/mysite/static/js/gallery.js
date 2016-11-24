@@ -1,4 +1,18 @@
 IMAGE_COUNT = 19;
+LOADING_IMAGE = new Image();
+LOADING_IMAGE.src = "/static/files/loading.gif";
+NEXT_IMAGE = new Image();
+PREV_IMAGE = new Image();
+
+function pre_download_next_and_prev_image(id)
+{
+    var int_id = parseInt(id);
+    console.log(id);
+    PREV_IMAGE.src = getImageSrc((int_id - 1).toString());
+    PREV_IMAGE.background = 'url(' + LOADING_IMAGE.src + ')';
+    NEXT_IMAGE.src = getImageSrc((int_id + 1).toString());
+    NEXT_IMAGE.background = 'url(' + LOADING_IMAGE.src + ')';
+}
 
 function closeBigImage()
 {
@@ -36,9 +50,9 @@ document.body.onkeydown = function (e)
     }
 }
 
-function expandImage(id)
+function getImageSrc(id)
 {
-    document.cookie = 'img=' + id + '; path=/;';
+    console.log(id);
     var src_parts = document.getElementById(id).src.split('/');
     var src = '';
     for (var i = 0; i < src_parts.length; i++)
@@ -52,16 +66,32 @@ function expandImage(id)
             }
 
     }
-    document.getElementById('gallery_big_img_container').style.display = 'flex';
-    document.getElementById('gallery_big_img').src = src;
-    document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
+
+    if (src === NEXT_IMAGE.src)
+        return NEXT_IMAGE.src;
+    if (src === PREV_IMAGE.src)
+        return PREV_IMAGE.src;
+    return src;
 }
 
-
+function expandImage(id)
+{
+    document.cookie = 'img=' + id + '; path=/;';
+    var src = getImageSrc(id);
+    pre_download_next_and_prev_image(id);
+    document.getElementById('gallery_big_img_container').style.display = 'flex';
+    document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
+    document.getElementById('gallery_big_img').src = src;
+}
 
 function imgOnClick(id)
 {
     setCookie('img', id.toString());
+}
+
+function bigImgOnLoad(id)
+{
+    document.getElementById("gallery_big_img").style.opacity = 1;
 }
 
 function makeBackgroundImage(url)
