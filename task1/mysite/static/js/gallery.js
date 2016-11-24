@@ -14,6 +14,10 @@ function pausecomp(src)
         alert(123);
     };
     load_img.src = src;
+    var date = new Date();
+    var curDate = null;
+    do { curDate = new Date(); }
+    while(curDate-date < 3000);
 }
 
 var xhr = new XMLHttpRequest();
