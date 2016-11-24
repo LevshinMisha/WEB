@@ -110,7 +110,7 @@ function imgOnClick(id)
 
 function bigImgOnLoad(id)
 {
-    //document.getElementById("gallery_big_img").style.opacity = 1;
+    document.getElementById("gallery_big_img").style.opacity = 1;
 }
 
 function makeBackgroundImage(url)
