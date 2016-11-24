@@ -16,18 +16,18 @@
 
 .gallery_big_img
 {
-    background: #555 url('/static/files/loading.gif') center center no-repeat;
+    background: url('/static/files/loading.gif') no-repeat;
+    max-width: 90%;
     max-height: 75vh;
-    opacity: 0.5;
 }
 
 .big_img_wrapper
 {
     background: url('/static/files/loading.gif') center center no-repeat;
-    background-size: 100% 95%;
+    background-size: calc(90% - 1px) 100%;
     display: inline-block;
-    min-width: 300px;
-    min-height: 300px;
+    min-width: 100px;
+    min-height: 100px;
 }
 
 .gallery_big_img_container
@@ -47,6 +47,7 @@
 .gallery_big_img_content
 {
     text-align: center;
+    line-height: 0;
 }
 
 .main_content p
