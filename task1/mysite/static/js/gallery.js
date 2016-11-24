@@ -6,10 +6,19 @@ var xhr = new XMLHttpRequest();
 xhr.open('GET', '/static/files/loading.gif', false);
 xhr.send(); // (1)
 
+function pausecomp(millis)
+{
+    var date = new Date();
+    var curDate = null;
+    do { curDate = new Date(); }
+    while(curDate-date < millis);
+}
+
 var xhr = new XMLHttpRequest();
 xhr.open('GET', '/static/img/thumbnails/001_tn.jpg', false);
 xhr.send();
 
+pausecomp(3000);
 
 function pre_download_next_and_prev_image(id)
 {
