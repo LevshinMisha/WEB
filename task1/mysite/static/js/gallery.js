@@ -1,8 +1,6 @@
 IMAGE_COUNT = 19;
 NEXT_IMAGE = new Image();
 PREV_IMAGE = new Image();
-LOADING_IMAGE = new Image();
-LOADING_IMAGE.src = "/static/files/loading.gif";
 
 function pre_download_next_and_prev_image(id)
 {
@@ -79,9 +77,9 @@ function getImageSrc(id)
 function expandImage(id)
 {
     document.cookie = 'img=' + id + '; path=/;';
+    document.getElementById("gallery_big_img").style.opacity = 0.5;
     var src = getImageSrc(id);
     pre_download_next_and_prev_image(id);
-    document.getElementById('gallery_big_img').src = LOADING_IMAGE.src;
     document.getElementById('gallery_big_img_container').style.display = 'flex';
     document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
     document.getElementById('gallery_big_img').src = src;

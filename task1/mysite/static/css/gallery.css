@@ -18,13 +18,14 @@
 {
     background: #555 url('/static/files/loading.gif') center center no-repeat;
     max-height: 75vh;
-    max-width: 90%;
-    opacity: 0.8;
+    opacity: 0.5;
 }
 
-.big_img_background
+.big_img_wrapper
 {
-    background: #555 url('/static/files/loading.gif') center center no-repeat;
+    background: url('/static/files/loading.gif') center center no-repeat;
+    background-size: 100% 95%;
+    display: inline-block;
 }
 
 .gallery_big_img_container
