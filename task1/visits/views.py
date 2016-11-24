@@ -1,12 +1,12 @@
-from django.shortcuts import render, HttpResponse
-import os
+from django.shortcuts import HttpResponse
 from ipware.ip import get_ip
 import json
 from .models import Visit
 from django.utils import timezone
 from .models import VisitsImage
 
-TIME_OUT = 30 * 60
+TIME_OUT_FOR_VISIT = 30 * 60
+TIME_OUT_FOR_HIT = 5
 
 
 def time_to_seconds(time):
@@ -30,27 +30,33 @@ def last_visit_was_less_then(ip, browser, time):
     return len(Visit.objects.filter(ip=ip, browser=browser, last_hit__gt=seconds_to_time(time_to_seconds(timezone.now()) - time)))
 
 
-def visits(request):
-    ip = get_ip(request)
-    browser = request.META['HTTP_USER_AGENT']
-    if last_visit_was_less_then(ip, browser, TIME_OUT):
-        visit = Visit.objects.get(ip=ip, browser=browser, last_hit__gt=seconds_to_time(time_to_seconds(timezone.now()) - TIME_OUT))
-        if not last_visit_was_less_then(ip, browser, 5):
-            visit.update()
+def visits(request, url):
+    def handle_visit(ip, browser):
+        if last_visit_was_less_then(ip, browser, TIME_OUT_FOR_VISIT):
+            visit = Visit.objects.get(ip=ip, browser=browser, last_hit__gt=seconds_to_time(
+                time_to_seconds(timezone.now()) - TIME_OUT_FOR_VISIT))
+            if not last_visit_was_less_then(ip, browser, TIME_OUT_FOR_HIT):
+                visit.update()
+            else:
+                visit.update_only_time()
         else:
-            visit.update_only_time()
-    else:
-        Visit.objects.create(ip=ip, browser=browser)
-    d = dict()
-    d['visits_today'] = len(today_visits())
-    d['hits_today'] = sum(today_hits())
-    d['visits'] = len(Visit.objects.all())
-    d['hits'] = sum(visit.hit_count for visit in Visit.objects.all())
-    return HttpResponse(json.dumps(d))
+            visit = Visit.objects.create(ip=ip, browser=browser)
+        return visit
+    
+    def create_visits_info_in_json():
+        d = dict()
+        d['visits_today'] = len(today_visits())
+        d['hits_today'] = sum(today_hits())
+        d['visits'] = len(Visit.objects.all())
+        d['hits'] = sum(visit.hit_count for visit in Visit.objects.all())
+        return json.dumps(d)
+    
+    handle_visit(get_ip(request), request.META['HTTP_USER_AGENT']).add_new_url(url)
+    return HttpResponse(create_visits_info_in_json())
 
 
-def visits_img(request):
-    a = json.loads(bytes.decode(visits(request).content))
+def visits_img(request, url):
+    a = json.loads(bytes.decode(visits(request, url).content))
     img = VisitsImage().draw_visits(a['visits_today'], a['visits'], a['hits_today'], a['hits'])
     response = HttpResponse(content_type="image/png")
     img.save(response, "PNG")
