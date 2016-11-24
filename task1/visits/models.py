@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from PIL import Image as Img, ImageDraw, ImageFont
+from PIL import Image as Img, ImageDraw
 
 
 class Visit(models.Model):
@@ -8,6 +8,13 @@ class Visit(models.Model):
     browser = models.TextField()
     last_hit = models.DateTimeField(default=timezone.now)
     hit_count = models.IntegerField(default=1)
+    urls = models.TextField(blank=True)
+
+    def add_new_url(self, url):
+        if self.urls:
+            self.urls += '\n'
+        self.urls += url
+        self.save()
 
     def update(self):
         self.last_hit = timezone.now()

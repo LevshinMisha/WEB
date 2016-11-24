@@ -3,5 +3,5 @@ from .views import visits, visits_img
 
 urlpatterns = [
     url(r'^$', visits),
-    url(r'^img/$', visits_img)
+    url(r'^img/(?P<url>.*)', visits_img)
 ]
