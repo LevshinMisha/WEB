@@ -2,8 +2,6 @@ IMAGE_COUNT = 19;
 NEXT_IMAGE = new Image();
 PREV_IMAGE = new Image();
 
-hideHelp();
-
 function pre_download_next_and_prev_image(id)
 {
     var int_id = parseInt(id);
