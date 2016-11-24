@@ -19,3 +19,4 @@ if __name__ == "__main__":
             )
         raise
     execute_from_command_line(['', 'makemigrations'])
+    execute_from_command_line(['', 'migrate'])
