@@ -6,19 +6,21 @@ var xhr = new XMLHttpRequest();
 xhr.open('GET', '/static/files/loading.gif', false);
 xhr.send(); // (1)
 
-function pausecomp(millis)
+function pausecomp(src)
 {
-    var date = new Date();
-    var curDate = null;
-    do { curDate = new Date(); }
-    while(curDate-date < millis);
+    load_img = new Image();
+    load_img.onload = function()
+    {
+        alert(123);
+    };
+    load_img.src = src;
 }
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', '/static/img/thumbnails/001_tn.jpg', false);
 xhr.send();
 
-pausecomp(3000);
+pausecomp("/static/files/loading.gif");
 
 function pre_download_next_and_prev_image(id)
 {
