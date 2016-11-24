@@ -27,7 +27,7 @@ class UserAdmin(UserAdmin):
                  )}),
                 ('Permissions', {'fields': ('is_superuser', )}),
                 ('Important dates', {'fields': ('last_login',)}),
-                ('Visits', {'fields': ('visits_count', )})
+
     )
 
     add_fieldsets = (
