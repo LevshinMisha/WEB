@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from .views import main_page, about, links, contacts, gallery, popup, homework
+from .views import main_page, about, links, contacts, gallery
 
 urlpatterns = [
     url(r'^$', main_page),
@@ -8,7 +8,5 @@ urlpatterns = [
     url(r'^contacts/', contacts),
     url(r'^gallery/', gallery),
     url(r'^feedbacks/', include('feedbacks.urls')),
-    url(r'^popup/', popup),
-    url(r'^visits/', include('visits.urls')),
-    url(r'^homework/', homework)
+    url(r'^visits/', include('visits.urls'))
 ]
