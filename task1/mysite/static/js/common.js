@@ -8,6 +8,7 @@ function galleryCheck()
 {
     if (document.getElementById('gallery') !== null)
     {
+
         if (getCookie('img') === '-1' || getCookie('img') === undefined)
         {
             document.getElementById('gallery_big_img_container').style.display = 'none';
