@@ -2,6 +2,15 @@ IMAGE_COUNT = 19;
 NEXT_IMAGE = new Image();
 PREV_IMAGE = new Image();
 
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '/static/files/loading.gif', false);
+xhr.send(); // (1)
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '/static/img/thumbnails/001_tn.jpg', false);
+xhr.send();
+
+
 function pre_download_next_and_prev_image(id)
 {
     var int_id = parseInt(id);
@@ -92,7 +101,7 @@ function imgOnClick(id)
 
 function bigImgOnLoad(id)
 {
-    document.getElementById("gallery_big_img").style.opacity = 1;
+    //document.getElementById("gallery_big_img").style.opacity = 1;
 }
 
 function makeBackgroundImage(url)

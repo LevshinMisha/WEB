@@ -16,7 +16,6 @@
 
 .gallery_big_img
 {
-    background: url('/static/files/loading.gif') no-repeat;
     max-width: 90%;
     max-height: 75vh;
 }
@@ -24,10 +23,10 @@
 .big_img_wrapper
 {
     background: url('/static/files/loading.gif') center center no-repeat;
-    background-size: calc(90% - 1px) 100%;
+    background-size: calc(90% - 1px) calc(100% - 1px);
     display: inline-block;
-    min-width: 100px;
-    min-height: 100px;
+    min-width: 150px;
+    min-height: 150px;
 }
 
 .gallery_big_img_container
