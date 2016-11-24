@@ -1,3 +1,7 @@
-IMAGE_COUNT = 19;
-for (var i = 0; i < IMAGE_COUNT; i++)
-    document.getElementById(i.toString()).style.background-image = LOADING_IMAGE.src;
+document.getElementById('gallery').style.display = 'none';
+load_img = new Image();
+load_img.onload = function()
+    {
+        document.getElementById('gallery').style.display = 'block';
+    };
+load_img.src = "/static/files/loading.gif";

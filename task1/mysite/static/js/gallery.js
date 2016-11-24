@@ -2,29 +2,7 @@ IMAGE_COUNT = 19;
 NEXT_IMAGE = new Image();
 PREV_IMAGE = new Image();
 
-var xhr = new XMLHttpRequest();
-xhr.open('GET', '/static/files/loading.gif', false);
-xhr.send(); // (1)
-
-function pausecomp(src)
-{
-    load_img = new Image();
-    load_img.onload = function()
-    {
-        alert(123);
-    };
-    load_img.src = src;
-    var date = new Date();
-    var curDate = null;
-    do { curDate = new Date(); }
-    while(curDate-date < 3000);
-}
-
-var xhr = new XMLHttpRequest();
-xhr.open('GET', '/static/img/thumbnails/001_tn.jpg', false);
-xhr.send();
-
-pausecomp("/static/files/loading.gif");
+hideHelp();
 
 function pre_download_next_and_prev_image(id)
 {
