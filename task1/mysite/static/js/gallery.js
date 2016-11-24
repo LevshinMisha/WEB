@@ -1,8 +1,8 @@
 IMAGE_COUNT = 19;
-LOADING_IMAGE = new Image();
-LOADING_IMAGE.src = "/static/files/loading.gif";
 NEXT_IMAGE = new Image();
 PREV_IMAGE = new Image();
+LOADING_IMAGE = new Image();
+LOADING_IMAGE.src = "/static/files/loading.gif";
 
 function pre_download_next_and_prev_image(id)
 {
@@ -40,7 +40,7 @@ document.body.onkeydown = function (e)
     if (e.keyCode === 37)
     {
         var c = parseInt(getCookie('img')) - 1
-        if (c === -1)
+        if (c < 0)
             c = IMAGE_COUNT;
         setCookie('img', c.toString());
     }
