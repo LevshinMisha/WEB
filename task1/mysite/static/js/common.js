@@ -23,6 +23,7 @@ function bigImgCheck()
 {
     if (getCookie('big_img') !== undefined)
     {
+        document.body.style.background = '';
         document.body.style.backgroundImage = 'url(' + getCookie('big_img') + ')';
     }
 }
