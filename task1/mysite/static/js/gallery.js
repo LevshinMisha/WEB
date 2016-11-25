@@ -76,7 +76,7 @@ function getImageSrc(id)
 function expandImage(id)
 {
     document.cookie = 'img=' + id + '; path=/;';
-    document.getElementById("gallery_big_img").style.opacity = 0;
+    document.getElementById("div1").style.opacity = 0.7;
     var src = getImageSrc(id);
 
     var image = new Image();
