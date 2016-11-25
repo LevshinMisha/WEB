@@ -30,24 +30,28 @@ document.body.onkeydown = function (e)
         else
             hideHelp();
     }
-    if (e.keyCode === 27)
+    if (getCookie('img') !== '-1' && getCookie('img') !== undefined)
     {
-        closeBigImage();
+        if (e.keyCode === 27)
+        {
+            closeBigImage();
+        }
+        if (e.keyCode === 37)
+        {
+            var c = parseInt(getCookie('img')) - 1
+            if (c < 0)
+                c = IMAGE_COUNT;
+            expandImage(c.toString());
+        }
+        if (e.keyCode === 39)
+        {
+            var c = parseInt(getCookie('img')) + 1
+            if (c === IMAGE_COUNT + 1)
+                c = 0;
+            expandImage(c.toString());
+        }
     }
-    if (e.keyCode === 37)
-    {
-        var c = parseInt(getCookie('img')) - 1
-        if (c < 0)
-            c = IMAGE_COUNT;
-        setCookie('img', c.toString());
-    }
-    if (e.keyCode === 39)
-    {
-        var c = parseInt(getCookie('img')) + 1
-        if (c === IMAGE_COUNT + 1)
-            c = 0;
-        setCookie('img', c.toString());
-    }
+
 }
 
 function getImageSrc(id)
