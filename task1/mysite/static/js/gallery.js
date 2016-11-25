@@ -87,8 +87,8 @@ function expandImage(id)
     document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
     if (IMG_DICT[src] !== 'loaded') // Этот костыль я посвещаю работе атрибута src.
     {
-        document.getElementById('gallery_big_img').style.display = 'none';
-        window.setTimeout(function() { document.getElementById('gallery_big_img').style.display = 'inline-block'; }, 100)
+        document.getElementById('gallery_big_img_container').style.display = 'none';
+        window.setTimeout(function() { document.getElementById('gallery_big_img_container').style.display = 'flex'; }, 100)
     }
 }
 
