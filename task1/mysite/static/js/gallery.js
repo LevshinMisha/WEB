@@ -1,4 +1,5 @@
 IMAGE_COUNT = 19;
+IMG_DICT = {};
 hideHelp();
 
 function pre_download_next_and_prev_image(id)
@@ -80,7 +81,7 @@ function expandImage(id)
     pre_download_next_and_prev_image(id);
     document.getElementById('gallery_big_img').style.display = 'none';
     document.getElementById('gallery_big_img').src = src;
-    window.setTimeout(function() {document.getElementById('gallery_big_img').style.display = 'inline-block';}, 250);
+    window.setTimeout(function() {document.getElementById('gallery_big_img').style.display = 'inline-block';}, 50);
     document.getElementById('gallery_big_img_container').style.display = 'flex';
     document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
 
@@ -106,12 +107,17 @@ function makeBackgroundImage(url)
 
 function addImageInCash(url)
 {
-    var image = new Image();
-    image.src = url;
-    console.log(url + ' Загружается');
-    image.onload = function()
+    if (!IMG_DICT[url])
     {
-        console.log(url + ' Загружено');
+        IMG_DICT[url] = true;
+        var image = new Image();
+        image.src = url;
+        console.log(url + ' Загружается');
+        image.onload = function()
+        {
+            console.log(url + ' Загружено');
+        }
+        document.getElementById('gallery_cash').appendChild(image);
     }
-    document.getElementById('gallery_cash').appendChild(image);
+
 }
