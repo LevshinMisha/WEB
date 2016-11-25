@@ -76,18 +76,17 @@ function getImageSrc(id)
 function expandImage(id)
 {
     document.cookie = 'img=' + id + '; path=/;';
-    document.getElementById("div1").style.opacity = 0.7;
+    document.getElementById("gallery_big_img").style.opacity = 0.7;
     var src = getImageSrc(id);
 
     addImageInCash(src);
     pre_download_next_and_prev_image(id);
 
     document.getElementById('gallery_big_img_container').style.display = 'flex';
-    document.getElementById('div1').style.background = "url(" + src + ") round";
     document.getElementById('gallery_big_img').src = src;
     document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
     document.getElementById('gallery_big_img').style.display = 'none';
-    window.setTimeout(function() { document.getElementById('gallery_big_img').style.display = 'inline-block'; }, 1)
+    window.setTimeout(function() { document.getElementById('gallery_big_img').style.display = 'inline-block'; }, 10)
 
 }
 
@@ -98,7 +97,7 @@ function imgOnClick(id)
 
 function bigImgOnLoad(id)
 {
-    document.getElementById("div1").style.opacity = 1;
+    document.getElementById("gallery_big_img").style.opacity = 1;
 }
 
 function makeBackgroundImage(url)
