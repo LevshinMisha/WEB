@@ -85,11 +85,19 @@ function expandImage(id)
 
     document.getElementById('gallery_big_img_container').style.display = 'flex';
     document.getElementById('div1').style.background = "url(" + src + ") round";
-    window.setTimeout(function()
-    {
+    if (IMG_DICT[src] === 'loaded')
         document.getElementById('gallery_big_img').src = src;
-        document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
-    }, 50);
+    else
+    {
+        document.getElementById('gallery_big_img').style.display = 'none';
+        window.setTimeout(function()
+        {
+
+            document.getElementById('gallery_big_img').src = src;
+            document.getElementById('gallery_big_img').style.display = 'inline-block';
+        }, 50);
+    }
+    document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
 
 }
 
