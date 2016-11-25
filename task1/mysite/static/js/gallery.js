@@ -85,9 +85,11 @@ function expandImage(id)
     document.getElementById('gallery_big_img_container').style.display = 'flex';
     document.getElementById('gallery_big_img').src = src;
     document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
-    document.getElementById('gallery_big_img').style.display = 'none';
-    window.setTimeout(function() { document.getElementById('gallery_big_img').style.display = 'inline-block'; }, 10)
-
+    if (IMG_DICT[src] !== 'loaded')
+    {
+        document.getElementById('gallery_big_img').style.display = 'none';
+        window.setTimeout(function() { document.getElementById('gallery_big_img').style.display = 'inline-block'; }, 10)
+    }
 }
 
 function imgOnClick(id)
