@@ -3,5 +3,8 @@ load_img = new Image();
 load_img.onload = function()
     {
         document.getElementById('gallery').style.display = 'block';
+        load_img.style.width = "0";
+        load_img.style.height = "0";
+        document.getElementsByClassName('gallery_cash')[0].appendChild(load_img);
     };
 load_img.src = "/static/files/loading.gif";
