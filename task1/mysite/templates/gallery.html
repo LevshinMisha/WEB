@@ -2,7 +2,8 @@
 
 {% block content %}
 
-    <script src="/static/js/gallery.js"></script>
+    <div class="gallery_cash"></div>
+
     <link rel="stylesheet" href="/static/css/gallery.css">
 
     <div class="gallery_big_img_container" id="gallery_big_img_container">
@@ -18,12 +19,15 @@
     </div>
 
     <div class="help" id="help">Здесь должен быть хелп. Если вы видите эту надпись, значит у вас не работает javascript</div>
-    <div class="gallery" id="gallery">
 
+    <script src="/static/js/gallery.js"></script>
+
+    <div class="gallery" id="gallery">
         {% for url in urls %}
             <img class="gallery_img" src="{{ url.0 }}" alt="cant load this image" id="{{ url.1 }}" onclick="imgOnClick('{{ url.1 }}')">
         {% endfor %}
-
     </div>
+
+    <script src="/static/js/after_gallery_scripts.js"></script>
 
 {% endblock %}
