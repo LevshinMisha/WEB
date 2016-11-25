@@ -25,8 +25,9 @@
 .big_img_wrapper
 {
     background: url('/static/files/loading.gif') center center no-repeat;
-    background-size: calc(90% - 1px) calc(100% - 1px);
+    background-size: calc(100% - 1px) calc(100% - 1px);
     display: inline-block;
+    width: 90%;
 }
 
 .gallery_big_img_container
