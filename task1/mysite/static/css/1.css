@@ -58,4 +58,6 @@ footer
     z-index: -200;
     background-repeat: no-repeat;
     background-size: 100vw 100vh;
+    transition-property: background-image;
+    transition-duration: 5s;
 }

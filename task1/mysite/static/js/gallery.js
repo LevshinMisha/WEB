@@ -76,29 +76,17 @@ function getImageSrc(id)
 function expandImage(id)
 {
     document.cookie = 'img=' + id + '; path=/;';
-    document.getElementById("gallery_big_img").style.opacity = 0.5;
+    document.getElementById("gallery_big_img").style.opacity = 0;
     var src = getImageSrc(id);
 
     var image = new Image();
     image.onload = function() { pre_download_next_and_prev_image(id); }
     image.src = src;
 
-    if (!IMG_DICT[src] || IMG_DICT[src] === 'loading')
-    {
-        document.getElementById('gallery_big_img').style.display = 'none';
-        document.getElementById('gallery_big_img').src = src;
-        window.setTimeout(function()
-        {
-            document.getElementById('gallery_big_img').style.display = 'inline-block';
-            document.getElementById('gallery_big_img_container').style.display = 'flex';
-            document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
-        }, 10);
-    }
-    else
-    {
-        document.getElementById('gallery_big_img').src = src;
-    }
-
+    document.getElementById('gallery_big_img_container').style.display = 'flex';
+    document.getElementById('div1').style.background = "url(" + src + ") round";
+    document.getElementById('gallery_big_img').src = src;
+    document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
 }
 
 function imgOnClick(id)
@@ -108,7 +96,7 @@ function imgOnClick(id)
 
 function bigImgOnLoad(id)
 {
-    document.getElementById("gallery_big_img").style.opacity = 1;
+    document.getElementById("gallery_big_img").style.opacity = 0;
 }
 
 function makeBackgroundImage(url)
