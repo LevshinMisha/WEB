@@ -95,7 +95,7 @@ function expandImage(id)
 
             document.getElementById('gallery_big_img').src = src;
             document.getElementById('gallery_big_img').style.display = 'inline-block';
-        }, 50);
+        }, 10);
     }
     document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
 
@@ -108,7 +108,7 @@ function imgOnClick(id)
 
 function bigImgOnLoad(id)
 {
-    document.getElementById("gallery_big_img").style.opacity = 0;
+    document.getElementById("gallery_big_img").style.opacity = 1;
 }
 
 function makeBackgroundImage(url)
