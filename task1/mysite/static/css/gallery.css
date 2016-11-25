@@ -18,6 +18,7 @@
 {
     max-width: 90%;
     max-height: 75vh;
+    display: inline-block;
 }
 
 .big_img_wrapper
@@ -74,4 +75,11 @@
 {
     width: 0;
     height: 0;
+}
+
+.div1
+{
+    display: inline-block;
+    opacity: 0.7;
+    max-width: 90%;
 }
