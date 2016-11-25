@@ -81,9 +81,12 @@ function expandImage(id)
     pre_download_next_and_prev_image(id);
     document.getElementById('gallery_big_img').style.display = 'none';
     document.getElementById('gallery_big_img').src = src;
-    document.getElementById('gallery_big_img').style.display = 'inline-block';
-    document.getElementById('gallery_big_img_container').style.display = 'flex';
-    document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
+    window.setTimeout(function()
+    {
+        document.getElementById('gallery_big_img').style.display = 'inline-block';
+        document.getElementById('gallery_big_img_container').style.display = 'flex';
+        document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
+    }, 10);
 
 }
 
