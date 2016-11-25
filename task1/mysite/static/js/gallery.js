@@ -110,5 +110,5 @@ function addImageInCash(url)
     {
         console.log(url + ' Загружено');
     }
-    document.getElementsByClassName('gallery_cash')[0].appendChild(image);
+    document.getElementById('gallery_cash').appendChild(image);
 }
