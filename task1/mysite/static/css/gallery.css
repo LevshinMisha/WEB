@@ -19,6 +19,7 @@
     max-width: 90%;
     max-height: 75vh;
     display: inline-block;
+    opacity: 0;
 }
 
 .big_img_wrapper
