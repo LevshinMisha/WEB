@@ -21,6 +21,13 @@
     display: inline-block;
 }
 
+.gallery_big_img
+{
+    max-width: 100%;
+    max-height: 75vh;
+    display: inline-block;
+}
+
 .big_img_wrapper
 {
     background: url('/static/files/loading.gif') center center no-repeat;
