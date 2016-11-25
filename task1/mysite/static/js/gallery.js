@@ -79,9 +79,8 @@ function expandImage(id)
     document.getElementById("div1").style.opacity = 0.7;
     var src = getImageSrc(id);
 
-    var image = new Image();
-    image.onload = function() { pre_download_next_and_prev_image(id); }
-    image.src = src;
+    addImageInCash(src);
+    pre_download_next_and_prev_image(id);
 
     document.getElementById('gallery_big_img_container').style.display = 'flex';
     document.getElementById('div1').style.background = "url(" + src + ") round";
