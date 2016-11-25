@@ -78,9 +78,11 @@ function expandImage(id)
     document.getElementById("gallery_big_img").style.opacity = 0.5;
     var src = getImageSrc(id);
     pre_download_next_and_prev_image(id);
+    document.getElementById('gallery_big_img_container').style.display = 'none';
+    document.getElementById('gallery_big_img').src = src;
     document.getElementById('gallery_big_img_container').style.display = 'flex';
     document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
-    document.getElementById('gallery_big_img').src = src;
+
 }
 
 function imgOnClick(id)
