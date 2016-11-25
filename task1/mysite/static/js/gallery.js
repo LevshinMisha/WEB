@@ -85,8 +85,12 @@ function expandImage(id)
 
     document.getElementById('gallery_big_img_container').style.display = 'flex';
     document.getElementById('div1').style.background = "url(" + src + ") round";
-    document.getElementById('gallery_big_img').src = src;
-    document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
+    window.setTimeout(function()
+    {
+        document.getElementById('gallery_big_img').src = src;
+        document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
+    }, 50);
+
 }
 
 function imgOnClick(id)
