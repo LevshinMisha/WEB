@@ -87,6 +87,8 @@ function expandImage(id)
     document.getElementById('div1').style.background = "url(" + src + ") round";
     document.getElementById('gallery_big_img').src = src;
     document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
+    document.getElementById('gallery_big_img').style.display = 'none';
+    windows.setTimeout(function() { document.getElementById('gallery_big_img').style.display = 'inline-block'; }, 10)
 
 }
 
