@@ -78,15 +78,26 @@ function expandImage(id)
     document.cookie = 'img=' + id + '; path=/;';
     document.getElementById("gallery_big_img").style.opacity = 0.5;
     var src = getImageSrc(id);
-    pre_download_next_and_prev_image(id);
-    document.getElementById('gallery_big_img').style.display = 'none';
-    document.getElementById('gallery_big_img').src = src;
-    window.setTimeout(function()
+
+    var image = new Image();
+    image.onload = function() { pre_download_next_and_prev_image(id); }
+    image.src = src;
+
+    if (!IMG_DICT[src] || IMG_DICT[src] === 'loading')
     {
-        document.getElementById('gallery_big_img').style.display = 'inline-block';
-        document.getElementById('gallery_big_img_container').style.display = 'flex';
-        document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
-    }, 10);
+        document.getElementById('gallery_big_img').style.display = 'none';
+        document.getElementById('gallery_big_img').src = src;
+        window.setTimeout(function()
+        {
+            document.getElementById('gallery_big_img').style.display = 'inline-block';
+            document.getElementById('gallery_big_img_container').style.display = 'flex';
+            document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
+        }, 10);
+    }
+    else
+    {
+        document.getElementById('gallery_big_img').src = src;
+    }
 
 }
 
@@ -108,17 +119,18 @@ function makeBackgroundImage(url)
     }
 }
 
-function addImageInCash(url)
+function addImageInCash(src)
 {
-    if (!IMG_DICT[url])
+    if (!IMG_DICT[src])
     {
-        IMG_DICT[url] = true;
+        IMG_DICT[src] = 'loading';
         var image = new Image();
-        image.src = url;
-        console.log(url + ' Загружается');
+        image.src = src;
+        console.log(src + ' Загружается');
         image.onload = function()
         {
-            console.log(url + ' Загружено');
+            console.log(src + ' Загружено');
+            IMG_DICT[src] = 'loaded';
         }
         document.getElementById('gallery_cash').appendChild(image);
     }
