@@ -1,6 +1,6 @@
 @media(max-width: 1359px)
 {
-    .header_background
+    header:after
     {
         height: calc(48px * 2);
     }
@@ -8,7 +8,7 @@
 
 @media(max-width: 780px)
 {
-    .header_background
+    header:after
     {
         height: calc(48px * 3);
     }

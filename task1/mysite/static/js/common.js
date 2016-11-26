@@ -26,6 +26,7 @@ function bigImgCheck()
     {
         document.getElementById('background').style.backgroundImage = 'url(' + getCookie('big_img') + ')';
         document.getElementById('background').style.display = "block";
+
     }
 }
 

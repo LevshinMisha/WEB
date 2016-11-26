@@ -7,7 +7,7 @@ header
     line-height: 0;
 }
 
-.header_background
+header:after
 {
     background: rgba(69, 104, 142, 1);
     position: absolute;
@@ -16,6 +16,7 @@ header
     width: 100%;
     height: 48px;
     z-index: -100;
+    content: "";
 }
 
 .menu
