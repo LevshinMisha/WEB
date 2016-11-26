@@ -82,7 +82,8 @@ function expandImage(id)
     addImageInCash(src);
     pre_download_next_and_prev_image(id);
 
-    document.getElementById('gallery_big_img_container').style.display = 'flex';
+    if (document.getElementById('gallery_big_img_container').style.display !== 'flex')
+        document.getElementById('gallery_big_img_container').style.display = 'flex';
 
     document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
     if (IMG_DICT[src] !== 'loaded') // Этот костыль я посвещаю работе атрибута src.
