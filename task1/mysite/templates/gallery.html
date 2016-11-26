@@ -23,11 +23,10 @@
     <script src="/static/js/gallery.js"></script>
 
     <div class="gallery" id="gallery">
+        <script src="/static/js/after_gallery_scripts.js"></script>
         {% for url in urls %}
             <img class="gallery_img" src="{{ url.0 }}" alt="cant load this image" id="{{ url.1 }}" onclick="imgOnClick('{{ url.1 }}')">
         {% endfor %}
     </div>
-
-    <script src="/static/js/after_gallery_scripts.js"></script>
 
 {% endblock %}
