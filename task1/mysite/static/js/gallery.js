@@ -86,7 +86,7 @@ function expandImage(id)
         document.getElementById('gallery_big_img_container').style.display = 'flex';
 
     document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
-    if (IMG_DICT[src] !== 'loaded') // Этот костыль я посвещаю работе атрибута src.
+    if (IMG_DICT[src] !== 'loaded') // Этот костыль я посвещаю работе атрибута src в firefox.
     {
         document.getElementById('gallery_big_img').src = "";
         window.setTimeout(function()
