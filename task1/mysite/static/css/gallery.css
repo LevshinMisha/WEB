@@ -19,13 +19,8 @@
     max-width: 100%;
     max-height: 75vh;
     display: inline-block;
-}
-
-.gallery_big_img
-{
-    max-width: 100%;
-    max-height: 75vh;
-    display: inline-block;
+    min-width: 300px;
+    min-height: 225px;
 }
 
 .big_img_wrapper

@@ -2,18 +2,17 @@
 
 {% block content %}
 
-    <div class="gallery_cash" id="gallery_cash"></div>
+    <div class="gallery_cash" id="gallery_cash"></div> <!-- Чтобы предзагружать картинки -->
 
     <link rel="stylesheet" href="/static/css/gallery.css">
 
     <div class="gallery_big_img_container" id="gallery_big_img_container">
         <div class="gallery_big_img_content" id="gallery_big_img_content">
             <div class="big_img_wrapper" id="big_img_wrapper">
-                <img class="gallery_big_img_loading" id="gallery_big_img_loading">
                 <img class='gallery_big_img' id="gallery_big_img" onload="bigImgOnLoad()">
             </div>
             <div class="big_img_buttons">
-                <button onclick="alert(123)" id="button_make_img_background">Сделать Фоновым Изображением</button>
+                <button id="button_make_img_background">Сделать Фоновым Изображением</button>
                 <button onclick="closeBigImage()">Закрыть</button>
             </div>
         </div>
