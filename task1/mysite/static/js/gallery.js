@@ -92,7 +92,7 @@ function expandImage(id)
         window.setTimeout(function()
         {
             document.getElementById('gallery_big_img').src = src;
-        }, 100)
+        }, 50)
     }
     else
         document.getElementById('gallery_big_img').src = src;
