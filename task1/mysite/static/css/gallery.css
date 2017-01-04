@@ -16,8 +16,8 @@
 
 .gallery_big_img
 {
-    max-width: 100%;
-    max-height: 75vh;
+    max-width: 90vw;
+    max-height: 50vh;
     display: inline-block;
     min-width: 300px;
     min-height: 225px;
@@ -28,9 +28,9 @@
     background: url('/static/files/loading.gif') center center no-repeat;
     background-size: calc(100% - 1px) calc(100% - 2px);
     display: inline-block;
-    width: auto;
     height: auto;
     max-width: 90%;
+    margin-bottom: 3px;
 }
 
 .gallery_big_img_container
@@ -79,4 +79,68 @@
 .gallery_cash
 {
     display: none;
+}
+
+textarea
+{
+    width: 100%;
+    min-width: 300px;
+    height: 50px;
+    resize: none;
+    padding: 0;
+    border: 0;
+}
+
+.comments
+{
+    line-height: 1;
+    display: block;
+    margin: auto;
+    width: 90%;
+    min-width: 300px;
+    margin-bottom: 2px;
+}
+
+.comment
+{
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    min-width: 300px;
+
+    margin-bottom: 1px;
+}
+
+.comment_author
+{
+    display: inline-block;
+    width: 100px;
+    padding: 5px;
+    line-height: 25px;
+}
+
+.comment_text
+{
+    display: inline-block;
+    width: calc(100% - 125px);
+    padding: 5px;
+}
+
+button
+{
+    width: 33.3%;
+}
+
+.new_comment
+{
+    width: 90%;
+    margin: auto;
+    margin-bottom: 3px;
+}
+
+.buttons
+{
+    width: 90%;
+    margin: auto;
+    font-size: 0;
 }

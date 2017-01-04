@@ -1,6 +1,6 @@
 IMAGE_COUNT = 19;
 IMG_DICT = {};
-hideHelp();
+
 
 function pre_download_next_and_prev_image(id)
 {
@@ -55,6 +55,11 @@ document.body.onkeydown = function (e)
 
 }
 
+window.onresize = function(e)
+{
+    console.log(document.getElementById('gallery_big_img_content').style.height)
+}
+
 function getImageSrc(id)
 {
     var src_parts = document.getElementById(id).src.split('/');
@@ -96,6 +101,7 @@ function expandImage(id)
     }
     else
         document.getElementById('gallery_big_img').src = src;
+    getComments();
 }
 
 function imgOnClick(id)
@@ -132,4 +138,65 @@ function addImageInCash(src)
         document.getElementById('gallery_cash').appendChild(image);
     }
 
+}
+
+function getFilename(path)
+{
+    for (var i = path.length - 1; i !== 0; i--)
+    {
+        if (path[i] === '/')
+        {
+            return path.slice(i + 1)
+        }
+
+    }
+
+}
+
+function getComments()
+{
+    var picture = getCookie('img');
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', picture, false);
+    xhr.send();
+
+    if (xhr.status != 200)
+    {
+        alert( xhr.status + ': ' + xhr.statusText );
+    }
+    else
+    {
+        document.getElementById('comments').innerHTML = '';
+        var comments = JSON.parse(xhr.responseText);
+        console.log(comments.comments)
+        for (var i = 0; i < comments.comments.length; i++)
+        {
+            var text = comments.comments[i].text;
+            var comment = createElement('div', 'comment', '');
+            comment.appendChild(createElement('div', 'comment_author', comments.comments[i].author));
+            comment.appendChild(createElement('div', 'comment_text', comments.comments[i].text));
+            document.getElementById('comments').appendChild(comment)
+        }
+    }
+}
+
+function addComment()
+{
+    var picture = getCookie('img');
+    var xhr = new XMLHttpRequest();
+    var text = document.getElementById('new_comment_text').value;
+
+    xhr.open('GET', picture + '/' + text, false);
+    xhr.send();
+
+    if (xhr.status != 200)
+    {
+        alert( xhr.status + ': ' + xhr.statusText );
+    }
+    else
+    {
+        alert( xhr.responseText );
+        getComments();
+    }
 }
