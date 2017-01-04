@@ -70,3 +70,11 @@ window.onload = function (event)
         help.innerHTML = 'Нажмите F1, чтобы открыть\\закрыть хелп\nНажимайте на миниатюру чтобы увидеть полную картинку\nПеремещение по галерее с помощью стрелок\nESC - закрывает картинку';
     }
 }
+
+function createElement(type, className, innerText)
+{
+    var element = document.createElement(type);
+    element.className = className;
+    element.innerText = innerText;
+    return element
+}

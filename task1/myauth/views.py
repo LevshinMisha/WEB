@@ -5,17 +5,17 @@ from .form import LoginForm, RegistrationForm
 from .settings import PAGE_TO_REDIRECT_AFTER_AUTH, AUTH_PAGE
 
 
-def is_user(request):
+def is_not_user(request):
     return not isinstance(request.user, get_user_model())
 
 
 def is_admin(request):
-    return is_user(request) and request.user.is_superuser
+    return is_not_user(request) and request.user.is_superuser
 
 
 def need_authentication(func):
     def f(request, *args, **kwargs):
-        if is_user(request):
+        if is_not_user(request):
             return redirect(AUTH_PAGE)
         return func(request, *args, **kwargs)
     return f

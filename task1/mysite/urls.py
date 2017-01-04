@@ -6,7 +6,7 @@ urlpatterns = [
     url(r'^about/', about),
     url(r'^links/', links),
     url(r'^contacts/', contacts),
-    url(r'^gallery/', gallery),
+    url(r'^gallery/', include('gallery.urls')),
     url(r'^feedbacks/', include('feedbacks.urls')),
     url(r'^visits/', include('visits.urls'))
 ]
