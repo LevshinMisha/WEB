@@ -145,15 +145,19 @@ function ajax(url, func)
 {
     var xhr = new XMLHttpRequest();
 
-    xhr.open('GET', url, false);
+    xhr.open('GET', url, true);
     xhr.send();
     xhr.onreadystatechange = function()
     {
         if (xhr.readyState != 4) return;
         if (xhr.status != 200)
+        {
             alert(xhr.status + ': ' + xhr.statusText);
+        }
         else
+        {
             func(xhr.responseText);
+        }
     }
 }
 
@@ -174,6 +178,7 @@ function getComments()
     }
 
     var picture = getCookie('img');
+    document.getElementById('comments').innerHTML = '<div class="comment">Loading...</div>';
     ajax('getComments/' + picture, afterResponse)
 }
 
@@ -209,5 +214,5 @@ function getLikes()
     }
 
     var picture = getCookie('img');
-    ajax('like/' + picture, afterResponse)
+    ajax('getLikes/' + picture, afterResponse)
 }
