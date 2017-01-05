@@ -12,3 +12,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Comment({}, {}, {})'.format(self.author, self.text, self.picture)
+
+
+class Like(models.Model):
+    picture = models.TextField()
+    user = models.ForeignKey(AUTH_USER_MODEL)
+
+    def __str__(self):
+        return 'Like({}, {})'.format(self.user, self.picture)

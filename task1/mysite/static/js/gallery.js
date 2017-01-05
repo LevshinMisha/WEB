@@ -102,6 +102,7 @@ function expandImage(id)
     else
         document.getElementById('gallery_big_img').src = src;
     getComments();
+    getLikes();
 }
 
 function imgOnClick(id)
@@ -140,36 +141,28 @@ function addImageInCash(src)
 
 }
 
-function getFilename(path)
+function ajax(url, func)
 {
-    for (var i = path.length - 1; i !== 0; i--)
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', url, false);
+    xhr.send();
+    xhr.onreadystatechange = function()
     {
-        if (path[i] === '/')
-        {
-            return path.slice(i + 1)
-        }
-
+        if (xhr.readyState != 4) return;
+        if (xhr.status != 200)
+            alert(xhr.status + ': ' + xhr.statusText);
+        else
+            func(xhr.responseText);
     }
-
 }
 
 function getComments()
 {
-    var picture = getCookie('img');
-    var xhr = new XMLHttpRequest();
-
-    xhr.open('GET', picture, false);
-    xhr.send();
-
-    if (xhr.status != 200)
-    {
-        alert( xhr.status + ': ' + xhr.statusText );
-    }
-    else
+    function afterResponse(responseText)
     {
         document.getElementById('comments').innerHTML = '';
-        var comments = JSON.parse(xhr.responseText);
-        console.log(comments.comments)
+        var comments = JSON.parse(responseText);
         for (var i = 0; i < comments.comments.length; i++)
         {
             var text = comments.comments[i].text;
@@ -179,24 +172,42 @@ function getComments()
             document.getElementById('comments').appendChild(comment)
         }
     }
+
+    var picture = getCookie('img');
+    ajax('getComment' + picture, afterResponse)
 }
 
 function addComment()
 {
-    var picture = getCookie('img');
-    var xhr = new XMLHttpRequest();
-    var text = document.getElementById('new_comment_text').value;
-
-    xhr.open('GET', picture + '/' + text, false);
-    xhr.send();
-
-    if (xhr.status != 200)
+    function afterResponse(responseText)
     {
-        alert( xhr.status + ': ' + xhr.statusText );
-    }
-    else
-    {
-        alert( xhr.responseText );
+        alert(responseText);
         getComments();
     }
+
+    var picture = getCookie('img');
+    var text = document.getElementById('new_comment_text').value;
+    ajax('addComment/' + picture + '/' + text, afterResponse)
+}
+
+function like()
+{
+    function afterResponse(responseText)
+    {
+        getLikes()
+    }
+
+    var picture = getCookie('img');
+    ajax('like/' + picture, afterResponse)
+}
+
+function getLikes()
+{
+    function afterResponse(responseText)
+    {
+        document.getElementById('like_button').innerText= "Лайков:" + responseText;
+    }
+
+    var picture = getCookie('img');
+    ajax('like/' + picture, afterResponse)
 }
