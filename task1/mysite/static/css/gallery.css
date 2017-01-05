@@ -54,14 +54,16 @@
     z-index: 100;
 }
 
-.popup
+.gallery_big_img_container:before
 {
+    content: '';
     background: rgba(0,0,0,0.5);
     min-height: 100vh;
     position: fixed;
     width: 100%;
     z-index: 50;
     top: 0;
+
 }
 
 .main_content p
@@ -136,7 +138,7 @@ textarea
 
 button
 {
-    width: 30vw;
+    width: 22.5vw;
     padding: 5px;
 }
 
