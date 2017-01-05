@@ -174,7 +174,7 @@ function getComments()
     }
 
     var picture = getCookie('img');
-    ajax('getComment' + picture, afterResponse)
+    ajax('getComment/' + picture, afterResponse)
 }
 
 function addComment()
