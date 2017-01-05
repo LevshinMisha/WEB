@@ -73,3 +73,9 @@
 /task1/mysite/static/files/5.jpg
 /task1/mysite/static/files/6.jpg
 /task1/task1/qwe.py
+/task1/gallery/__pycache__/admin.cpython-35.pyc
+/task1/gallery/__pycache__/models.cpython-35.pyc
+/task1/gallery/__pycache__/urls.cpython-35.pyc
+/task1/gallery/__pycache__/views.cpython-35.pyc
+/task1/gallery/migrations/__pycache__/0001_initial.cpython-35.pyc
+/task1/gallery/migrations/__pycache__/__init__.cpython-35.pyc

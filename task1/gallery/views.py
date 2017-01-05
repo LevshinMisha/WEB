@@ -26,8 +26,6 @@ def add_comment(request, filename, text):
             return HttpResponse('Какие длинные и не понятные слова. Попытались выглядить умнее?')
     if len(Comment.objects.filter(author=request.user, picture=filename, text=text)):
         return HttpResponse('Повторюша, дядя Хрюша')
-    if len(Comment.objects.filter(picture=filename)) > 3:
-        return HttpResponse('Место под комментарии закончилось.')
     Comment.objects.create(author=request.user, picture=filename, text=text)
     return HttpResponse('Надеюсь вы написали что-то умное')
 
