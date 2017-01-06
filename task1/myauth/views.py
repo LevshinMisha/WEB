@@ -10,7 +10,7 @@ def is_not_user(request):
 
 
 def is_admin(request):
-    return is_not_user(request) and request.user.is_superuser
+    return not is_not_user(request) and request.user.is_superuser
 
 
 def need_authentication(func):
@@ -39,7 +39,7 @@ def auth(request):
 
 
 def register(request):
-    return render(request, 'cheater.html', {'title': 'Читерок', 'cheater_message': 'Регистрация закрыта, но вы держитесь'})
+    #  return render(request, 'cheater.html', {'title': 'Читерок', 'cheater_message': 'Регистрация закрыта, но вы держитесь'})
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
