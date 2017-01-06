@@ -81,12 +81,11 @@ function getImageSrc(id)
 
 function expandImage(id)
 {
+    clearComments();
+    document.getElementById('like_button').innerText= "Лайки не загрузились";
     document.cookie = 'img=' + id + '; path=/;';
     document.getElementById("gallery_big_img").style.opacity = 0.7;
     var src = getImageSrc(id);
-    clearComments();
-    document.getElementById('like_button').innerText= "Лайки не загрузились"t;
-
 
     addImageInCash(src);
     pre_download_next_and_prev_image(id);
@@ -167,11 +166,11 @@ function ajax(url, func)
 
 function isCommentsNeedToUpdate(comments)
 {
-    if (comments.length != CURRENT_COMMENTS.length)
+    if (comments.length !== CURRENT_COMMENTS.length)
         return true
     for(var i = 0; i < comments.length; i++)
     {
-        if (comments[i].author != CURRENT_COMMENTS[i].author || comments[i].text != CURRENT_COMMENTS[i].text)
+        if (comments[i].author !== CURRENT_COMMENTS[i].author || comments[i].text !== CURRENT_COMMENTS[i].text)
             return true
     }
     return false
@@ -234,7 +233,7 @@ function getLikes()
 {
     function afterResponse(responseText)
     {
-        if (responseText != CURRENT_LIKES)
+        if (responseText !== CURRENT_LIKES)
         {
             CURRENT_LIKES = responseText;
             document.getElementById('like_button').innerText= "Лайков:" + responseText;
