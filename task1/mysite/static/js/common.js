@@ -1,3 +1,6 @@
+CURRENT_IMAGE = '';
+
+
 function getCookie(name)
 {
   var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
@@ -15,7 +18,11 @@ function galleryCheck()
         }
         else
         {
-            expandImage(getCookie('img'));
+            if (CURRENT_IMAGE !== getCookie('img'))
+            {
+                expandImage(getCookie('img'));
+                CURRENT_IMAGE = getCookie('img');
+            }
         }
     }
 }
