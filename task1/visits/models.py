@@ -31,7 +31,7 @@ class Visit(models.Model):
 
 class VisitsImage:
     def __init__(self):
-        self.img = Img.open('visits.jpg')
+        self.img = Img.open('visits.png')
         self.draw = ImageDraw.Draw(self.img)
 
     def draw_visits(self, today_visits, visits, today_hits, hits):
