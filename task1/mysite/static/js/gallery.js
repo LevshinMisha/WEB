@@ -1,7 +1,8 @@
 IMAGE_COUNT = 19;
 IMG_DICT = {};
-CURRENT_COMMENTS = []
-CURRENT_LIKES = ''
+CURRENT_COMMENTS = [];
+CURRENT_LIKES = '';
+CURRENT_ID = '';
 
 function pre_download_next_and_prev_image(id)
 {
@@ -78,33 +79,38 @@ function expandImage(id)
 {
     CURRENT_COMMENTS = [];
     CURRENT_LIKES = '';
-
-    clearComments();
-    document.getElementById('comments').innerHTML = '<div class="comment">Loading...</div>';
-    document.getElementById('like_button').innerText= "Лайки не загрузились";
-    document.cookie = 'img=' + id + '; path=/;';
-    document.getElementById("gallery_big_img").style.opacity = 0.7;
-    var src = getImageSrc(id);
-
-    addImageInCash(src);
-    pre_download_next_and_prev_image(id);
-
-    if (document.getElementById('gallery_big_img_container').style.display !== 'flex')
-        document.getElementById('gallery_big_img_container').style.display = 'flex';
-
-    document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
-    if (IMG_DICT[src] !== 'loaded') // Этот костыль я посвещаю работе атрибута src в firefox.
+    if (CURRENT_ID !== id)
     {
-        document.getElementById('gallery_big_img').src = "";
-        window.setTimeout(function()
+        clearComments();
+        CURRENT_ID = id;
+        document.getElementById('comments').innerHTML = '<div class="comment">Loading...</div>';
+        document.getElementById('like_button').innerText= "Лайки не загрузились";
+        document.cookie = 'img=' + id + '; path=/;';
+        document.getElementById("gallery_big_img").style.opacity = 0.7;
+        var src = getImageSrc(id);
+
+        addImageInCash(src);
+        pre_download_next_and_prev_image(id);
+
+        if (document.getElementById('gallery_big_img_container').style.display !== 'flex')
+            document.getElementById('gallery_big_img_container').style.display = 'flex';
+
+        document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
+        if (IMG_DICT[src] !== 'loaded') // Этот костыль я посвещаю работе атрибута src в firefox.
         {
+            document.getElementById('gallery_big_img').src = "";
+            window.setTimeout(function()
+            {
+                document.getElementById('gallery_big_img').src = src;
+            }, 50)
+        }
+        else
             document.getElementById('gallery_big_img').src = src;
-        }, 50)
+        getComments();
+        getLikes();
     }
-    else
-        document.getElementById('gallery_big_img').src = src;
-    getComments();
-    getLikes();
+
+
 }
 
 function imgOnClick(id)
