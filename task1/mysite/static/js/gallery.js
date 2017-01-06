@@ -162,12 +162,24 @@ function ajax(url, func)
     }
 }
 
+function isCommentsNeedToUpdate(comments)
+{
+    if (comments.length != CURRENT_COMMENTS.length)
+        return true
+    for(var i = 0; i < comments.length; i++)
+    {
+        if (comments[i].author != CURRENT_COMMENTS[i].author || comments[i].text != CURRENT_COMMENTS[i].text)
+            return true
+    }
+    return false
+}
+
 function getComments()
 {
     function afterResponse(responseText)
     {
         var comments = JSON.parse(responseText);
-        if (comments.comments != CURRENT_COMMENTS)
+        if (isCommentsNeedToUpdate(comments.comments))
         {
             CURRENT_COMMENTS = comments.comments;
             document.getElementById('comments').innerHTML = '';
@@ -183,7 +195,6 @@ function getComments()
     }
 
     var picture = getCookie('img');
-    document.getElementById('comments').innerHTML = '<div class="comment">Loading...</div>';
     ajax('getComments/' + picture, afterResponse)
 }
 
