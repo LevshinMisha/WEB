@@ -69,6 +69,11 @@ window.onload = function (event)
         help.style.whiteSpace = 'pre-wrap';
         help.innerHTML = 'Нажмите F1, чтобы открыть\\закрыть хелп\nНажимайте на миниатюру чтобы увидеть полную картинку\nПеремещение по галерее с помощью стрелок\nESC - закрывает картинку';
     }
+    if (document.getElementById('gallery') !== null)
+    {
+        setInterval(getLikes, 2000);
+        setInterval(getComments, 10000);
+    }
 }
 
 function createElement(type, className, innerText)
