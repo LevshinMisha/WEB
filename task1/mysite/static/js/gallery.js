@@ -82,6 +82,7 @@ function getImageSrc(id)
 function expandImage(id)
 {
     clearComments();
+    document.getElementById('comments').innerHTML = '<div class="comment">Loading...</div>';
     document.getElementById('like_button').innerText= "Лайки не загрузились";
     document.cookie = 'img=' + id + '; path=/;';
     document.getElementById("gallery_big_img").style.opacity = 0.7;
@@ -199,6 +200,12 @@ function getComments()
                 document.getElementById('comments').appendChild(comment)
             }
         }
+        else
+        {
+            if (CURRENT_COMMENTS.length === 0)
+                clearComments();
+        }
+
     }
 
     var picture = getCookie('img');
