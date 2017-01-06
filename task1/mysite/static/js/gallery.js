@@ -84,6 +84,9 @@ function expandImage(id)
     document.cookie = 'img=' + id + '; path=/;';
     document.getElementById("gallery_big_img").style.opacity = 0.7;
     var src = getImageSrc(id);
+    clearComments();
+    document.getElementById('like_button').innerText= "Лайки не загрузились"t;
+
 
     addImageInCash(src);
     pre_download_next_and_prev_image(id);
@@ -174,6 +177,11 @@ function isCommentsNeedToUpdate(comments)
     return false
 }
 
+function clearComments()
+{
+    document.getElementById('comments').innerHTML = '';
+}
+
 function getComments()
 {
     function afterResponse(responseText)
@@ -182,7 +190,7 @@ function getComments()
         if (isCommentsNeedToUpdate(comments.comments))
         {
             CURRENT_COMMENTS = comments.comments;
-            document.getElementById('comments').innerHTML = '';
+            clearComments()
             for (var i = 0; i < comments.comments.length; i++)
             {
                 var text = comments.comments[i].text;
