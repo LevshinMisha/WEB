@@ -56,11 +56,6 @@ document.body.onkeydown = function (e)
 
 }
 
-window.onresize = function(e)
-{
-    console.log(document.getElementById('gallery_big_img_content').style.height)
-}
-
 function getImageSrc(id)
 {
     var src_parts = document.getElementById(id).src.split('/');
@@ -83,7 +78,7 @@ function expandImage(id)
 {
     CURRENT_COMMENTS = [];
     CURRENT_LIKES = '';
-    
+
     clearComments();
     document.getElementById('comments').innerHTML = '<div class="comment">Loading...</div>';
     document.getElementById('like_button').innerText= "Лайки не загрузились";
