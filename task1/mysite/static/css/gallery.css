@@ -138,14 +138,14 @@ textarea
 
 button
 {
-    margin-top: 3px;
+    width: 22.5vw;
     padding: 5px;
-    width: 300px;
 }
 
-.buttons button
+.xls_button
 {
-    width: 22.5vw;
+    margin-top: 3px;
+    width: 600px;
 }
 
 .new_comment
@@ -166,4 +166,5 @@ button a
 {
     text-decoration: none;
     color: black;
+    display: block;
 }
