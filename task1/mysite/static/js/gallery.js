@@ -1,6 +1,7 @@
 IMAGE_COUNT = 19;
 IMG_DICT = {};
-
+CURRENT_COMMENTS = []
+CURRENT_LIKES = ''
 
 function pre_download_next_and_prev_image(id)
 {
@@ -165,15 +166,19 @@ function getComments()
 {
     function afterResponse(responseText)
     {
-        document.getElementById('comments').innerHTML = '';
         var comments = JSON.parse(responseText);
-        for (var i = 0; i < comments.comments.length; i++)
+        if (comments.comments != CURRENT_COMMENTS)
         {
-            var text = comments.comments[i].text;
-            var comment = createElement('div', 'comment', '');
-            comment.appendChild(createElement('div', 'comment_author', comments.comments[i].author));
-            comment.appendChild(createElement('div', 'comment_text', comments.comments[i].text));
-            document.getElementById('comments').appendChild(comment)
+            CURRENT_COMMENTS = comments.comments;
+            document.getElementById('comments').innerHTML = '';
+            for (var i = 0; i < comments.comments.length; i++)
+            {
+                var text = comments.comments[i].text;
+                var comment = createElement('div', 'comment', '');
+                comment.appendChild(createElement('div', 'comment_author', comments.comments[i].author));
+                comment.appendChild(createElement('div', 'comment_text', comments.comments[i].text));
+                document.getElementById('comments').appendChild(comment)
+            }
         }
     }
 
@@ -210,7 +215,11 @@ function getLikes()
 {
     function afterResponse(responseText)
     {
-        document.getElementById('like_button').innerText= "Лайков:" + responseText;
+        if (responseText != CURRENT_LIKES)
+        {
+            CURRENT_LIKES = responseText;
+            document.getElementById('like_button').innerText= "Лайков:" + responseText;
+        }
     }
 
     var picture = getCookie('img');
