@@ -81,6 +81,9 @@ function getImageSrc(id)
 
 function expandImage(id)
 {
+    CURRENT_COMMENTS = [];
+    CURRENT_LIKES = '';
+    
     clearComments();
     document.getElementById('comments').innerHTML = '<div class="comment">Loading...</div>';
     document.getElementById('like_button').innerText= "Лайки не загрузились";
