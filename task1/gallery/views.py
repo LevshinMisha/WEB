@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse
 import os
 from .models import Comment, Like
 from myauth.views import is_not_user
+import xlwt
 import json
 
 
@@ -39,6 +40,24 @@ def like(request, filename):
     Like.objects.create(picture=filename, user=request.user)
     return  HttpResponse('Лайк добавлен')
 
+
 def get_likes(request, filename):
     return HttpResponse(len(Like.objects.filter(picture=filename)))
+
+
+def get_xls(request):
+    wb = xlwt.Workbook()
+    ws = wb.add_sheet('A Test Sheet')
+    ws.write(0, 0, 'Имя файла')
+    ws.write(0, 1, 'Кол-во комментариев')
+    ws.write(0, 2, 'Кол-во лайков')
+    urls = os.listdir(os.path.dirname(__file__)[:-8] + '/mysite/static/img')
+    for i in range(len(urls)):
+        ws.write(i + 1, 0, urls[i])
+        ws.write(i + 1, 1, len(Comment.objects.filter(picture=i)))
+        ws.write(i + 1, 2, len(Like.objects.filter(picture=i)))
+    response = HttpResponse(content_type='application/force-download')
+    response['Content-Disposition'] = 'attachment; filename=gallery.xls'
+    wb.save(response)
+    return response
 

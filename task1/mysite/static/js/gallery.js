@@ -254,3 +254,8 @@ function getLikes()
     var picture = getCookie('img');
     ajax('getLikes/' + picture, afterResponse)
 }
+
+function downloadXls()
+{
+    ajax('xls', function() {});
+}

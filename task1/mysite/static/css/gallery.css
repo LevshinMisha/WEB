@@ -138,15 +138,21 @@ textarea
 
 button
 {
-    width: 22.5vw;
+    margin-top: 3px;
     padding: 5px;
+    width: 300px;
+}
+
+.buttons button
+{
+    width: 22.5vw;
 }
 
 .new_comment
 {
     width: 90vw;
     margin: auto;
-    margin-bottom: 3px;
+
 }
 
 .buttons
@@ -154,4 +160,10 @@ button
     width: 90vw;
     margin: auto;
     font-size: 0;
+}
+
+button a
+{
+    text-decoration: none;
+    color: black;
 }
