@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from task1.settings import AUTH_USER_MODEL
-
+import bleach
 
 class Feedback(models.Model):
     text = models.TextField(max_length=300)
@@ -17,6 +17,11 @@ class Feedback(models.Model):
         self.author = user
         self.created_date = timezone.now()
         self.save()
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        attr = {'a': ['href'], 'img': ['src']}
+        self.text = str(bleach.clean(self.text, tags=['img', 'b', 'i', 'a'], attributes=attr))
+        return super().save(force_insert, force_update, using, update_fields)
 
     def __str__(self):
         return self.text

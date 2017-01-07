@@ -16,6 +16,7 @@ def trying_to_delete_or_edit_not_your_feedback(request):
     feedbacks = Feedback.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     return render(request, 'feedback_main.html', {"feedbacks": feedbacks, 'title': 'Гадости'})
 
+
 @need_authentication
 def feedback_new(request):
     if not Feedback.objects.filter(author=request.user):
