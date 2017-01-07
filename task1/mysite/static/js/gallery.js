@@ -21,6 +21,7 @@ function closeBigImage()
 {
     setCookie('img', '-1');
     CURRENT_ID = '-1';
+    document.location = '#-1';
 }
 
 document.body.onkeydown = function (e)
@@ -80,10 +81,11 @@ function expandImage(id)
 {
     CURRENT_COMMENTS = [];
     CURRENT_LIKES = '';
-    if (CURRENT_ID !== id)
+    if (CURRENT_ID !== id && CURRENT_ID !== -1)
     {
         clearComments();
         CURRENT_ID = id;
+        document.location = '#' + id;
         document.getElementById('comments').innerHTML = '<div class="comment">Loading...</div>';
         document.getElementById('like_button').innerText= "Лайки не загрузились";
         document.cookie = 'img=' + id + '; path=/;';
@@ -214,7 +216,8 @@ function getComments()
     }
 
     var picture = getCookie('img');
-    ajax('getComments/' + picture, afterResponse)
+    if (picture !== '-1')
+        ajax('getComments/' + picture, afterResponse)
 }
 
 function addComment()
@@ -257,10 +260,22 @@ function getLikes()
     }
 
     var picture = getCookie('img');
-    ajax('getLikes/' + picture, afterResponse)
+    if (picture !== '-1')
+        ajax('getLikes/' + picture, afterResponse)
 }
 
 function downloadXls()
 {
     window.location = 'xls';
+}
+
+function checkLocation()
+{
+    console.log(document.location.hash)
+    if (document.location.hash === '#-1')
+    {
+        closeBigImage()
+    }
+    else if (document.location.hash !== '')
+        expandImage(document.location.hash.slice(1, document.location.length))
 }

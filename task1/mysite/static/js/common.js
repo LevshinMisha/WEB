@@ -12,6 +12,7 @@ function galleryCheck()
         if (getCookie('img') === '-1' || getCookie('img') === undefined)
         {
             document.getElementById('gallery_big_img_container').style.display = 'none';
+            document.location = '#-1';
         }
         else
         {
@@ -73,6 +74,7 @@ window.onload = function (event)
     {
         setInterval(getLikes, 2000);
         setInterval(getComments, 10000);
+        setInterval(checkLocation, 100);
     }
 }
 
