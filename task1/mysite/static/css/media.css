@@ -67,7 +67,7 @@
     {
         width: 75vw;
         max-width: 450px;
-        min-height: calc(100vh - 120px);
+        min-height: calc(100vh - 160px);
     }
 
     button

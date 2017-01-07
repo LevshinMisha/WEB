@@ -62,6 +62,6 @@ def visits_img(request, url):
         time = 'Никогда'
     img = VisitsImage().draw_visits(a['visits_today'], a['visits'], a['hits_today'], a['hits'], time)
     response = HttpResponse(content_type="image/png")
-    response.set_cookie('time', str(timezone.now()))
+    response.set_cookie('time', str(timezone.now()), path=url[1:])
     img.save(response, "PNG")
     return response
