@@ -57,7 +57,11 @@ def visits(request, url):
 
 def visits_img(request, url):
     a = json.loads(bytes.decode(visits(request, url).content))
-    img = VisitsImage().draw_visits(a['visits_today'], a['visits'], a['hits_today'], a['hits'])
+    time = request.COOKIES.get('time')
+    if time is None:
+        time = 'Никогда'
+    img = VisitsImage().draw_visits(a['visits_today'], a['visits'], a['hits_today'], a['hits'], time)
     response = HttpResponse(content_type="image/png")
+    response.set_cookie('time', str(timezone.now()))
     img.save(response, "PNG")
     return response
