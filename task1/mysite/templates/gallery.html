@@ -37,7 +37,7 @@
             <img class="gallery_img" src="{{ url.0 }}" alt="cant load this image" id="{{ url.1 }}" onclick="imgOnClick('{{ url.1 }}')">
         {% endfor %}
         <br>
-        <button class="xls_button"><a href="xls">Скачать галерею в xls формате</a></button>
+        <button class="xls_button" onclick="downloadXls()">Скачать галерею в xls формате</button>
     </div>
 
 {% endblock %}

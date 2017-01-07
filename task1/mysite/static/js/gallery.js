@@ -257,5 +257,5 @@ function getLikes()
 
 function downloadXls()
 {
-    ajax('xls', function() {});
+    window.location = 'xls';
 }
