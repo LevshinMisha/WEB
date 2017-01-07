@@ -226,7 +226,11 @@ function addComment()
 
     var picture = getCookie('img');
     var text = document.getElementById('new_comment_text').value;
-    ajax('addComment/' + picture + '/' + text, afterResponse)
+    text = 'addComment/' + picture + '/' + text;
+    var ajaxText = '';
+    for (var i in text.split('\n'))
+        ajaxText += text.split('\n')[i] + '\\n';
+    ajax(ajaxText.slice(0, ajaxText.length - 2), afterResponse)
 }
 
 function like()
