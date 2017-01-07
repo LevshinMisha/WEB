@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from .views import main_page, about, links, contacts, gallery
+from .views import main_page, about, links, contacts, gallery, ban
 
 urlpatterns = [
     url(r'^$', main_page),
@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^contacts/', contacts),
     url(r'^gallery/', include('gallery.urls')),
     url(r'^feedbacks/', include('feedbacks.urls')),
-    url(r'^visits/', include('visits.urls'))
+    url(r'^visits/', include('visits.urls')),
+    url(r'^ban/', ban)
 ]
