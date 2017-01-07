@@ -273,7 +273,7 @@ function checkLocation()
 {
     if (document.location.hash === '#-1')
     {
-        if CURRENT_ID !== '-1'
+        if (CURRENT_ID !== '-1')
             closeBigImage()
     }
     else if (document.location.hash !== '')
