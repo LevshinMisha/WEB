@@ -76,7 +76,6 @@ window.onload = function (event)
         setInterval(getComments, 10000);
         setInterval(checkLocation, 100);
     }
-    document.cookie = 'time=' + (new Date()).toString();
 }
 
 function createElement(type, className, innerText)
