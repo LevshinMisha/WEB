@@ -20,6 +20,7 @@ function pre_download_next_and_prev_image(id)
 function closeBigImage()
 {
     setCookie('img', '-1');
+    CURRENT_ID = '-1';
 }
 
 document.body.onkeydown = function (e)
