@@ -273,7 +273,8 @@ function checkLocation()
 {
     if (document.location.hash === '#-1')
     {
-        closeBigImage()
+        if CURRENT_ID !== '-1'
+            closeBigImage()
     }
     else if (document.location.hash !== '')
         expandImage(document.location.hash.slice(1, document.location.length))
