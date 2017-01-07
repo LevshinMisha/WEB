@@ -86,7 +86,7 @@ function expandImage(id)
         clearComments();
         CURRENT_ID = id;
         document.location = '#' + id;
-        document.getElementById('comments').innerHTML = '<div class="comment">Loading...</div>';
+        document.getElementById('comments').innerHTML = '<div class="comment" style="padding: 5px">Loading...</div>';
         document.getElementById('like_button').innerText= "Лайки не загрузились";
         document.cookie = 'img=' + id + '; path=/;';
         document.getElementById("gallery_big_img").style.opacity = 0.7;
@@ -109,11 +109,12 @@ function expandImage(id)
         }
         else
             document.getElementById('gallery_big_img').src = src;
-        getComments();
-        getLikes();
+        window.setTimeout(function()
+            {
+                getComments();
+                getLikes();
+            }, 500)
     }
-
-
 }
 
 function imgOnClick(id)
