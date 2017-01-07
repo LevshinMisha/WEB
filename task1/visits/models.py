@@ -42,8 +42,8 @@ class VisitsImage:
         self.draw.text((150, 30), 'Сегодня:')
         self.draw.text((5, 55), 'Эта страница была посещена:')
         self.draw.text((100, 5), str(visits))
-        self.draw.text((100, 30), str(today_visits))
-        self.draw.text((230, 5), str(hits))
+        self.draw.text((100, 30), str(hits))
+        self.draw.text((230, 5), str(today_visits))
         self.draw.text((230, 30), str(today_hits))
         self.draw.text((5, 80), str(time))
         return self.img
