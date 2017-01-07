@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from PIL import Image as Img, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
 
 class Visit(models.Model):
@@ -13,7 +13,7 @@ class Visit(models.Model):
     def add_new_url(self, url):
         if self.urls:
             self.urls += '\n'
-        self.urls += url
+        self.urls += '/' + url
         self.save()
 
     def update(self):
@@ -31,12 +31,19 @@ class Visit(models.Model):
 
 class VisitsImage:
     def __init__(self):
-        self.img = Img.open('visits.png')
+        self.img = Image.new('RGB', (300, 100), (69, 104, 142))
         self.draw = ImageDraw.Draw(self.img)
+        self.draw.font = ImageFont.truetype('Pillow/Tests/fonts/DejaVuSans.ttf', 15)
 
-    def draw_visits(self, today_visits, visits, today_hits, hits):
-        self.draw.text((135, 15), "{}".format(visits), (255, 255, 255))
-        self.draw.text((135, 45), "{}".format(hits), (255, 255, 255))
-        self.draw.text((275, 15), "{}".format(today_visits), (255, 255, 255))
-        self.draw.text((275, 45), "{}".format(today_hits), (255, 255, 255))
+    def draw_visits(self, today_visits, visits, today_hits, hits, time):
+        self.draw.text((5, 5), 'Визитов:')
+        self.draw.text((5, 30), 'Посещений:')
+        self.draw.text((150, 5), 'Сегодня:')
+        self.draw.text((150, 30), 'Сегодня:')
+        self.draw.text((5, 55), 'Эта страница была посещена:')
+        self.draw.text((100, 5), str(visits))
+        self.draw.text((100, 30), str(today_visits))
+        self.draw.text((230, 5), str(hits))
+        self.draw.text((230, 30), str(today_hits))
+        self.draw.text((5, 80), str(time))
         return self.img

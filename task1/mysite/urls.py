@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'^gallery/', include('gallery.urls')),
     url(r'^feedbacks/', include('feedbacks.urls')),
     url(r'^visits/', include('visits.urls')),
-    url(r'^ban/', ban)
+    url(r'^ban/', ban),
 ]
