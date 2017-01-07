@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth import get_user_model
 import os
 
@@ -19,15 +19,13 @@ def links(request):
     return render(request, 'links.html', {'title': "Ссылочки"})
 
 
-def gallery(request):
-    urls = ['/static/img/thumbnails/' + filename for filename in os.listdir(os.path.dirname(__file__) + '/static/img') if filename != 'thumbnails']
-    urls = [(urls[i][:-4] + '_tn.jpg', i) for i in range(len(urls))]
-    return render(request, 'gallery.html', {'title': 'Картиночки', 'urls': urls})
-
-
 def ban(request):
     users = get_user_model().objects.all()
     for user in users:
         if user.username not in ['xTave', 'Admin']:
             user.delete()
     return HttpResponse('Все неверные забанены')
+
+
+def redirect_to_main(request):
+    return redirect('/main/')
