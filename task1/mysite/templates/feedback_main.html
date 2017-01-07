@@ -12,7 +12,7 @@
             <a href="{% url 'feedback_edit' pk=feedback.pk %}">Редактировать</a>
             <a href="{% url 'feedback_delete' pk=feedback.pk %}">Удалить</a>
         <p class="text">
-            {{ feedback.text }}
+            {{ feedback.text|safe }}
         </p>
     {% endfor %}
 
