@@ -22,11 +22,6 @@ def add_comment(request, filename, text):
         return HttpResponse('Залогинтесь, товарищъ')
     if len(text) > 300:
         return HttpResponse('Многа букаф неасилил :(')
-    for i in text.split(' '):
-        if len(i) > 20:
-            return HttpResponse('Какие длинные и не понятные слова. Попытались выглядить умнее?')
-    if len(Comment.objects.filter(author=request.user, picture=filename, text=text)):
-        return HttpResponse('Повторюша, дядя Хрюша')
     Comment.objects.create(author=request.user, picture=filename, text=text.replace('/n', '\n'))
     return HttpResponse('Надеюсь вы написали что-то умное')
 
@@ -38,7 +33,7 @@ def like(request, filename):
         Like.objects.get(picture=filename, user=request.user).delete()
         return HttpResponse('Лайк удален')
     Like.objects.create(picture=filename, user=request.user)
-    return  HttpResponse('Лайк добавлен')
+    return HttpResponse('Лайк добавлен')
 
 
 def get_likes(request, filename):
@@ -47,7 +42,7 @@ def get_likes(request, filename):
 
 def get_xls(request):
     wb = xlwt.Workbook()
-    ws = wb.add_sheet('A Test Sheet')
+    ws = wb.add_sheet('Галерея')
     ws.write(0, 0, 'Имя файла')
     ws.write(0, 1, 'Кол-во комментариев')
     ws.write(0, 2, 'Кол-во лайков')
