@@ -271,7 +271,6 @@ function downloadXls()
 
 function checkLocation()
 {
-    console.log(document.location.hash)
     if (document.location.hash === '#-1')
     {
         closeBigImage()
