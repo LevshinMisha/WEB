@@ -62,3 +62,8 @@ footer
     transition-duration: 5s;
 }
 
+.text img
+{
+    max-width: 275px;
+}
+
