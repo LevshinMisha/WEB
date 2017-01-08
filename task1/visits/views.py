@@ -3,6 +3,7 @@ from ipware.ip import get_ip
 import json
 from .models import Visit
 from django.utils import timezone
+import datetime
 from .models import VisitsImage
 
 TIME_OUT_FOR_VISIT = 30 * 60
@@ -10,7 +11,7 @@ TIME_OUT_FOR_HIT = 5
 
 
 def get_now():
-    return timezone.now()
+    return timezone.now() + datetime.timedelta(hours=5)
 
 
 def time_to_seconds(time):
@@ -21,8 +22,9 @@ def seconds_to_time(seconds):
     a = get_now()
     if seconds < 0:
         seconds += 60 * 60
-        a.day -= 1
-    return a.replace(year=a.year, month=a.month, day=a.day, hour=seconds // (60 * 60), minute=(seconds % (60 * 60)) // 60, second=seconds % 60)
+        return datetime.datetime(year=a.year, month=a.month, day=a.day - 1, hour=seconds // (60 * 60),
+                                 minute=(seconds % (60 * 60)) // 60, second=seconds % 60)
+    return datetime.datetime(year=a.year, month=a.month, day=a.day, hour=seconds // (60 * 60), minute=(seconds % (60 * 60)) // 60, second=seconds % 60)
 
 
 def today_visits():
@@ -40,8 +42,9 @@ def last_visit_was_less_then(ip, browser, time):
 def visits(request, url):
     def handle_visit(ip, browser):
         if last_visit_was_less_then(ip, browser, TIME_OUT_FOR_VISIT):
-            visit = Visit.objects.get(ip=ip, browser=browser, last_hit__gt=seconds_to_time(
-                time_to_seconds(get_now()) - TIME_OUT_FOR_VISIT))
+            for i in Visit.objects.filter(ip=ip, browser=browser, last_hit__gt=seconds_to_time(time_to_seconds(get_now()) - TIME_OUT_FOR_VISIT)):
+                print(i)
+            visit = Visit.objects.get(ip=ip, browser=browser, last_hit__gt=seconds_to_time(time_to_seconds(get_now()) - TIME_OUT_FOR_VISIT))
             if not last_visit_was_less_then(ip, browser, TIME_OUT_FOR_HIT):
                 visit.update()
             else:
@@ -69,6 +72,6 @@ def visits_img(request, url):
         time = 'Никогда'
     img = VisitsImage().draw_visits(a['visits_today'], a['visits'], a['hits_today'], a['hits'], time)
     response = HttpResponse(content_type="image/png")
-    response.set_cookie('time', str(get_now()), path=url[1:])
+    response.set_cookie('time', str(datetime.datetime.combine(get_now().date(), get_now().time())) + '+05:00', path=url[1:])
     img.save(response, "PNG")
     return response
