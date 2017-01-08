@@ -9,32 +9,39 @@ TIME_OUT_FOR_VISIT = 30 * 60
 TIME_OUT_FOR_HIT = 5
 
 
+def get_now():
+    return timezone.now()
+
+
 def time_to_seconds(time):
     return time.hour * 60 * 60 + time.minute * 60 + time.second
 
 
 def seconds_to_time(seconds):
-    a = timezone.now()
+    a = get_now()
+    if seconds < 0:
+        seconds += 60 * 60
+        a.day -= 1
     return a.replace(year=a.year, month=a.month, day=a.day, hour=seconds // (60 * 60), minute=(seconds % (60 * 60)) // 60, second=seconds % 60)
 
 
 def today_visits():
-    return [visit for visit in Visit.objects.all() if visit.last_hit.day == timezone.now().day]
+    return [visit for visit in Visit.objects.all() if visit.last_hit.day == get_now().day]
 
 
 def today_hits():
-    return [visit.hit_count for visit in Visit.objects.all() if visit.last_hit.day == timezone.now().day]
+    return [visit.hit_count for visit in Visit.objects.all() if visit.last_hit.day == get_now().day]
 
 
 def last_visit_was_less_then(ip, browser, time):
-    return len(Visit.objects.filter(ip=ip, browser=browser, last_hit__gt=seconds_to_time(time_to_seconds(timezone.now()) - time)))
+    return len(Visit.objects.filter(ip=ip, browser=browser, last_hit__gt=seconds_to_time(time_to_seconds(get_now()) - time)))
 
 
 def visits(request, url):
     def handle_visit(ip, browser):
         if last_visit_was_less_then(ip, browser, TIME_OUT_FOR_VISIT):
             visit = Visit.objects.get(ip=ip, browser=browser, last_hit__gt=seconds_to_time(
-                time_to_seconds(timezone.now()) - TIME_OUT_FOR_VISIT))
+                time_to_seconds(get_now()) - TIME_OUT_FOR_VISIT))
             if not last_visit_was_less_then(ip, browser, TIME_OUT_FOR_HIT):
                 visit.update()
             else:
@@ -62,6 +69,6 @@ def visits_img(request, url):
         time = 'Никогда'
     img = VisitsImage().draw_visits(a['visits_today'], a['visits'], a['hits_today'], a['hits'], time)
     response = HttpResponse(content_type="image/png")
-    response.set_cookie('time', str(timezone.now()), path=url[1:])
+    response.set_cookie('time', str(get_now()), path=url[1:])
     img.save(response, "PNG")
     return response
