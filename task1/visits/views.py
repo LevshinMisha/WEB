@@ -42,8 +42,6 @@ def last_visit_was_less_then(ip, browser, time):
 def visits(request, url):
     def handle_visit(ip, browser):
         if last_visit_was_less_then(ip, browser, TIME_OUT_FOR_VISIT):
-            for i in Visit.objects.filter(ip=ip, browser=browser, last_hit__gt=seconds_to_time(time_to_seconds(get_now()) - TIME_OUT_FOR_VISIT)):
-                print(i)
             visit = Visit.objects.get(ip=ip, browser=browser, last_hit__gt=seconds_to_time(time_to_seconds(get_now()) - TIME_OUT_FOR_VISIT))
             if not last_visit_was_less_then(ip, browser, TIME_OUT_FOR_HIT):
                 visit.update()

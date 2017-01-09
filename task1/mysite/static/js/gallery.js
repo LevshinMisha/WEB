@@ -229,13 +229,23 @@ function addComment()
         getComments();
     }
 
+    function changeSymbol(symbol, newSymbol, text)
+    {
+        var s = '';
+        for (var i in text.split(symbol))
+            s += text.split(symbol)[i] + newSymbol;
+        return s.slice(0, s.length - 2)
+    }
+
     var picture = getCookie('img');
     var text = document.getElementById('new_comment_text').value;
-    text = 'addComment/' + picture + '/' + text;
-    var ajaxText = '';
-    for (var i in text.split('\n'))
-        ajaxText += text.split('\n')[i] + '\\n';
-    ajax(ajaxText.slice(0, ajaxText.length - 2), afterResponse)
+    console.log(text);
+    text = 'addComment/' + picture + '/' + text.replace('?', ' \\q');
+
+    text = changeSymbol('?', ' \\q', text);
+    text = changeSymbol('\n', ' \\n', text);
+    console.log(text);
+    ajax(text, afterResponse)
 }
 
 function like()
