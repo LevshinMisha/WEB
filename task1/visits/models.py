@@ -4,17 +4,10 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 class Visit(models.Model):
-    ip = models.TextField()
-    browser = models.TextField()
+    user_agent = models.TextField()
+    screen = models.TextField(default='JS или куки былы выключены')
     last_hit = models.DateTimeField(default=timezone.now)
     hit_count = models.IntegerField(default=1)
-    urls = models.TextField(blank=True)
-
-    def add_new_url(self, url):
-        if self.urls:
-            self.urls += '\n'
-        self.urls += '/' + url
-        self.save()
 
     def update(self):
         self.last_hit = timezone.now()
@@ -26,7 +19,20 @@ class Visit(models.Model):
         self.save()
 
     def __str__(self):
-        return str(self.ip) + ', ' + str(self.browser) + ', ' + str(self.last_hit)
+        return 'Visit(screen={}, user_agent={}, last_hit={})'.format(self.screen, self.user_agent, self.last_hit)
+
+
+class Visiter(models.Model):
+    cookie = models.TextField()
+    ip = models.TextField()
+    urls = models.TextField(blank=True)
+
+    def add_new_url(self, url):
+        self.urls += url + '\n'
+        self.save()
+
+    def __str__(self):
+        return 'Visiter(ip={}, cookie={})'.format(self.ip, self.cookie)
 
 
 class VisitsImage:

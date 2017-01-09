@@ -85,3 +85,5 @@ function createElement(type, className, innerText)
     element.innerText = innerText;
     return element
 }
+
+setCookie('screen', window.screen.width + ' x ' + window.screen.height)
