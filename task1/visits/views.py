@@ -1,7 +1,7 @@
 from django.shortcuts import HttpResponse
-from ipware.ip import get_ip
 import json
-from .models import Visit
+import uuid
+from .models import Visit, Visiter
 from django.utils import timezone
 import datetime
 from .models import VisitsImage
@@ -35,41 +35,55 @@ def today_hits():
     return [visit.hit_count for visit in Visit.objects.all() if visit.last_hit.day == get_now().day]
 
 
-def last_visit_was_less_then(ip, browser, time):
-    return len(Visit.objects.filter(ip=ip, browser=browser, last_hit__gt=seconds_to_time(time_to_seconds(get_now()) - time)))
+def last_visit_was_less_then(screen, user_agent, time):
+    return len(Visit.objects.filter(screen=screen, user_agent=user_agent, last_hit__gt=seconds_to_time(time_to_seconds(get_now()) - time)))
 
 
 def visits(request, url):
-    def handle_visit(ip, browser):
-        if last_visit_was_less_then(ip, browser, TIME_OUT_FOR_VISIT):
-            visit = Visit.objects.get(ip=ip, browser=browser, last_hit__gt=seconds_to_time(time_to_seconds(get_now()) - TIME_OUT_FOR_VISIT))
-            if not last_visit_was_less_then(ip, browser, TIME_OUT_FOR_HIT):
+    def handle_visit(screen, user_agent):
+        if last_visit_was_less_then(screen, user_agent, TIME_OUT_FOR_VISIT):
+            visit = Visit.objects.get(screen=screen, user_agent=user_agent, last_hit__gt=seconds_to_time(time_to_seconds(get_now()) - TIME_OUT_FOR_VISIT))
+            if not last_visit_was_less_then(screen, user_agent, TIME_OUT_FOR_HIT):
                 visit.update()
             else:
                 visit.update_only_time()
         else:
-            visit = Visit.objects.create(ip=ip, browser=browser)
-        return visit
-    
-    def create_visits_info_in_json():
+            visit = Visit.objects.create(screen=screen, user_agent=user_agent, last_hit=get_now())
+
+    def handle_visiter(ip, cookie, url):
+        if cookie is None:
+            cookie = uuid.uuid4()
+            Visiter.objects.create(ip=ip, cookie=cookie)
+        Visiter.objects.get(ip=ip, cookie=cookie).add_new_url(url)
+        return HttpResponse(create_visits_info_in_json(cookie))
+
+    def create_visits_info_in_json(cookie):
         d = dict()
         d['visits_today'] = len(today_visits())
         d['hits_today'] = sum(today_hits())
         d['visits'] = len(Visit.objects.all())
         d['hits'] = sum(visit.hit_count for visit in Visit.objects.all())
+        d['secret_cookie'] = str(cookie)
         return json.dumps(d)
-    
-    handle_visit(get_ip(request), request.META['HTTP_USER_AGENT']).add_new_url(url)
-    return HttpResponse(create_visits_info_in_json())
+
+    screen = request.COOKIES.get('screen')
+    if screen is None:
+        screen = 'JS или куки былы выключены'
+    handle_visit(screen, request.META['HTTP_USER_AGENT'])
+    return handle_visiter(request.META['REMOTE_ADDR'], request.COOKIES.get('secret'), url)
 
 
 def visits_img(request, url):
+    if url == '':
+        url = '/visits/img/'
     a = json.loads(bytes.decode(visits(request, url).content))
     time = request.COOKIES.get('time')
     if time is None:
         time = 'Никогда'
     img = VisitsImage().draw_visits(a['visits_today'], a['visits'], a['hits_today'], a['hits'], time)
     response = HttpResponse(content_type="image/png")
-    response.set_cookie('time', str(datetime.datetime.combine(get_now().date(), get_now().time())) + '+05:00', path=url[1:])
+    if request.COOKIES.get('secret') is None:
+        response.set_cookie('secret', a['secret_cookie'])
+    response.set_cookie('time', str(datetime.datetime.combine(get_now().date(), get_now().time())) + '+05:00', path=url)
     img.save(response, "PNG")
     return response
