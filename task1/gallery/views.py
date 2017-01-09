@@ -22,7 +22,7 @@ def add_comment(request, filename, text):
         return HttpResponse('Залогинтесь, товарищъ')
     if len(text) > 300:
         return HttpResponse('Многа букаф неасилил :(')
-    Comment.objects.create(author=request.user, picture=filename, text=text.replace('/n', '\n'))
+    Comment.objects.create(author=request.user, picture=filename, text=text.replace(' /n', '\n').replace(' /q', '?'))
     return HttpResponse('Надеюсь вы написали что-то умное')
 
 
