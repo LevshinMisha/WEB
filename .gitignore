@@ -81,3 +81,6 @@
 /task1/gallery/migrations/__pycache__/__init__.cpython-35.pyc
 /task1/gallery/migrations/__pycache__/0002_like.cpython-35.pyc
 /task1/feedbacks/migrations/__pycache__/0003_auto_20170107_1749.cpython-35.pyc
+/task1/visits/migrations/__pycache__/0020_auto_20170109_2338.cpython-35.pyc
+/task1/visits/migrations/__pycache__/0021_auto_20170110_0004.cpython-35.pyc
+/task1/visits/migrations/__pycache__/0022_visit_screen.cpython-35.pyc
