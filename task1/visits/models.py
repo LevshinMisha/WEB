@@ -6,10 +6,6 @@ from datetime import timedelta, datetime
 SCREEN_IS_NONE = 'JS или куки былы выключены'
 
 
-def get_now():
-    return timezone.now()
-
-
 class Visit(models.Model):
     user_agent = models.TextField()
     screen = models.TextField(default=SCREEN_IS_NONE)
@@ -18,12 +14,12 @@ class Visit(models.Model):
     visiter = models.ForeignKey('Visiter')
 
     def update(self):
-        self.last_hit = get_now()
+        self.last_hit = timezone.now()
         self.hit_count += 1
         self.save()
 
     def update_only_time(self):
-        self.last_hit = get_now()
+        self.last_hit = timezone.now()
         self.save()
 
     def set_screen(self, screen):
@@ -55,6 +51,8 @@ class VisitsImage:
         self.draw.font = ImageFont.truetype('Pillow/Tests/fonts/DejaVuSans.ttf', 15)
 
     def draw_visits(self, today_visits, visits, today_hits, hits, time):
+        if time is None:
+            time = 'Никогда'
         self.draw.text((5, 5), 'Визитов:')
         self.draw.text((5, 30), 'Посещений:')
         self.draw.text((150, 5), 'Сегодня:')
