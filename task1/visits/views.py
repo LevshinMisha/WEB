@@ -76,8 +76,6 @@ def visits(request, url):
 
 
 def visits_img(request, url):
-    print(url)
-    print(request.COOKIES)
     if url == '':
         url = '/visits/img/'
     a = json.loads(bytes.decode(visits(request, url).content))
