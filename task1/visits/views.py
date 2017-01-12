@@ -1,7 +1,7 @@
 from django.shortcuts import HttpResponse
 import json
 import uuid
-from .models import Visit, Visiter
+from .models import Visit, Visiter, SCREEN_IS_NONE
 from django.utils import timezone
 import datetime
 from .models import VisitsImage
@@ -11,7 +11,7 @@ TIME_OUT_FOR_HIT = 5
 
 
 def get_now():
-    return timezone.now() + datetime.timedelta(hours=5)
+    return timezone.now()
 
 
 def time_to_seconds(time):
@@ -19,12 +19,11 @@ def time_to_seconds(time):
 
 
 def seconds_to_time(seconds):
-    a = get_now()
+    date = get_now().date()
     if seconds < 0:
-        seconds += 60 * 60
-        return datetime.datetime(year=a.year, month=a.month, day=a.day - 1, hour=seconds // (60 * 60),
-                                 minute=(seconds % (60 * 60)) // 60, second=seconds % 60)
-    return datetime.datetime(year=a.year, month=a.month, day=a.day, hour=seconds // (60 * 60), minute=(seconds % (60 * 60)) // 60, second=seconds % 60)
+        seconds += 60 * 60 * 24
+        date -= datetime.timedelta(days=1)
+    return datetime.datetime.combine(date, datetime.time(hour=seconds // (60 * 60), minute=(seconds % (60 * 60)) // 60, second=seconds % 60))
 
 
 def today_visits():
@@ -35,20 +34,21 @@ def today_hits():
     return [visit.hit_count for visit in Visit.objects.all() if visit.last_hit.day == get_now().day]
 
 
-def last_visit_was_less_then(screen, user_agent, time):
-    return len(Visit.objects.filter(screen=screen, user_agent=user_agent, last_hit__gt=seconds_to_time(time_to_seconds(get_now()) - time)))
+def last_visit_was_less_then(user_agent, time):
+    return len(Visit.objects.filter(user_agent=user_agent, last_hit__gt=seconds_to_time(time_to_seconds(get_now()) - time)))
 
 
 def visits(request, url):
-    def handle_visit(screen, user_agent):
-        if last_visit_was_less_then(screen, user_agent, TIME_OUT_FOR_VISIT):
-            visit = Visit.objects.get(screen=screen, user_agent=user_agent, last_hit__gt=seconds_to_time(time_to_seconds(get_now()) - TIME_OUT_FOR_VISIT))
-            if not last_visit_was_less_then(screen, user_agent, TIME_OUT_FOR_HIT):
+    def handle_visit(screen, user_agent, visiter):
+        if last_visit_was_less_then(user_agent, TIME_OUT_FOR_VISIT):
+            visit = Visit.objects.get(user_agent=user_agent, last_hit__gt=seconds_to_time(time_to_seconds(get_now()) - TIME_OUT_FOR_VISIT))
+            if not last_visit_was_less_then(user_agent, TIME_OUT_FOR_HIT):
                 visit.update()
             else:
                 visit.update_only_time()
         else:
-            visit = Visit.objects.create(screen=screen, user_agent=user_agent, last_hit=get_now())
+            visit = Visit.objects.create(user_agent=user_agent, last_hit=get_now(), visiter=visiter)
+        visit.set_screen(screen)
 
     def handle_visiter(ip, cookie, url):
         if cookie is None:
@@ -56,7 +56,7 @@ def visits(request, url):
         if not len(Visiter.objects.filter(ip=ip, cookie=cookie)):
             Visiter.objects.create(ip=ip, cookie=cookie)
         Visiter.objects.get(ip=ip, cookie=cookie).add_new_url(url)
-        return HttpResponse(create_visits_info_in_json(cookie))
+        return HttpResponse(create_visits_info_in_json(cookie)),  Visiter.objects.get(ip=ip, cookie=cookie)
 
     def create_visits_info_in_json(cookie):
         d = dict()
@@ -70,21 +70,24 @@ def visits(request, url):
     screen = request.COOKIES.get('screen')
     if screen is None:
         screen = 'JS или куки былы выключены'
-    handle_visit(screen, request.META['HTTP_USER_AGENT'])
-    return handle_visiter(request.META['REMOTE_ADDR'], request.COOKIES.get('secret'), url)
+    response, visiter = handle_visiter(request.META['REMOTE_ADDR'], request.COOKIES.get('secret'), url)
+    handle_visit(screen, request.META['HTTP_USER_AGENT'], visiter)
+    return response
 
 
 def visits_img(request, url):
+    print(url)
+    print(request.COOKIES)
     if url == '':
         url = '/visits/img/'
     a = json.loads(bytes.decode(visits(request, url).content))
     time = request.COOKIES.get('time')
     if time is None:
         time = 'Никогда'
-    img = VisitsImage().draw_visits(a['visits_today'], a['visits'], a['hits_today'], a['hits'], time)
     response = HttpResponse(content_type="image/png")
     if request.COOKIES.get('secret') is None:
         response.set_cookie('secret', a['secret_cookie'])
-    response.set_cookie('time', str(datetime.datetime.combine(get_now().date(), get_now().time())) + '+05:00', path=url)
-    img.save(response, "PNG")
+    VisitsImage().draw_visits(a['visits_today'], a['visits'], a['hits_today'], a['hits'], time).save(response, "PNG")
+    response.set_cookie('time', str(get_now()), path=url[1:])
+
     return response

@@ -1,25 +1,38 @@
 from django.db import models
 from django.utils import timezone
 from PIL import Image, ImageDraw, ImageFont
+from datetime import timedelta, datetime
+
+SCREEN_IS_NONE = 'JS или куки былы выключены'
+
+
+def get_now():
+    return timezone.now()
 
 
 class Visit(models.Model):
     user_agent = models.TextField()
-    screen = models.TextField(default='JS или куки былы выключены')
+    screen = models.TextField(default=SCREEN_IS_NONE)
     last_hit = models.DateTimeField(default=timezone.now)
     hit_count = models.IntegerField(default=1)
+    visiter = models.ForeignKey('Visiter')
 
     def update(self):
-        self.last_hit = timezone.now()
+        self.last_hit = get_now()
         self.hit_count += 1
         self.save()
 
     def update_only_time(self):
-        self.last_hit = timezone.now()
+        self.last_hit = get_now()
         self.save()
 
+    def set_screen(self, screen):
+        if screen != SCREEN_IS_NONE:
+            self.screen = screen
+            self.save()
+
     def __str__(self):
-        return 'Visit(screen={}, user_agent={}, last_hit={})'.format(self.screen, self.user_agent, self.last_hit)
+        return 'Visit(screen={}, user_agent={}, last_hit={}, visiter={})'.format(self.screen, self.user_agent, self.last_hit, self.visiter)
 
 
 class Visiter(models.Model):
