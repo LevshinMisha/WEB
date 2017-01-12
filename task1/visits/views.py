@@ -53,6 +53,7 @@ def visits(request, url):
     def handle_visiter(ip, cookie, url):
         if cookie is None:
             cookie = uuid.uuid4()
+        if not len(Visiter.objects.filter(ip=ip, cookie=cookie)):
             Visiter.objects.create(ip=ip, cookie=cookie)
         Visiter.objects.get(ip=ip, cookie=cookie).add_new_url(url)
         return HttpResponse(create_visits_info_in_json(cookie))
