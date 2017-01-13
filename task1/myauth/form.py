@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model, authenticate
+from .models import RegistrationRequest
 
 
 def user_exists(email):
@@ -44,10 +45,18 @@ class RegistrationForm(forms.Form):
     password2 = forms.CharField(label='Password2', widget=forms.PasswordInput)
 
     def is_valid(self):
-        return self.check_data() and self.data['password1'] == self.data['password2'] and not user_exists(self.data['email'])
+        return self.check_data() and self.data['password1'] == self.data['password2']
 
     def registrate(self):
-        return get_user_model().objects.create_user(email=self.data['email'], username=self.data['username'], password=self.data['password1'])
+        email = self.data['email']
+        username = self.data['username']
+        password = self.data['password1']
+        if len(get_user_model().objects.filter(email=email)) or len(get_user_model().objects.filter(username=username)):
+            return 'Пользователь с таким email или username уже существует! Неужто вы спутали кнопку "Войти" с "Регистрация"?'
+        if len(RegistrationRequest.objects.filter(email=email)) or len(RegistrationRequest.objects.filter(username=username)):
+            return 'Хватит спамить! Если письмо еще не пришло - подождите.'
+        RegistrationRequest.objects.create_registration_request(email=email, username=username, password=password)
+        return 'На указанную вами почту(надеюсь вы ее не забыли), было выслано письмо. Пройдите по ссылке в письме и регистрация завершится'
 
     def check_data(self):
         for i in ['email', 'username', 'password1', 'password2']:

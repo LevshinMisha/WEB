@@ -20,10 +20,10 @@ def links(request):
 
 
 def ban(request):
-    users = get_user_model().objects.all()
-    for user in users:
-        if user.username not in ['xTave', 'Admin']:
-            user.delete()
+    from django.core.mail import send_mail
+
+    send_mail('Subject here', 'Here is the message.', 'xTave@yandex.ru',
+              ['mishalevshin@gmail.com'], fail_silently=False)
     return HttpResponse('Все неверные забанены')
 
 

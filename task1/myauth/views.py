@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import login, logout
 from .form import LoginForm, RegistrationForm
 from .settings import PAGE_TO_REDIRECT_AFTER_AUTH, AUTH_PAGE
+from .models import RegistrationRequest
 
 
 def is_not_user(request):
@@ -39,12 +40,17 @@ def auth(request):
 
 
 def register(request):
-    #  return render(request, 'cheater.html', {'title': 'Читерок', 'cheater_message': 'Регистрация закрыта, но вы держитесь'})
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = form.registrate()
-            login(request, user)
-            return redirect(PAGE_TO_REDIRECT_AFTER_AUTH)
-    form = RegistrationForm()
-    return render(request, "registration.html", {'form': form, 'title': 'Регистрация'})
+            return render(request, 'cheater.html', {'title': 'Регистрация', 'cheater_message': form.registrate()})
+    return render(request, "registration.html", {'form': RegistrationForm(), 'title': 'Регистрация'})
+
+
+def create_user(request, username, token):
+    if len(RegistrationRequest.objects.filter(username=username, token=token)):
+        user = RegistrationRequest.objects.get(username=username, token=token).create_real_user()
+        login(request, user)
+        RegistrationRequest.objects.get(username=username, token=token).delete()
+        return render(request, 'cheater.html', {'title' : 'Регистрация завершена', 'cheater_message': 'Надеюсь вы не угадали свой токен! Добро пожаловать!'})
+    return render(request, 'cheater.html', {'title': 'Регистрация провалилась', 'cheater_message': 'Пытались угадать токен? Так вот - вы ошиблись! Попробуйте еще раз!'})
