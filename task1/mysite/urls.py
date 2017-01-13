@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from .views import main_page, about, links, contacts, ban, redirect_to_main
+from .views import main_page, about, links, contacts, redirect_to_main
 
 urlpatterns = [
     url(r'^$', redirect_to_main),
@@ -10,5 +10,4 @@ urlpatterns = [
     url(r'^gallery/', include('gallery.urls')),
     url(r'^feedbacks/', include('feedbacks.urls')),
     url(r'^visits/', include('visits.urls')),
-    url(r'^ban/', ban),
 ]
