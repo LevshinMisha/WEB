@@ -27,7 +27,7 @@ class RegistrationRequest(models.Model):
                                                'Надеюсь это были вы, потому что я сейчас дам вам ссылку, пройдя по '
                                                'которой вы завершите регистрацию.'
                                                '\nВот же она: {}'.format(self.get_link()),
-                  'xTave@yandex.ru',
+                  'MishaLevshin@gmail.com',
                   [str(self.email)],
                   fail_silently=False)
 
