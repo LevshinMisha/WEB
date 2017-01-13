@@ -19,13 +19,5 @@ def links(request):
     return render(request, 'links.html', {'title': "Ссылочки"})
 
 
-def ban(request):
-    from django.core.mail import send_mail
-
-    send_mail('Subject here', 'Here is the message.', 'xTave@yandex.ru',
-              ['mishalevshin@gmail.com'], fail_silently=False)
-    return HttpResponse('Все неверные забанены')
-
-
 def redirect_to_main(request):
     return redirect('/main/')
