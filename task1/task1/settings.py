@@ -132,6 +132,7 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'xTave@yandex.ru'
 EMAIL_HOST_PASSWORD = 'Misha250596'
 EMAIL_USE_TLS = True
+EMAIL_USE_SSL = True
 
 EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 EMAIL_FILE_PATH = '/tmp/app-messages'
