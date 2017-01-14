@@ -45,7 +45,7 @@ class ExtUser(AbstractBaseUser, PermissionsMixin):
         return self.username
 
     def __str__(self):
-        return self.username
+        return 'User(username={}, password={}, email={}'.format(self.username, self.password, self.email)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

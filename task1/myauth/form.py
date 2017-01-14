@@ -29,7 +29,11 @@ class LoginForm(forms.Form):
         return self.check_data() and user_exists(get_email(self.data['username']))
 
     def authenticate(self):
-        return authenticate(email=get_email(self.data['username']), password=self.data['password'])
+        email = get_email(self.data['username'])
+        password = self.data['password']
+        print(email, password, sep='\n')
+        print(get_user_model().objects.all())
+        return authenticate(email=email, password=password)
 
     def check_data(self):
         for i in ['username', 'password']:
@@ -51,11 +55,13 @@ class RegistrationForm(forms.Form):
         email = self.data['email']
         username = self.data['username']
         password = self.data['password1']
+        print(email, username, password, sep='\n')
         if len(get_user_model().objects.filter(email=email)) or len(get_user_model().objects.filter(username=username)):
             return 'Пользователь с таким email или username уже существует! Неужто вы спутали кнопку "Войти" с "Регистрация"?'
         if len(RegistrationRequest.objects.filter(email=email)) or len(RegistrationRequest.objects.filter(username=username)):
             return 'Хватит спамить! Если письмо еще не пришло - подождите.'
-        RegistrationRequest.objects.create_registration_request(email=email, username=username, password=password)
+        r = RegistrationRequest.objects.create_registration_request(email=email, username=username, password=password)
+        print(r)
         return 'На указанную вами почту(надеюсь вы ее не забыли), было выслано письмо. Пройдите по ссылке в письме и регистрация завершится'
 
     def check_data(self):

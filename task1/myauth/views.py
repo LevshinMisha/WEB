@@ -50,6 +50,7 @@ def register(request):
 def create_user(request, username, token):
     if len(RegistrationRequest.objects.filter(username=username, token=token)):
         user = RegistrationRequest.objects.get(username=username, token=token).create_real_user()
+        print(user)
         login(request, user)
         RegistrationRequest.objects.get(username=username, token=token).delete()
         return render(request, 'cheater.html', {'title' : 'Регистрация завершена', 'cheater_message': 'Надеюсь вы не угадали свой токен! Добро пожаловать!'})

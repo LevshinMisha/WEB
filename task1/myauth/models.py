@@ -19,7 +19,7 @@ class RegistrationRequest(models.Model):
     objects = RegistrationRequestManager()
 
     def create_real_user(self):
-        return get_user_model().objects.create(username=self.username, password=self.password, email=self.email)
+        return get_user_model().objects.create_user(username=self.username, password=self.password, email=self.email)
 
     def send_email(self):
         send_mail('Регистрация на моем сайте', 'Тут такое дело. '
@@ -35,4 +35,4 @@ class RegistrationRequest(models.Model):
         return 'http://levshinmisha.pythonanywhere.com/auth/createUser/{}/{}'.format(self.username, self.token)
 
     def __str__(self):
-        return 'Unregistered User({})'.format(self.username)
+        return 'Unregistered User({}, {})'.format(self.username, self.password)
