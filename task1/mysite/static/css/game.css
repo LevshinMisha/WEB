@@ -1,0 +1,63 @@
+.menu
+{
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    width: 100px;
+}
+
+.menu img
+{
+    width: 100px;
+    height: 100px;
+}
+
+.wrapper
+{
+    position: absolute;
+    top: 10px;
+    left: 115px;
+    display: block;
+    width: calc(100vw - 250px);
+    margin: auto;
+    min-width: 300px;
+}
+
+.wrapper div
+{
+
+}
+
+div
+{
+    border: 2px solid black;
+}
+
+.choice
+{
+    width: calc(100% - 14px);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    padding: 5px;
+}
+
+.text
+{
+    display: inline-block;
+    padding: 15px;
+    width: calc(100% - 34px);
+    min-height: 500px;
+}
+
+.choices
+{
+    display: block;
+    text-align: center;
+}
+
+p
+{
+    margin: 0;
+    text-indent: 10px;
+}

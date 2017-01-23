@@ -46,7 +46,8 @@ MY_APPS = [
     'extuser',
     'feedbacks',
     'visits',
-    'gallery'
+    'gallery',
+    'game',
 ]
 
 INSTALLED_APPS = MY_APPS + DJANGO_APPS
