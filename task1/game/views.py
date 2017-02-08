@@ -1,7 +1,9 @@
 from django.shortcuts import render, HttpResponse
 from .models import Student, Player, Stage, Choice
+from myauth.views import need_authentication
 
 
+@need_authentication
 def main(request):
     stage = current_player(request.user).cur_stage
     choices = Choice.objects.filter(stage_from=stage)

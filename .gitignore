@@ -101,3 +101,9 @@
 /task1/myauth/migrations/__pycache__/__init__.cpython-35.pyc
 /task1/task1/db.sqlite3
 /.idea/WEB.iml
+/task1/game/__pycache__/__init__.cpython-35.pyc
+/task1/game/__pycache__/admin.cpython-35.pyc
+/task1/game/__pycache__/models.cpython-35.pyc
+/task1/game/__pycache__/urls.cpython-35.pyc
+/task1/game/__pycache__/views.cpython-35.pyc
+/task1/qwe.py
