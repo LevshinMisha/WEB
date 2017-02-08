@@ -7,8 +7,8 @@ class Comment(models.Model):
     text = models.TextField()
     picture = models.TextField()
 
-    def to_json(self):
-        return {'author': str(self.author), 'text': self.text}
+    def json(self):
+        return {'author': str(self.author), 'text': str(self.text)}
 
     def __str__(self):
         return 'Comment({}, {}, {})'.format(self.author, self.text, self.picture)

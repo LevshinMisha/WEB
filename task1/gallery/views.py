@@ -14,7 +14,7 @@ def gallery(request):
 
 
 def get_comments(request, filename):
-    return HttpResponse(json.dumps({'comments': [i.to_json() for i in Comment.objects.filter(picture=filename)]}))
+    return HttpResponse(json.dumps({'comments': [i.json() for i in Comment.objects.filter(picture=filename)]}))
 
 
 def add_comment(request, filename, text):

@@ -5,27 +5,32 @@
     <title>Однако, здравствуйте</title>
     <link rel="stylesheet" href="/static/css/game.css">
     <link rel="shortcut icon" href="/static/favicon.ico">
+    <script src="/static/js/game.js"></script>
 </head>
 <body>
-    <div class="menu">
-        <img src="http://download.seaicons.com/icons/rafiqul-hassan/blogger/512/Settings-2-icon.png">
-        <img src="http://dom-comp.moy.su/vesna2015/unnamed.png">
-    </div>
-    <div class="wrapper">
-        <div class="text">
-            <p>Сегодняшним Утром ты проснулся довольно бодрым.</p>
-            <p>Ты не знал в чем причина.</p>
-            <p>До тех пор пока не вспомнил, что сегодня зачетная неделя.</p>
-            <p>Однако Дратути.</p>
-        </div>
-        <br>
-        <div class="choices">
-            <div class="choice" title="Это приведет к пробуждению">Проснутся окончательно</div>
-            <div class="choice" title="А может и не 5...">Полежать еще 5 минуточек</div>
-            <div class="choice" title="Правда толкан не рядом">Обосраться</div>
-            <div class="choice" title="Вдруг она рядом">Позвать маму</div>
+    <div class="big_wrapper">
+        <div class="wrapper left">
+            <div class="block text" id="text">
+                {{ stage.text }}
+            </div>
+            <br>
+            <div class="choices" id="choices">
+                {% for choice in choices %}
+                    <div class="choice menu-item" title="{{ choice.title }}" onclick="makeChoice('{{ choice.stage_to.code_name }}')">{{ choice.text }}</div>
+                {% endfor %}
+            </div>
         </div>
 
+        <div class="wrapper right">
+            <div class="block">
+                <img src="{{ stage.img }}" id="img">
+            </div>
+            <div class="stats">
+                <div class="menu-item">Сон : 146%;</div>
+                <div class="menu-item">Настроение : 146%;</div>
+                <div class="menu-item">Сытость : 146%;</div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
