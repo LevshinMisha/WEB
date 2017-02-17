@@ -2,20 +2,7 @@ from django.db import models
 from task1.settings import AUTH_USER_MODEL
 import json
 from django.db.models import Model
-
-def to_json(obj):
-    if isinstance(obj, JsonDumpable):
-        return obj.json()
-    if type(obj) in [str, int, float]:
-        return obj
-    if type(obj) in [list, set]:
-        return [to_json(i) for i in obj]
-    if isinstance(obj, dict):
-        return {key: to_json(obj[key]) for key in obj}
-    if obj is None:
-        return 'null'
-    raise Exception
-
+import bleach
 
 class JsonDumpable:
     def json(self):
@@ -84,7 +71,6 @@ class Subject(Model):
     complexity = models.FloatField()
     connected_subject = models.ForeignKey('self', blank=True)
     connected_skills = models.ManyToManyField(Skill)
-    #type = models.ForeignKey(SubjectType)
 
     def connect_with_subject(self, subj):
         self.connected_subject = subj
@@ -95,31 +81,45 @@ class Subject(Model):
 
 
 class Stage(Model, JsonDumpable):
-    code_name = models.CharField(max_length=30, unique=True)
+    codename = models.CharField(max_length=30, unique=True)
     text = models.TextField()
     img = models.URLField()
     choices = models.ManyToManyField('self', through='Choice', through_fields=('stage_from', 'stage_to'), symmetrical=False)
 
     def __str__(self):
-        return str(self.code_name)
+        return str(self.codename)
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.text = str(bleach.clean(self.text, tags=['p']))
+        return super().save(force_insert, force_update, using, update_fields)
+
+    def get_type(self):
+        choices = self.get_choices()
+        if len(choices) == 1 and choices[0].text == '':
+            return 'Simple'
+        return 'Fork'
 
     def get_choices(self):
         return Choice.objects.filter(stage_from=self)
 
     def json(self):
+        text = ""
+        for i in self.text.split('\n'):
+            text += '<p>{}</p>'.format(i)
         return {
-            'codeName': str(self.code_name),
-            'text': str(self.text),
+            'codename': str(self),
+            'text': text,
             'img': str(self.img),
-            'choices': [i.json() for i in self.get_choices()]
+            'choices': [i.json() for i in self.get_choices()],
+            'type': self.get_type()
         }
 
 
 class Choice(Model, JsonDumpable):
     stage_from = models.ForeignKey(Stage, related_name='stage_from')
     stage_to = models.ForeignKey(Stage, related_name='stage_to')
-    text = models.TextField()
-    title = models.CharField(max_length=30)
+    text = models.TextField(blank=True)
+    title = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return 'from:{} to:{} text:{}'.format(self.stage_from, self.stage_to, self.text)

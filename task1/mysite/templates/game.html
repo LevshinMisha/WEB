@@ -10,21 +10,12 @@
 <body>
     <div class="big_wrapper">
         <div class="wrapper left">
-            <div class="block text" id="text">
-                {{ stage.text }}
-            </div>
-            <br>
-            <div class="choices" id="choices">
-                {% for choice in choices %}
-                    <div class="choice menu-item" title="{{ choice.title }}" onclick="makeChoice('{{ choice.stage_to.code_name }}')">{{ choice.text }}</div>
-                {% endfor %}
-            </div>
+            <div class="block text" id="text"></div>
+            <div class="choices" id="choices"></div>
         </div>
 
         <div class="wrapper right">
-            <div class="block">
-                <img src="{{ stage.img }}" id="img">
-            </div>
+            <div class="block"><img src="#" id="img"></div>
             <div class="stats">
                 <div class="menu-item">Сон : 146%;</div>
                 <div class="menu-item">Настроение : 146%;</div>

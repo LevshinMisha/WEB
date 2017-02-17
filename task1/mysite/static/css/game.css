@@ -76,3 +76,8 @@ body
 {
     text-align: center;
 }
+
+.no_show
+{
+    display: none;
+}
