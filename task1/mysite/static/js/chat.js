@@ -15,7 +15,6 @@ function addMessageToChat(message)
         $('.message:last').fadeIn(1000);
     else
         $('.message:last').slideDown(1000);
-    $('.message:last').css('min-height', '0');
     messages_count++;
     if (messages_count > 10)
         deleteFirstMessage()
@@ -28,7 +27,6 @@ function deleteFirstMessage()
         $('.message:first').remove();
     already_delete = true;
     $('.message:first').slideUp(1000);
-    $('.message:first').css('min-height', '0');
 }
 
 function addMessagesToChat(data)
