@@ -48,6 +48,7 @@ MY_APPS = [
     'visits',
     'gallery',
     'game',
+    'chat'
 ]
 
 INSTALLED_APPS = MY_APPS + DJANGO_APPS

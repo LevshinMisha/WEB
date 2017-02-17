@@ -1,0 +1,34 @@
+.message
+{
+    min-height: 50px;
+    width: 75vw;
+    border: 1px solid black;
+    display: none;
+    margin: auto;
+}
+
+.chat
+{
+    text-align: center;
+}
+
+.add-message
+{
+    margin-top: 15px;
+    text-align: center;
+}
+
+input
+{
+    width: 50vw;
+}
+
+button
+{
+    width: 25vw;
+}
+
+.text
+{
+    display: inline;
+}
