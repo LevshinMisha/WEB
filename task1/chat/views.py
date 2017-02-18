@@ -17,3 +17,7 @@ def add_message(request, text):
     Message.objects.create(text=text)
     Message.delete_old_messages()
     return HttpResponse('добавлено')
+
+
+def last_message(request):
+    return HttpResponse(str(Message.objects.all()[-1]))

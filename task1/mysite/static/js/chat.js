@@ -1,6 +1,8 @@
 messages_count = 0;
-already_delete = false
-animation_is_over = true
+already_delete = false;
+animation_is_over = true;
+animation_time = 1000;
+messages = [];
 
 function ajax(url, onComplete)
 {
@@ -9,16 +11,16 @@ function ajax(url, onComplete)
 
 function addMessageToChat(message)
 {
-    animation_is_over = false
+    animation_is_over = false;
     $('#chat').append('<div class="message">' + message + '</div>');
     if (messages_count < 10)
-        $('.message:last').fadeIn(1000);
+        $('.message:last').fadeIn(animation_time);
     else
-        $('.message:last').slideDown(1000);
+        $('.message:last').slideDown(animation_time);
     messages_count++;
     if (messages_count > 10)
-        deleteFirstMessage()
-    setTimeout(function() { animation_is_over = true;  }, 1000)
+        deleteFirstMessage();
+    setTimeout(function() { animation_is_over = true;  }, animation_time);
 }
 
 function deleteFirstMessage()
@@ -26,19 +28,25 @@ function deleteFirstMessage()
     if (already_delete)
         $('.message:first').remove();
     already_delete = true;
-    $('.message:first').slideUp(1000);
+    $('.message:first').css('height', '50px').css('min-height', '0').slideUp(animation_time);
 }
 
 function addMessagesToChat(data)
 {
-    JSON.parse(data).forEach(addMessageToChat)
+    messages = JSON.parse(data);
+    messages.forEach(addMessageToChat);
+}
+
+function getMessages()
+{
+    ajax('messages', addMessagesToChat);
 }
 
 function buttonOnClick()
 {
     if (animation_is_over)
     {
-        var text = $('#text').val()
+        var text = $('#text').val();
         ajax('addMessage/' + text, addMessageToChat(text));
     }
 }
@@ -46,7 +54,7 @@ function buttonOnClick()
 function main()
 {
     $('button').click(buttonOnClick);
-    ajax('messages', addMessagesToChat);
+    getMessages();
 }
 
 $(main);
