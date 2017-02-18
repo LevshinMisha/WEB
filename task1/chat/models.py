@@ -10,5 +10,11 @@ class Message(models.Model):
         while len(Message.objects.all()) > 10:
             Message.objects.all()[0].delete()
 
+    def json(self):
+        return {
+            'text': str(self),
+            'id': self.id,
+        }
+
     def __str__(self):
         return str(self.text)

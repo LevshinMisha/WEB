@@ -33,13 +33,28 @@ function deleteFirstMessage()
 
 function addMessagesToChat(data)
 {
-    messages = JSON.parse(data);
-    messages.forEach(addMessageToChat);
+    var m = JSON.parse(data);
+    var m1 = [];
+    m.forEach(function(item) {
+        a = true
+        messages.forEach(function(item2) {
+            if (item.id === item2.id)
+                a = false;
+
+        })
+        if (a)
+            m1.push(item.text)
+    });
+    messages = m;
+    m1.forEach(addMessageToChat);
 }
 
 function getMessages()
 {
-    ajax('messages', addMessagesToChat);
+    if (animation_is_over)
+    {
+        ajax('messages', addMessagesToChat);
+    }
 }
 
 function buttonOnClick()
@@ -47,14 +62,14 @@ function buttonOnClick()
     if (animation_is_over)
     {
         var text = $('#text').val();
-        ajax('addMessage/' + text, addMessageToChat(text));
+        ajax('addMessage/' + text, getMessages);
     }
 }
 
 function main()
 {
     $('button').click(buttonOnClick);
-    getMessages();
+    setInterval(getMessages, 1000);
 }
 
 $(main);

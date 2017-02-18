@@ -10,7 +10,7 @@ def main(request):
 
 def messages(request):
     Message.delete_old_messages()
-    return HttpResponse(json.dumps([str(i) for i in Message.objects.all()]))
+    return HttpResponse(json.dumps([i.json() for i in Message.objects.all()]))
 
 
 def add_message(request, text):
