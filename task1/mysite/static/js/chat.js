@@ -6,7 +6,7 @@ messages = [];
 
 function ajax(url, onComplete)
 {
-    $.get(url).done(onComplete).fail(function(xhr, status, errorText) { alert(errorText) });
+    $.get(url).done(onComplete).fail(function(xhr, status, errorText) { console.log(errorText) });
 }
 
 function addMessageToChat(message)
@@ -35,16 +35,15 @@ function addMessagesToChat(data)
 {
     var m = JSON.parse(data);
     var m1 = [];
-    m.forEach(function(item) {
-        a = true
-        messages.forEach(function(item2) {
-            if (item.id === item2.id)
-                a = false;
-
-        })
-        if (a)
-            m1.push(item.text)
-    });
+    for (var i = 0; i < m.length; i++)
+        {
+            var a = true
+            for (var j = 0; j < messages.length; j++)
+                if (item.id === item2.id)
+                    a = false;
+            if (a)
+                m1.push(item.text)
+        }
     messages = m;
     m1.forEach(addMessageToChat);
 }
