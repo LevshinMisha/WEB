@@ -39,10 +39,10 @@ function addMessagesToChat(data)
         {
             var a = true
             for (var j = 0; j < messages.length; j++)
-                if (item.id === item2.id)
+                if (m[i].id === messages[j].id)
                     a = false;
             if (a)
-                m1.push(item.text)
+                m1.push(m[i].text)
         }
     messages = m;
     m1.forEach(addMessageToChat);
