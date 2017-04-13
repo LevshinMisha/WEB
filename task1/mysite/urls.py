@@ -10,6 +10,5 @@ urlpatterns = [
     url(r'^gallery/', include('gallery.urls')),
     url(r'^feedbacks/', include('feedbacks.urls')),
     url(r'^visits/', include('visits.urls')),
-    url(r'^game/', include('game.urls')),
     url(r'^chat/', include('chat.urls')),
 ]
