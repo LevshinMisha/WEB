@@ -12,7 +12,7 @@ function ajax(url, onComplete)
 function addMessageToChat(message)
 {
     animation_is_over = false;
-    $('#chat').append('<div class="message">' + message + '</div>');
+    $('#chat').append('<div class="message"><div class="text">' + message + '</div></div>');
     if (messages_count < 10)
         $('.message:last').fadeIn(animation_time);
     else
@@ -25,10 +25,10 @@ function addMessageToChat(message)
 
 function deleteFirstMessage()
 {
-    if (already_delete)
-        $('.message:first').remove();
-    already_delete = true;
-    $('.message:first').css('height', '50px').css('min-height', '0').slideUp(animation_time);
+    var first_message = $('.message:first');
+    first_message.slideUp(animation_time);
+    $('.text:first').slideUp(animation_time);
+    setTimeout(function () { first_message.remove() }, animation_time);
 }
 
 function addMessagesToChat(data)
@@ -56,7 +56,7 @@ function getMessages()
     }
 }
 
-function buttonOnClick()
+function buttonAddMessageClick()
 {
     if (animation_is_over)
     {
@@ -65,9 +65,33 @@ function buttonOnClick()
     }
 }
 
+function buttonOnClick()
+{
+    var id = $(this)[0].id.split(' ');
+    $(id[0]).css('background-color', id[1]);
+}
+
+function addButtons()
+{
+    var colors = ['green', 'blue', 'red', 'white', 'orange', 'grey', 'yellow', 'purple'];
+    var selectors = ['body', '.text']
+    var readable_selectors = ['Цвет фона всего сайта', 'Цвет фона сообщений', '', '', '', '', '']
+    selectors.forEach(function(selector) {
+        var id = "div-" + selector.replace('.', '');
+        $('body').append(readable_selectors[selectors.indexOf(selector)]);
+        $('body').append('<div id="'+ id + '"></div>');
+        $('#' + id).css('width', '75vw').css('margin', '10px auto')
+        colors.forEach(function(color) {
+            $('#' + id).append('<button id="' + selector + ' ' + color + '">' + color + '</button>');
+        });
+    })
+    $('button').click(buttonOnClick)
+}
+
 function main()
 {
-    $('button').click(buttonOnClick);
+    addButtons();
+    $('#button').click(buttonAddMessageClick);
     setInterval(getMessages, 1000);
 }
 

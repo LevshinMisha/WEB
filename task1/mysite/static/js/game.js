@@ -56,20 +56,15 @@ function setChoices(choices, type)
 {
     document.getElementById('choices').innerHTML = '';
     document.body.onclick = function() {};
-    if (type === 'Fork')
-        choices.forEach(function(choice)
-        {
-            var d = document.createElement('div');
-            d.classList.add('choice', 'menu-item');
-            d.title = choice.title;
-            d.onclick = function() { makeChoice(choice.stage_to)};
-            d.innerText = choice.text;
-            document.getElementById('choices').appendChild(d);
-        });
-    else
+    choices.forEach(function(choice)
     {
-        document.body.onclick = function() { makeChoice(choices[0].stage_to)};
-    }
+        var d = document.createElement('div');
+        d.classList.add('choice', 'menu-item');
+        d.title = choice.title;
+        d.onclick = function() { makeChoice(choice.stage_to)};
+        d.innerText = choice.text;
+        document.getElementById('choices').appendChild(d);
+    });
     choices.forEach(function(choice) { preload_stage(choice.stage_to, 1) });
 }
 
@@ -115,4 +110,5 @@ window.onload = function (event)
         setStage(stage);
     }
     ajax('currentStage', afterResponse);
+    ajax('vars', function(response) {console.log(response)})
 };

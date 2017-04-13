@@ -47,7 +47,6 @@ MY_APPS = [
     'feedbacks',
     'visits',
     'gallery',
-    'game',
     'chat'
 ]
 
