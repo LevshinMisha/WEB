@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 from PIL import Image, ImageDraw, ImageFont
-from datetime import timedelta, datetime
 
 SCREEN_IS_NONE = 'JS или куки былы выключены'
 
@@ -23,7 +22,7 @@ class Visit(models.Model):
         self.save()
 
     def set_screen(self, screen):
-        if screen != SCREEN_IS_NONE:
+        if screen != SCREEN_IS_NONE and screen is not None:
             self.screen = screen
             self.save()
 

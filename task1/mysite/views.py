@@ -1,6 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
-from django.contrib.auth import get_user_model
-import os
+from django.shortcuts import render, redirect
 
 
 def main_page(request):
