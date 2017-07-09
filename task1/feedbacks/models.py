@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from task1.settings import AUTH_USER_MODEL
+from project_root.settings import AUTH_USER_MODEL
 import bleach
 
 class Feedback(models.Model):

@@ -15,7 +15,3 @@ def about(request):
 
 def links(request):
     return render(request, 'links.html', {'title': "Ссылочки"})
-
-
-def redirect_to_main(request):
-    return redirect('/main/')

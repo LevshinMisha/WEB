@@ -30,7 +30,7 @@ document.body.onkeydown = function (e)
     {
         e.preventDefault();
         e.stopImmediatePropagation();
-        if (getHelpElement().style.display === 'none')
+        if ($('#help')[0].style.display === 'none')
             showHelp();
         else
             hideHelp();
@@ -43,36 +43,34 @@ document.body.onkeydown = function (e)
         }
         if (e.keyCode === 37)
         {
-            var c = parseInt(getCookie('img')) - 1
+            var c = parseInt(getCookie('img')) - 1;
             if (c < 0)
                 c = IMAGE_COUNT;
             expandImage(c.toString());
         }
         if (e.keyCode === 39)
         {
-            var c = parseInt(getCookie('img')) + 1
+            var c = parseInt(getCookie('img')) + 1;
             if (c === IMAGE_COUNT + 1)
                 c = 0;
             expandImage(c.toString());
         }
     }
-
-}
+};
 
 function getImageSrc(id)
 {
-    var src_parts = document.getElementById(id).src.split('/');
+    var src_parts = $('#'+id)[0].src.split('/');
     var src = '';
     for (var i = 0; i < src_parts.length; i++)
     {
         if (src_parts[i] !== 'thumbnails')
-            {
-                if (i !== src_parts.length - 1)
-                    src += src_parts[i] + '/';
-                else
-                    src += src_parts[i].slice(0, -7) + '.jpg';
-            }
-
+        {
+            if (i !== src_parts.length - 1)
+                src += src_parts[i] + '/';
+            else
+                src += src_parts[i].slice(0, -7) + '.jpg';
+        }
     }
     return src;
 }
@@ -86,34 +84,31 @@ function expandImage(id)
         clearComments();
         CURRENT_ID = id;
         document.location = '#' + id;
-        document.getElementById('comments').innerHTML = '<div class="comment" style="padding: 5px 0; width:90vw">Loading...</div>';
-        document.getElementById('like_button').innerText= "Лайки не загрузились";
+        $('#comments')[0].innerHTML = '<div class="comment" style="padding: 5px 0; width:90vw">Loading...</div>';
+        $('#like_button')[0].innerText= "Лайки не загрузились";
         document.cookie = 'img=' + id + '; path=/;';
-        document.getElementById("gallery_big_img").style.opacity = 0.7;
+        $('#gallery_big_img')[0].style.opacity = 0.7;
         var src = getImageSrc(id);
 
         addImageInCash(src);
         pre_download_next_and_prev_image(id);
 
-        if (document.getElementById('gallery_big_img_container').style.display !== 'flex')
-            document.getElementById('gallery_big_img_container').style.display = 'flex';
+        var gallery_big_img_container = $('#gallery_big_img_container')[0];
+        if (gallery_big_img_container.style.display !== 'flex')
+            gallery_big_img_container.style.display = 'flex';
 
-        document.getElementById('button_make_img_background').onclick = makeBackgroundImage(src);
+        $('#button_make_img_background')[0].onclick = makeBackgroundImage(src);
         if (IMG_DICT[src] !== 'loaded') // Этот костыль я посвещаю работе атрибута src в firefox.
         {
-            document.getElementById('gallery_big_img').src = "";
+            $('#gallery_big_img')[0].src = "";
             window.setTimeout(function()
             {
-                document.getElementById('gallery_big_img').src = src;
+                $('#gallery_big_img')[0].src = src;
             }, 50)
         }
         else
-            document.getElementById('gallery_big_img').src = src;
-        window.setTimeout(function()
-            {
-                getComments();
-                getLikes();
-            }, 500)
+            $('#gallery_big_img')[0].src = src;
+        window.setTimeout(function() { getComments(); getLikes(); }, 500)
     }
 }
 
@@ -124,15 +119,12 @@ function imgOnClick(id)
 
 function bigImgOnLoad(id)
 {
-    document.getElementById("gallery_big_img").style.opacity = 1;
+    $('#gallery_big_img')[0].style.opacity = 1;
 }
 
 function makeBackgroundImage(url)
 {
-    return function (event)
-    {
-        setCookie('big_img', url);
-    }
+    return function (event) { setCookie('big_img', url); }
 }
 
 function addImageInCash(src)
@@ -147,47 +139,29 @@ function addImageInCash(src)
         {
             console.log(src + ' Загружено');
             IMG_DICT[src] = 'loaded';
-        }
-        document.getElementById('gallery_cash').appendChild(image);
+        };
+        $('#gallery_cash').append(image);
     }
-
 }
 
-function ajax(url, func)
+function ajax(url, onComplete)
 {
-    var xhr = new XMLHttpRequest();
-
-    xhr.open('GET', url, true);
-    xhr.send();
-    xhr.onreadystatechange = function()
-    {
-        if (xhr.readyState != 4) return;
-        if (xhr.status != 200)
-        {
-            alert(xhr.status + ': ' + xhr.statusText);
-        }
-        else
-        {
-            func(xhr.responseText);
-        }
-    }
+    $.get(url).done(onComplete).fail(function(xhr, status, errorText) { console.log(errorText) });
 }
 
 function isCommentsNeedToUpdate(comments)
 {
     if (comments.length !== CURRENT_COMMENTS.length)
-        return true
+        return true;
     for(var i = 0; i < comments.length; i++)
-    {
         if (comments[i].author !== CURRENT_COMMENTS[i].author || comments[i].text !== CURRENT_COMMENTS[i].text)
-            return true
-    }
+            return true;
     return false
 }
 
 function clearComments()
 {
-    document.getElementById('comments').innerHTML = '';
+    $('#comments')[0].innerHTML = '';
 }
 
 function getComments()
@@ -198,27 +172,21 @@ function getComments()
         if (isCommentsNeedToUpdate(comments.comments))
         {
             CURRENT_COMMENTS = comments.comments;
-            clearComments()
+            clearComments();
             for (var i = 0; i < comments.comments.length; i++)
             {
-                var text = comments.comments[i].text;
                 var comment = createElement('div', 'comment', '');
                 comment.appendChild(createElement('div', 'comment_author', comments.comments[i].author));
                 comment.appendChild(createElement('div', 'comment_text', comments.comments[i].text));
-                document.getElementById('comments').appendChild(comment)
+                $('#comments').append(comment)
             }
         }
         else
-        {
-            if (CURRENT_COMMENTS.length === 0)
-                clearComments();
-        }
-
+            if (CURRENT_COMMENTS.length === 0) clearComments();
     }
 
     var picture = getCookie('img');
-    if (picture !== '-1')
-        ajax('getComments/' + picture, afterResponse)
+    if (picture !== '-1') ajax('getComments/' + picture, afterResponse)
 }
 
 function addComment()
@@ -238,7 +206,7 @@ function addComment()
     }
 
     var picture = getCookie('img');
-    var text = document.getElementById('new_comment_text').value;
+    var text = $('#new_comment_text')[0].value;
     console.log(text);
     text = 'addComment/' + picture + '/' + text.replace('?', ' \\q');
 
@@ -266,7 +234,7 @@ function getLikes()
         if (responseText !== CURRENT_LIKES)
         {
             CURRENT_LIKES = responseText;
-            document.getElementById('like_button').innerText= "Лайков:" + responseText;
+            $('#like_button')[0].innerText= "Лайков:" + responseText;
         }
     }
 
@@ -280,7 +248,7 @@ function downloadXls()
     window.location = 'xls';
 }
 
-function checkLocation()
+function locationCheck()
 {
     if (document.location.hash === '#-1')
     {
@@ -290,3 +258,37 @@ function checkLocation()
     else if (document.location.hash !== '')
         expandImage(document.location.hash.slice(1, document.location.length))
 }
+
+function galleryCheck()
+{
+    if ($('#gallery')[0] !== null)
+    {
+        if (getCookie('img') === '-1' || getCookie('img') === undefined)
+        {
+            $('#gallery_big_img_container')[0].style.display = 'none';
+            document.location = '#-1';
+        }
+        else
+        {
+            expandImage(getCookie('img'));
+        }
+    }
+}
+
+function bigImgCheck()
+{
+    if (getCookie('big_img') !== undefined)
+    {
+        var background = $('#background')[0];
+        background.style.backgroundImage = 'url(' + getCookie('big_img') + ')';
+        background.style.display = "block";
+    }
+}
+
+function checks()
+{
+    galleryCheck();
+    bigImgCheck();
+}
+
+$(checks);

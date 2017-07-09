@@ -10,7 +10,8 @@ https://docs.djangoproject.com/en/1.10/howto/deployment/wsgi/
 import os
 
 from django.core.wsgi import get_wsgi_application
+from .settings import project_root
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "task1.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", project_root + ".settings")
 
 application = get_wsgi_application()

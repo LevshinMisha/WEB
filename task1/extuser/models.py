@@ -2,11 +2,9 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 from django.db import models
-from django.utils import timezone
 
 
 class UserManager(BaseUserManager):
-
     def create_user(self, email, username, password=None):
         if not email:
             raise ValueError('Email непременно должен быть указан')
@@ -30,7 +28,7 @@ class ExtUser(AbstractBaseUser, PermissionsMixin):
     avatar = models.ImageField('Аватар', blank=True, null=True, upload_to="user/avatar")
     register_date = models.DateField('Дата регистрации', auto_now_add=True)
     is_active = models.BooleanField('Активен', default=True)
-    username = models.TextField('Имя Пользователя', unique=True, max_length=20)
+    username = models.CharField('Имя Пользователя', unique=True, max_length=20)
 
     # Этот метод обязательно должен быть определён
     def get_full_name(self):

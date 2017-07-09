@@ -1,8 +1,9 @@
 from django.conf.urls import url, include
-from .views import main_page, about, links, contacts, redirect_to_main
+from .views import main_page, about, links, contacts
+from utils.url import redirect_to
 
 urlpatterns = [
-    url(r'^$', redirect_to_main),
+    url(r'^$', redirect_to('/main/')),
     url(r'^main/', main_page),
     url(r'^about/', about),
     url(r'^links/', links),

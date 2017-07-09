@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
-from myauth.views import need_authentication
+from myauth.utils import authorized_users_only
 
 from .models import Feedback
 from .forms import FeedbackForm
@@ -17,7 +17,7 @@ def trying_to_delete_or_edit_not_your_feedback(request):
     return render(request, 'feedback_main.html', {"feedbacks": feedbacks, 'title': 'Гадости'})
 
 
-@need_authentication
+@authorized_users_only
 def feedback_new(request):
     if not Feedback.objects.filter(author=request.user):
         if request.method == "POST":
@@ -34,7 +34,7 @@ def feedback_new(request):
         return cheater(request, 'В одни руки один фидбек')
 
 
-@need_authentication
+@authorized_users_only
 def feedback_edit(request, pk):
     feedback = get_object_or_404(Feedback, pk=pk)
     if request.user == feedback.author:
@@ -51,7 +51,7 @@ def feedback_edit(request, pk):
         return cheater(request, 'Пытались редактировать жужой фидбек?')
 
 
-@need_authentication
+@authorized_users_only
 def feedback_delete(request, pk):
     feedback = Feedback.objects.filter(pk=pk)[0]
     if request.user == feedback.author or request.user.is_superuser:

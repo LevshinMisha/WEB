@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse
 import os
 from .models import Comment, Like
-from myauth.views import is_not_user
+from utils.decorators import authorized_users_only, ajax_only
 import xlwt
 import json
 
@@ -13,22 +13,23 @@ def gallery(request):
     return render(request, 'gallery.html', {'title': 'Картиночки', 'urls': urls})
 
 
+@ajax_only
 def get_comments(request, filename):
     return HttpResponse(json.dumps({'comments': [i.json() for i in Comment.objects.filter(picture=filename)]}))
 
 
+@ajax_only
+@authorized_users_only
 def add_comment(request, filename, text):
-    if is_not_user(request):
-        return HttpResponse('Залогинтесь, товарищъ')
     if len(text) > 300:
         return HttpResponse('Многа букаф неасилил :(')
     Comment.objects.create(author=request.user, picture=filename, text=text.replace(' /n', '\n').replace(' /q', '?'))
     return HttpResponse('Надеюсь вы написали что-то умное')
 
 
+@ajax_only
+@authorized_users_only
 def like(request, filename):
-    if is_not_user(request):
-        return HttpResponse('Залогинтесь, товарищъ')
     if len(Like.objects.filter(picture=filename, user=request.user)):
         Like.objects.get(picture=filename, user=request.user).delete()
         return HttpResponse('Лайк удален')
@@ -36,6 +37,7 @@ def like(request, filename):
     return HttpResponse('Лайк добавлен')
 
 
+@ajax_only
 def get_likes(request, filename):
     return HttpResponse(len(Like.objects.filter(picture=filename)))
 

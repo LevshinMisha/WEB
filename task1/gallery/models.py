@@ -1,5 +1,5 @@
 from django.db import models
-from task1.settings import AUTH_USER_MODEL
+from project_root.settings import AUTH_USER_MODEL
 
 
 class Comment(models.Model):
